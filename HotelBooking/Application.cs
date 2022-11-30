@@ -10,22 +10,22 @@ namespace HotelBooking
     {
         public void Run()
         {
-            var sel = Menu.ShowStartMenu();
-            if (sel == 1)
+            while (true)
             {
-
-            }
-            else if (sel==2)
-            {
-                
-            }
-            else if (sel==3)
-            {
-                
-            }
-            else if (sel == 4)
-            {
-
+                var sel = ShowMenu.ShowStartMenu();
+                if (sel == 0) break;
+                if (sel == 1)
+                {
+                    ShowMenu.ShowCustomerMenu();
+                }
+                else if (sel == 2)
+                {
+                    ShowMenu.ShowRoomMenu();
+                }
+                else if (sel == 3)
+                {
+                    ShowMenu.ShowBookingMenu();
+                }
             }
         }
     }
