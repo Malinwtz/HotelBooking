@@ -12,6 +12,9 @@ namespace HotelBooking
         {
             while (true)
             {
+                ShowMenu.AllMenus("start");
+
+
                 var sel = ShowMenu.ShowStartMenu();
                 if (sel == 0) break;
                 if (sel == 1)
