@@ -11,8 +11,8 @@ public class ManageCustomerMenu
         else if (selection == 1)
         {
             ManageCustomer manage = new ManageCustomer();
-            manage.CreateCustomer();
-            manage.SaveCustomerToList();
+            var customer = manage.CreateCustomer();
+            manage.SaveCustomerToList(customer);
             manage.SaveCustomerToDatabase();
         }
         else if (selection == 2)
