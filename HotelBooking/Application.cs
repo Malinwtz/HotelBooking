@@ -12,14 +12,13 @@ namespace HotelBooking
         {
             while (true)
             {
-                ShowMenu.AllMenus("start");
-
-
                 var sel = ShowMenu.ShowStartMenu();
                 if (sel == 0) break;
                 if (sel == 1)
                 {
-                    ShowMenu.ShowCustomerMenu();
+                    var sel2 = ShowMenu.ShowCustomerMenu();
+                    ManageCustomerMenu.CustomerMenu(sel2);
+                    
                 }
                 else if (sel == 2)
                 {
