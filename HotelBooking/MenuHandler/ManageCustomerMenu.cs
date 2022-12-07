@@ -1,4 +1,6 @@
-﻿namespace HotelBooking;
+﻿using HotelBooking.CustomerHandler;
+
+namespace HotelBooking.MenuHandler;
 
 public class ManageCustomerMenu
 {

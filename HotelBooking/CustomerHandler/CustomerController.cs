@@ -1,4 +1,4 @@
-﻿namespace HotelBooking;
+﻿namespace HotelBooking.CustomerHandler;
 
 public class CustomerController
 {
