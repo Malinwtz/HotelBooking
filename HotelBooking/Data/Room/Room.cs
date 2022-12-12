@@ -11,8 +11,6 @@ namespace HotelBooking.RoomHandler
     {
         public int RoomId { get; set; }
         public string Size { get; set; }
-
-
-
+        public Bed Bed { get; set; }
     }
 }

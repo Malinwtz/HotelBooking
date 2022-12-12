@@ -23,6 +23,8 @@ namespace HotelBooking.Data
         DbSet<Room> Rooms { get; set; }
         DbSet<Customer> Customers { get; set; }
         DbSet<Booking> Bookings { get; set; }
+        DbSet<Bed> Beds { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
