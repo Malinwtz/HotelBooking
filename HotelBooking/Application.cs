@@ -19,7 +19,6 @@ namespace HotelBooking
                 {
                     var sel2 = ShowMenu.ShowCustomerMenu();
                     ManageCustomerMenu.CustomerMenu(sel2);
-                    
                 }
                 else if (sel == 2)
                 {

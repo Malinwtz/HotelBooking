@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking
+namespace HotelBooking.Data
 {
     public class Booking
     {
+
 
     }
 }
