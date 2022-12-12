@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.MenuHandler;
+﻿using HotelBooking.Controllers;
+
+namespace HotelBooking.MenuHandler;
 
 public class ReturnFromMenuClass
 {
