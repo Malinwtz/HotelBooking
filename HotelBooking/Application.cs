@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Data;
 using HotelBooking.MenuHandler;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking
 {
@@ -11,24 +13,28 @@ namespace HotelBooking
     {
         public void Run()
         {
-            while (true)
-            {
-                var sel = ShowMenu.ShowStartMenu();
-                if (sel == 0) break;
-                if (sel == 1)
-                {
-                    var sel2 = ShowMenu.ShowCustomerMenu();
-                    ManageCustomerMenu.CustomerMenu(sel2);
-                }
-                else if (sel == 2)
-                {
-                    ShowMenu.ShowRoomMenu();
-                }
-                else if (sel == 3)
-                {
-                    ShowMenu.ShowBookingMenu();
-                }
-            }
+            var context = new ApplicationDbContext();
+            context.CreateOrCheckIfDatabaseExists();
+
+
+            //while (true)
+            //{
+            //    var sel = ShowMenu.ShowStartMenu();
+            //    if (sel == 0) break;
+            //    if (sel == 1)
+            //    {
+            //        var sel2 = ShowMenu.ShowCustomerMenu();
+            //        ManageCustomerMenu.CustomerMenu(sel2);
+            //    }
+            //    else if (sel == 2)
+            //    {
+            //        ShowMenu.ShowRoomMenu();
+            //    }
+            //    else if (sel == 3)
+            //    {
+            //        ShowMenu.ShowBookingMenu();
+            //    }
+            //}
         }
     }
 }

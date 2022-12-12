@@ -31,5 +31,13 @@ namespace HotelBooking.Data
                 optionsBuilder.UseSqlServer("Server=localhost;Database=Hotel;Trusted_Connection=True;TrustServerCertificate=true");
             }
         }
+
+        public void CreateOrCheckIfDatabaseExists()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                context.Database.Migrate();
+            }
+        }
     }
 }

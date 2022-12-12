@@ -9,7 +9,7 @@ namespace HotelBooking.RoomHandler
 {
     public class Room
     {
-        public int Id { get; set; }
+        public int RoomId { get; set; }
         public string Size { get; set; }
 
 

@@ -7,9 +7,10 @@ public class Customer
     public string LastName { get; set; }
     public int Phone { get; set; }
 
-    public Customer(string firstName, string lastName)
+    public Customer(string firstName, string lastName, int phone)
     {
         FirstName = firstName;
         LastName = lastName;
+        Phone = phone;
     }
 }

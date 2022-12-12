@@ -11,6 +11,5 @@ namespace HotelBooking.Data
         public int BookingId { get; set; }
         public int CustomerId { get; set; }
         public int RoomId { get; set; }
-
     }
 }
