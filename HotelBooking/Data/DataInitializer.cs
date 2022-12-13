@@ -8,7 +8,8 @@ namespace HotelBooking.Data
         public void MigrateAndSeed(ApplicationDbContext dbContext)
         {
             dbContext.Database.Migrate();
-
+            SeedCountys(dbContext);
+            dbContext.SaveChanges();
         }
     }
 }

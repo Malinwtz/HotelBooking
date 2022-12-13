@@ -11,6 +11,13 @@ namespace HotelBooking.RoomHandler
     {
         public int RoomId { get; set; }
         public string Size { get; set; }
-        public Bed Bed { get; set; }
+        public string Type { get; set; } //double eller single
+        public Bed ExtraBed { get; set; } //konvertera till string i databas
+
+        public enum Bed
+        {
+            Single,
+            Double
+        };
     }
 }

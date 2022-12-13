@@ -12,7 +12,7 @@ namespace HotelBooking.Controllers
 {
     public class Builder
     {
-        public void BuildProject()
+        public ApplicationDbContext BuildProject()
         {
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", true, true);
@@ -27,6 +27,9 @@ namespace HotelBooking.Controllers
                 var dataInitiaizer = new DataInitializer();
                 dataInitiaizer.MigrateAndSeed(dbContext);
             }
+
+            var dbContextReturned = new ApplicationDbContext(options.Options);
+            return dbContextReturned;
         }
 
 

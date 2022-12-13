@@ -11,10 +11,10 @@ public class Customer
     public int Phone { get; set; }
     public Booking Booking { get; set; }
 
-    public Customer(string firstName, string lastName, int phone)
-    {
-        FirstName = firstName;
-        LastName = lastName;
-        Phone = phone;
-    }
+    //public Customer(string firstName, string lastName, int phone)
+    //{
+    //    FirstName = firstName;
+    //    LastName = lastName;
+    //    Phone = phone;
+    //}
 }

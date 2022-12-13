@@ -9,8 +9,8 @@ public class ShowMenu
         Console.WriteLine("2. Registrera/ändra rumsuppgifter");
         Console.WriteLine($"{endAlternative}. Registrera/ändra bokning");
         ReturnFromMenuClass.ExitMenu();
-        var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        return sel;
+        var startMenuSelection = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        return startMenuSelection;
     }
 
     public static int ShowCustomerMenu()
