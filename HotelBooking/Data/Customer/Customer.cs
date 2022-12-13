@@ -5,7 +5,7 @@ namespace HotelBooking.CustomerHandler;
 
 public class Customer
 {
-    [Key] public int CustomerId { get; set; }
+    public int CustomerId { get; set; }
     [Required][MaxLength(100)] public string FirstName { get; set; }
     [Required][MaxLength(100)]public string LastName { get; set; }
     [Required]public int Phone { get; set; }
