@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Controllers;
 using HotelBooking.Data;
 using HotelBooking.MenuHandler;
 using Microsoft.EntityFrameworkCore;
@@ -13,28 +14,10 @@ namespace HotelBooking
     {
         public void Run()
         {
-            var context = new ApplicationDbContext();
-            context.CreateOrCheckIfDatabaseExists();
+            var builder = new Builder();
+            builder.BuildProject();
 
-
-            //while (true)
-            //{
-            //    var sel = ShowMenu.ShowStartMenu();
-            //    if (sel == 0) break;
-            //    if (sel == 1)
-            //    {
-            //        var sel2 = ShowMenu.ShowCustomerMenu();
-            //        ManageCustomerMenu.CustomerMenu(sel2);
-            //    }
-            //    else if (sel == 2)
-            //    {
-            //        ShowMenu.ShowRoomMenu();
-            //    }
-            //    else if (sel == 3)
-            //    {
-            //        ShowMenu.ShowBookingMenu();
-            //    }
-            //}
+            // LoopMenu.MenuLoop();
         }
     }
 }
@@ -46,7 +29,7 @@ namespace HotelBooking
  Code first
 
 Användare ska kunna: 
-        Se och editera alla rum, kunder och bokningar år ett hotell.  
+        Se och editera alla rum, kunder och bokningar åt ett hotell.  
     •	(C) Lägg till en ny entitet
     •	(R) Se en list över de befintliga entiteter som finns i databasen
     •	(U) Uppdatera en befintlig entitet
