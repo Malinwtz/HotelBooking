@@ -15,9 +15,9 @@ namespace HotelBooking
         public void Run()
         {
             var builder = new Builder();
-            builder.BuildProject();
+            var dbContext = builder.BuildProject();
 
-            // LoopMenu.MenuLoop();
+            //LoopMenu.MenuLoop(dbContext);
         }
     }
 }

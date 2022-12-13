@@ -24,14 +24,24 @@ namespace HotelBooking.Controllers
                 Console.WriteLine("Registrera rum");
                 Console.WriteLine("==============");
                 Console.Write("Size: ");
-                var sizeInput = Console.ReadLine();
+                var sizeInput = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Max antal gäster som får plats: ");
+                var numberOfGuestsInput = Convert.ToInt32(Console.ReadLine());
                 Console.Write("Bed: ");
                 var bedInput = Console.ReadLine();
-                Enum.TryParse(bedInput, out Enum bedInputEnum);
+                //Enum.TryParse(bedInput, out Enum bedInputEnum);
+                Console.Write("Typ av rum: ");
+                var typeInput = Console.ReadLine();
+                Console.Write("Hur många extra sängar kan ställas in: ");
+                var extraBedInput = Convert.ToInt32(Console.ReadLine());
 
-                var room = new Room(sizeInput, bedInputEnum);
-
-                dbContext.Customers.Add(room);
+                dbContext.Rooms.Add(new Room
+                {
+                    Size = sizeInput,
+                    NumberOfGuests = numberOfGuestsInput,
+                    Type = typeInput,
+                    ExtraBed = extraBedInput
+                });
                 dbContext.SaveChanges();
             }
         }

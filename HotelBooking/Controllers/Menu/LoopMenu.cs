@@ -1,10 +1,11 @@
 ﻿using HotelBooking.Controllers;
+using HotelBooking.Data;
 
 namespace HotelBooking.MenuHandler;
 
 public class LoopMenu
 {
-    public static void MenuLoop() //skicka med dbcontext, skapa upp den en gång och skicka med den
+    public static void MenuLoop(ApplicationDbContext dbContext) //skicka med dbcontext, skapa upp den en gång och skicka med den
     {
         while (true)
         {
@@ -17,7 +18,7 @@ public class LoopMenu
                     var sel2 = ShowMenu.ShowCustomerMenu();
                     ManageCustomerMenu.CustomerMenu(sel2);
 
-                    var action = new Create(dbContext); ///vill göra nästan samma sak men lite olika  varje gång. strategy pattern och kanske factory pattern
+                    var action = new CreateCustomer(dbContext); ///vill göra nästan samma sak men lite olika varje gång. strategy pattern och kanske factory pattern
                     action.Run(); //använd interface för att crud ska ha samma metoder ex Run() Interface ICrud med metod run()
                     
                     break;
