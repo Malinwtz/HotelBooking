@@ -10,11 +10,4 @@ public class Customer
     [Required][MaxLength(100)]public string LastName { get; set; }
     public int Phone { get; set; }
     public Booking Booking { get; set; }
-
-    public Customer(string firstName, string lastName, int phone)
-    {
-        FirstName = firstName;
-        LastName = lastName;
-        Phone = phone;
-    }
 }
