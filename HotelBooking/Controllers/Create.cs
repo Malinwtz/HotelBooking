@@ -22,9 +22,14 @@ namespace HotelBooking.Controllers
                 var lastName = Console.ReadLine();
                 Console.Write("Telefon: ");
                 var phone = Convert.ToInt32(Console.ReadLine());
-                var customer = new Customer(firstName, lastName, phone);
+                
 
-                dbContext.Customers.Add(customer);
+                dbContext.Customers.Add( new Customer
+                {
+                    FirstName = firstName, 
+                    LastName = lastName, 
+                    Phone = phone
+                });
                 dbContext.SaveChanges();
             }
         }
