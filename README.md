@@ -1,2 +1,2 @@
-# HotelBooking application instructions
+# *HotelBooking application instructions*
 
