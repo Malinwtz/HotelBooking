@@ -1,17 +1,16 @@
-﻿using System;
+﻿using HotelBooking.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HotelBooking.Data;
 
-namespace HotelBooking.Controllers
+namespace HotelBooking.Controllers.Update
 {
-    public class UpdateCustomer : ICrud
+    public class UpdateRoom : ICrud
     {
         public ApplicationDbContext DatabaseContext { get; set; }
-
-        public UpdateCustomer(ApplicationDbContext dbContext)
+        public UpdateRoom(ApplicationDbContext dbContext)
         {
             DatabaseContext = dbContext;
         }
@@ -27,9 +26,9 @@ namespace HotelBooking.Controllers
                 }
 
                 Console.Write("Välj Id på den kund du vill uppdatera: ");
-                var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
-                var personToUpdate = DatabaseContext.Customers
-                                            .First(c => c.CustomerId == customerIdToUpdate);
+                var roomIdToUpdate = Convert.ToInt32(Console.ReadLine());
+                var roomToUpdate = DatabaseContext.Customers
+                    .First(c => c.CustomerId == roomIdToUpdate);
 
                 Console.Write("Ange förnamn: ");
                 var updatedFirstName = Console.ReadLine();
@@ -38,9 +37,9 @@ namespace HotelBooking.Controllers
                 Console.Write("Ange telefonnummer: ");
                 var updatedPhone = Convert.ToInt32(Console.ReadLine());
 
-                personToUpdate.FirstName = updatedFirstName;
-                personToUpdate.LastName = updatedLastName;
-                personToUpdate.Phone = updatedPhone;
+                roomToUpdate.FirstName = updatedFirstName;
+                roomToUpdate.LastName = updatedLastName;
+                roomToUpdate.Phone = updatedPhone;
                 DatabaseContext.SaveChanges();
             }
         }
