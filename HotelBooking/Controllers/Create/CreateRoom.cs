@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelBooking.RoomHandler;
 
-namespace HotelBooking.Controllers
+namespace HotelBooking.Controllers.Create
 {
     public class CreateRoom : ICrud
     {

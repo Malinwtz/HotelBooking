@@ -17,7 +17,7 @@ namespace HotelBooking
             var builder = new Builder();
             builder.BuildProject();
 
-            // LoopMenu.MenuLoop();
+            LoopMenu.MenuLoop();
         }
     }
 }

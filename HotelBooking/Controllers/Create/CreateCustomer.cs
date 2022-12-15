@@ -8,7 +8,7 @@ using HotelBooking.CustomerHandler;
 using HotelBooking.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelBooking.Controllers
+namespace HotelBooking.Controllers.Create
 {
     public class CreateCustomer : ICrud
     {
