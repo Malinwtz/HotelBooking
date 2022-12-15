@@ -2,27 +2,7 @@
 
 public class ShowMenu
 {
-    public static int ShowStartMenu()
-    {
-        var endAlternative = 3;
-        Console.WriteLine("1. Registrera/ändra/avregistrera kund");
-        Console.WriteLine("2. Registrera/ändra rumsuppgifter");
-        Console.WriteLine($"{endAlternative}. Registrera/ändra bokning");
-        ReturnFromMenuClass.ExitMenu();
-        var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        return sel;
-    }
-
-    public static int ShowCustomerMenu()
-    {
-        var endAlternative = 3;
-        Console.WriteLine("1. Registrera kund");
-        Console.WriteLine("2. Ändra kunduppgifter");
-        Console.WriteLine($"{endAlternative}. Avregistrera kund");
-        ReturnFromMenuClass.ExitMenu();
-        var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        return sel;
-    }
+    
 
     public static int ShowRoomMenu()
     {
@@ -30,8 +10,8 @@ public class ShowMenu
         Console.WriteLine("1. Registrera rum");
         Console.WriteLine($"{endAlternative}. Ändra rumsuppgifter");
         ReturnFromMenuClass.ExitMenu();
-        var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        return sel;
+        var selectFromRooMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        return selectFromRooMenu;
     }
 
     public static int ShowBookingMenu()
@@ -41,8 +21,8 @@ public class ShowMenu
         Console.WriteLine("2. Ta bort bokning");
         Console.WriteLine($"{endAlternative}. Sök på tillgängliga datum");
         ReturnFromMenuClass.ExitMenu();
-        var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        return sel;
+        var selectFromBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        return selectFromBookingMenu;
     }
 }
 

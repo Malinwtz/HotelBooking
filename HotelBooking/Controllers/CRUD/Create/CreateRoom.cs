@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.CRUD;
 using HotelBooking.Data;
-using HotelBooking.RoomHandler;
+using HotelBooking.Data.Tables;
 
 namespace HotelBooking.Controllers.Create;
 
@@ -33,7 +33,7 @@ public class CreateRoom : ICrud
 
             dbContext.Rooms.Add(new Room
             {
-                Size = sizeInput,
+                SizeSquareMeters = sizeInput,
                 NumberOfGuests = numberOfGuestsInput,
                 Type = typeInput,
                 ExtraBed = extraBedInput

@@ -1,6 +1,6 @@
 ﻿using HotelBooking.Controllers.CRUD;
-using HotelBooking.CustomerHandler;
 using HotelBooking.Data;
+using HotelBooking.Data.Tables;
 
 namespace HotelBooking.Controllers.Create;
 
