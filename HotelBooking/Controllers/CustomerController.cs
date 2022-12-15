@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.CustomerHandler;
+﻿using HotelBooking.Data.Tables;
+
+namespace HotelBooking.Controllers;
 
 public class CustomerController
 {

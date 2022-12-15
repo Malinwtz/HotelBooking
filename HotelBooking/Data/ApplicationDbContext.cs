@@ -1,5 +1,4 @@
-﻿using HotelBooking.CustomerHandler;
-using HotelBooking.RoomHandler;
+﻿using HotelBooking.Data.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Data;

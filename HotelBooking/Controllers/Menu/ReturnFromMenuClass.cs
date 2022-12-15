@@ -1,4 +1,4 @@
-﻿using HotelBooking.Controllers;
+﻿using HotelBooking.Controllers.ErrorHandling;
 
 namespace HotelBooking.MenuHandler;
 

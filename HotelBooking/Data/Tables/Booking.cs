@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotelBooking.CustomerHandler;
-using HotelBooking.RoomHandler;
 
-namespace HotelBooking.Data
+namespace HotelBooking.Data.Tables
 {
     public class Booking
     {

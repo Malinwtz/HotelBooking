@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.RoomHandler;
+﻿using HotelBooking.Data.Tables;
+
+namespace HotelBooking.Controllers;
 
 public class RoomController
 {

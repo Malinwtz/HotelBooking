@@ -17,11 +17,11 @@ public class ReadRoom : ICrud
         {
             Console.WriteLine("Visa alla rum");
             Console.WriteLine("=============");
-            ViewRooms();
+            View();
         }
     }
 
-    public void ViewRooms()
+    public void View()
     {
         foreach (var room in DatabaseContext.Rooms)
             Console.WriteLine(

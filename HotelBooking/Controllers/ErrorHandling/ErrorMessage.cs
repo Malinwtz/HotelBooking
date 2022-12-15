@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Controllers
+namespace HotelBooking.Controllers.ErrorHandling
 {
     public class ErrorMessage
     {

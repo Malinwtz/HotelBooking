@@ -17,11 +17,11 @@ public class ReadCustomer : ICrud
         {
             Console.WriteLine("Visa alla kunder");
             Console.WriteLine("================");
-            ViewCustomers();
+            View();
         }
     }
 
-    public void ViewCustomers()
+    public void View()
     {
         foreach (var customer in DatabaseContext.Customers)
             Console.WriteLine(
