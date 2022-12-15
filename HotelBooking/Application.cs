@@ -1,27 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HotelBooking.Controllers;
-using HotelBooking.Data;
+﻿using HotelBooking.Controllers;
 using HotelBooking.MenuHandler;
-using Microsoft.EntityFrameworkCore;
 
-namespace HotelBooking
+namespace HotelBooking;
+
+internal class Application
 {
-    internal class Application
+    public void Run()
     {
-        public void Run()
-        {
-            var builder = new Builder();
-            builder.BuildProject();
+        var builder = new Builder();
+        builder.BuildProject();
 
-            LoopMenu.MenuLoop();
-        }
+        LoopMenu.MenuLoop();
     }
 }
-
 
 
 /*
