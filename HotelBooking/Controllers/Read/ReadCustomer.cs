@@ -15,8 +15,8 @@ public class ReadCustomer : ICrud
     {
         using (DatabaseContext)
         {
-            Console.WriteLine("(Visa alla kunder");
-            Console.WriteLine("=================");
+            Console.WriteLine("Visa alla kunder");
+            Console.WriteLine("================");
             ViewCustomers();
         }
     }
