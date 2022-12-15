@@ -1,4 +1,9 @@
-﻿using HotelBooking.Controllers.Menu;
+﻿using HotelBooking.Controllers.Create;
+using HotelBooking.Controllers.Delete;
+using HotelBooking.Controllers.Menu;
+using HotelBooking.Controllers.Read;
+using HotelBooking.Controllers.Update;
+using HotelBooking.Data;
 
 namespace HotelBooking.MenuHandler;
 
@@ -15,8 +20,33 @@ public class BookingMenu : IMenu
         return selectFromBookingMenu;
     }
 
-    public void LoopMenu()
+    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
     {
-        throw new NotImplementedException();
+        //switch (selectionFromMenu)
+        //{
+        //    case 0:
+        //        //avsluta
+        //        break;
+        //    case 1:
+        //        var read = new ReadBookings(dbContext);
+        //        read.RunCrud();
+        //        break;
+        //    case 2:
+        //    {
+        //        var create = new CreateBookings(dbContext);
+        //        create.RunCrud();
+        //        break;
+        //    }
+        //    case 3:
+        //        var update = new UpdateBookings(dbContext);
+        //        update.RunCrud();
+        //        break;
+        //    case 4:
+        //    {
+        //        var delete = new DeleteBookings(dbContext);
+        //        delete.RunCrud();
+        //        break;
+        //    }
+        //}
     }
 }

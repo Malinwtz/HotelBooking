@@ -21,9 +21,9 @@ public class CustomerMenu : IMenu
         return sel;
     }
 
-    public void LoopMenu(int selectionCustomerMenu, ApplicationDbContext dbContext)
+    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
     {
-        switch (selectionCustomerMenu)
+        switch (selectionFromMenu)
         {
             case 0:
                 //avsluta

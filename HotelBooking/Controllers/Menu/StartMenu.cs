@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.Menu;
+using HotelBooking.Data;
 
 namespace HotelBooking.MenuHandler;
 
@@ -14,7 +15,7 @@ public class StartMenu : IMenu
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;
     }
-    public void LoopMenu()
+    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
     {
         while (true)
         {
