@@ -1,4 +1,5 @@
-﻿using HotelBooking.Data;
+﻿using HotelBooking.Controllers.CRUD;
+using HotelBooking.Data;
 
 namespace HotelBooking.Controllers.Read;
 

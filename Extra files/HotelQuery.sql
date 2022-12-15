@@ -8,4 +8,5 @@ ORDER BY c.CustomerId Desc
 
 SELECT *
 FROM Rooms
+WHERE Size > 20
 ORDER BY NumberOfGuests DESC

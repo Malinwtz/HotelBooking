@@ -1,4 +1,5 @@
-﻿using HotelBooking.Data;
+﻿using HotelBooking.Controllers.CRUD;
+using HotelBooking.Data;
 using HotelBooking.RoomHandler;
 
 namespace HotelBooking.Controllers.Create;
@@ -18,7 +19,7 @@ public class CreateRoom : ICrud
         {
             Console.WriteLine("Registrera rum");
             Console.WriteLine("==============");
-            Console.Write("Size: ");
+            Console.Write("SizeSquareMeters: ");
             var sizeInput = Convert.ToInt32(Console.ReadLine());
             Console.Write("Max antal gäster som får plats: ");
             var numberOfGuestsInput = Convert.ToInt32(Console.ReadLine());

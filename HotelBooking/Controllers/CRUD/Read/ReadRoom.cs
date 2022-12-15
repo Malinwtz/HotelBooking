@@ -1,4 +1,5 @@
-﻿using HotelBooking.Data;
+﻿using HotelBooking.Controllers.CRUD;
+using HotelBooking.Data;
 
 namespace HotelBooking.Controllers.Read;
 
@@ -25,7 +26,7 @@ public class ReadRoom : ICrud
     {
         foreach (var room in DatabaseContext.Rooms)
             Console.WriteLine(
-                $"Id{room.RoomId}: {room.Type} {room.Size}kvadratmeter. " +
+                $"Id{room.RoomId}: {room.Type} {room.SizeSquareMeters}kvadratmeter. " +
                 $"Antal gäster: {room.NumberOfGuests}, möjlighet till extra sängar antal: {room.ExtraBed} ");
     }
 }

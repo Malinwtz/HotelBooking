@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Controllers.CRUD;
 using HotelBooking.Data;
 using Microsoft.Extensions.Options;
 
@@ -25,7 +26,7 @@ namespace HotelBooking.Controllers.Delete
 
                 foreach (var room in DatabaseContext.Rooms)
                 {
-                    Console.WriteLine($"Id{room.RoomId}: {room.Type}, {room.Size}kvadratmeter, antal gäster: {room.NumberOfGuests}, antal möjliga extra sängar: {room.ExtraBed}");
+                    Console.WriteLine($"Id{room.RoomId}: {room.Type}, {room.SizeSquareMeters}kvadratmeter, antal gäster: {room.NumberOfGuests}, antal möjliga extra sängar: {room.ExtraBed}");
                 }
 
                 Console.WriteLine("Välj Id på det rum som du vill ta bort");

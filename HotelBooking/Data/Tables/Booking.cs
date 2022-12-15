@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HotelBooking.CustomerHandler;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace HotelBooking.Data.Tables
+namespace HotelBooking.Data.Tables;
+
+public class Booking
 {
-    public class Booking
-    {
-        public int BookingId { get; set; }
-        public int CustomerId { get; set; }
-        public int RoomId { get; set; }
-        public Room Room { get; set; }
-    }
+    [Key] public int BookingId { get; set; }
+    [Required] public int CustomerId { get; set; }
+    [Required] public int RoomId { get; set; }
+    public List<Room> Rooms { get; set; }
 }
