@@ -24,17 +24,17 @@ public class StartMenu : IMenu
             {
                 case 1:
                 {
-                    var selectedFromCustomerMenu = ShowMenu.ShowCustomerMenu();
+                    var selectedFromCustomerMenu = BookingMenu.ShowCustomerMenu();
                     ManageCustomerMenu.CustomerMenu(selectedFromCustomerMenu);
                     break;
                 }
                 case 2:
                 {
-                    var selectedFromRoomMenu = ShowMenu.ShowRoomMenu();
+                    var selectedFromRoomMenu = BookingMenu.ShowRoomMenu();
                     break;
                 }
                 case 3:
-                    ShowMenu.ShowBookingMenu();
+                    BookingMenu.ShowBookingMenu();
                     break;
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelBooking.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace HotelBooking.Controllers.Menu
     public interface IMenu
     {
         int ShowAndReturnSelection();
-        void LoopMenu();
+        void LoopMenu(int selectionMenu, ApplicationDbContext dbContext);
     }
 }
