@@ -14,12 +14,11 @@ public class ReadRoom : ICrud
 
     public void RunCrud()
     {
-        using (DbContext)
-        {
+        
             Console.WriteLine("Visa alla rum");
             Console.WriteLine("=============");
             View();
-        }
+        
     }
 
     public void View()

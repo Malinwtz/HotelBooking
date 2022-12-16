@@ -14,18 +14,19 @@ public class ReadBooking : ICrud
 
     public void RunCrud()
     {
-        using (DbContext)
-        {
-            Console.WriteLine("Visa alla kunder");
+        
+            Console.WriteLine("Visa alla bokningar");
             Console.WriteLine("================");
             View();
-        }
+        
     }
 
     public void View()
     {
-        foreach (var customer in DbContext.Customers)
+        if (DbContext.Bookings == null)
+            Console.WriteLine("Det finns inga bokningar");
+        foreach (var booking in DbContext.Bookings)
             Console.WriteLine(
-                $"Id{customer.CustomerId}: {customer.FirstName} {customer.LastName} Telefon: {customer.Phone} ");
+                $"Id{booking.CustomerId}: {booking.Customer} {booking.Room}");
     }
 }

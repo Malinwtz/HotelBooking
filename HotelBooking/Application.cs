@@ -3,17 +3,21 @@ using HotelBooking.MenuHandler;
 
 namespace HotelBooking;
 
-internal class Application
+public class Application
 {
+    public bool ContinueLoop { get; set; } = true;
     public void Run()
     {
         var builder = new Builder();
         builder.BuildProject();
         var dbContext = builder.ConnectProject();
-
-        var startMenu = new StartMenu();
-        var selectedFromStartMenu = startMenu.ShowAndReturnSelection();
-        startMenu.LoopMenu(selectedFromStartMenu, dbContext);
+        while (ContinueLoop)
+        {
+            var startMenu = new StartMenu();
+            var selectedFromStartMenu = startMenu.ShowAndReturnSelection();
+            if (selectedFromStartMenu == 0) break;
+                startMenu.LoopMenu(selectedFromStartMenu, dbContext);
+        }
     }
 }
 

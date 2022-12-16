@@ -23,16 +23,15 @@ public class StartMenu : IMenu
         var loop = true;
         while (loop == true)
         {
-            if (selectionFromMenu == 0)
-            {
-               // loop == false;
-            }
             switch (selectionFromMenu)
             {
                 case 1:
                 {
                     var customerMenu = new CustomerMenu();
                     var selectedFromCustomerMenu = customerMenu.ShowAndReturnSelection();
+
+                    if (selectionFromMenu == 0) break; 
+                    
                     customerMenu.LoopMenu(selectedFromCustomerMenu, dbContext);
                     break;
                 }
@@ -40,12 +39,18 @@ public class StartMenu : IMenu
                 {
                     var roomMenu = new RoomMenu();
                     var selectedFromRooMenuMenu = roomMenu.ShowAndReturnSelection();
+
+                    if (selectionFromMenu == 0) break;
+
                     roomMenu.LoopMenu(selectedFromRooMenuMenu, dbContext);
                     break;
                 }
                 case 3:
                     var bookingMenu = new BookingMenu();
                     var selectedFromBookingMenu = bookingMenu.ShowAndReturnSelection();
+
+                    if (selectionFromMenu == 0) break;
+
                     bookingMenu.LoopMenu(selectedFromBookingMenu, dbContext);
                     break;
             }

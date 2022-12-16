@@ -10,9 +10,9 @@ public class RoomMenu : IMenu
     public int ShowAndReturnSelection()
     {
         var endAlternative = 2;
-        Console.WriteLine("1. Visa alla kunder");
-        Console.WriteLine("2. Registrera kund");
-        Console.WriteLine("3. Ändra kunduppgifter");
+        Console.WriteLine("1. Visa alla rum");
+        Console.WriteLine("2. Registrera rum");
+        Console.WriteLine("3. Ändra rum");
         Console.WriteLine($"{endAlternative}. Ta bort rum");
         ReturnFromMenuClass.ExitMenu();
         var selectFromRooMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
@@ -27,22 +27,22 @@ public class RoomMenu : IMenu
                 //avsluta
                 break;
             case 1:
-                var read = new ReadCustomer(dbContext);
+                var read = new ReadRoom(dbContext);
                 read.RunCrud();
                 break;
             case 2:
             {
-                var create = new CreateCustomer(dbContext);
+                var create = new CreateRoom(dbContext);
                 create.RunCrud();
                 break;
             }
             case 3:
-                var update = new UpdateCustomer(dbContext);
+                var update = new UpdateRoom(dbContext);
                 update.RunCrud();
                 break;
             case 4:
             {
-                var delete = new DeleteCustomer(dbContext);
+                var delete = new DeleteRoom(dbContext);
                 delete.RunCrud();
                 break;
             }
