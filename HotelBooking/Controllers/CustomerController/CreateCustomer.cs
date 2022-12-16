@@ -17,6 +17,7 @@ public class CreateCustomer : ICrud
     {
         using (var dbContext = new ApplicationDbContext())
         {
+            Console.Clear();
             Console.WriteLine("Registrera ny kund");
             Console.WriteLine("==================");
             Console.Write("Förnamn: ");

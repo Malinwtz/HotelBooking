@@ -17,6 +17,7 @@ public class CreateRoom : ICrud
     {
         using (var dbContext = new ApplicationDbContext())
         {
+            Console.Clear();
             Console.WriteLine("Registrera rum");
             Console.WriteLine("==============");
             Console.Write("SizeSquareMeters: ");

@@ -14,9 +14,8 @@ public class UpdateCustomer : ICrud
 
     public void RunCrud()
     {
-        using (DbContext)
-        {
-            Console.WriteLine("Ändra kundinformation");
+        Console.Clear();
+        Console.WriteLine("Ändra kundinformation");
             Console.WriteLine("=====================");
             foreach (var c in DbContext.Customers)
                 Console.WriteLine($"{c.CustomerId}. {c.FirstName} {c.LastName}");
@@ -37,6 +36,6 @@ public class UpdateCustomer : ICrud
             personToUpdate.LastName = updatedLastName;
             personToUpdate.Phone = updatedPhone;
             DbContext.SaveChanges();
-        }
+        
     }
 }

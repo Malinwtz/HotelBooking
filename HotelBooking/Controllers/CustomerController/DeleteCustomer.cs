@@ -19,8 +19,9 @@ namespace HotelBooking.Controllers.CustomerController
         }
         public void RunCrud()
         {
-            
-                Console.WriteLine("Ta bort en kund");
+
+            Console.Clear();
+            Console.WriteLine("Ta bort en kund");
                 Console.WriteLine("===============");
 
                 foreach (var customer in DbContext.Customers)

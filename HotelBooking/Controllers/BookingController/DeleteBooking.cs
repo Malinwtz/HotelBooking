@@ -19,9 +19,8 @@ namespace HotelBooking.Controllers.CustomerController
         }
         public void RunCrud()
         {
-            using (DbContext)
-            {
-                Console.WriteLine("Ta bort en kund");
+            Console.Clear(); 
+            Console.WriteLine("Ta bort en kund");
                 Console.WriteLine("===============");
 
                 foreach (var customer in DbContext.Customers)
@@ -35,7 +34,7 @@ namespace HotelBooking.Controllers.CustomerController
                 DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
 
                 DbContext.SaveChanges();
-            }
+            
         }
     }
 }

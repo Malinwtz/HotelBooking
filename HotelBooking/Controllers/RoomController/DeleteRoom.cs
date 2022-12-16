@@ -19,8 +19,7 @@ namespace HotelBooking.Controllers.RoomController
         }
         public void RunCrud()
         {
-            using (DbContext)
-            {
+            Console.Clear();
                 Console.WriteLine("Ta bort ett rum");
                 Console.WriteLine("===============");
 
@@ -35,7 +34,7 @@ namespace HotelBooking.Controllers.RoomController
                 DbContext.Rooms.Remove(roomToDelete);
 
                 DbContext.SaveChanges();
-            }
+            
         }
     }
 }
