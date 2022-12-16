@@ -1,11 +1,10 @@
-﻿using HotelBooking.Controllers.CRUD;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
 
-namespace HotelBooking.Controllers.Update;
+namespace HotelBooking.Controllers.RoomController;
 
-public class UpdateCustomer : ICrud
+public class UpdateRoom : ICrud
 {
-    public UpdateCustomer(ApplicationDbContext dbContext)
+    public UpdateRoom(ApplicationDbContext dbContext)
     {
         DatabaseContext = dbContext;
     }
@@ -22,9 +21,9 @@ public class UpdateCustomer : ICrud
                 Console.WriteLine($"{c.CustomerId}. {c.FirstName} {c.LastName}");
 
             Console.Write("Välj Id på den kund du vill uppdatera: ");
-            var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
-            var personToUpdate = DatabaseContext.Customers
-                .First(c => c.CustomerId == customerIdToUpdate);
+            var roomIdToUpdate = Convert.ToInt32(Console.ReadLine());
+            var roomToUpdate = DatabaseContext.Customers
+                .First(c => c.CustomerId == roomIdToUpdate);
 
             Console.Write("Ange förnamn: ");
             var updatedFirstName = Console.ReadLine();
@@ -33,9 +32,9 @@ public class UpdateCustomer : ICrud
             Console.Write("Ange telefonnummer: ");
             var updatedPhone = Convert.ToInt32(Console.ReadLine());
 
-            personToUpdate.FirstName = updatedFirstName;
-            personToUpdate.LastName = updatedLastName;
-            personToUpdate.Phone = updatedPhone;
+            roomToUpdate.FirstName = updatedFirstName;
+            roomToUpdate.LastName = updatedLastName;
+            roomToUpdate.Phone = updatedPhone;
             DatabaseContext.SaveChanges();
         }
     }

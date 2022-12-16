@@ -1,11 +1,10 @@
-﻿using HotelBooking.Controllers.CRUD;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
 
-namespace HotelBooking.Controllers.Read;
+namespace HotelBooking.Controllers.CustomerController;
 
-public class ReadCustomer : ICrud
+public class ReadBooking : ICrud
 {
-    public ReadCustomer(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
+    public ReadBooking(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
     {
         DatabaseContext = dbContext;
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Controllers.CRUD
+namespace HotelBooking.Controllers
 {
 
     public interface ICrud

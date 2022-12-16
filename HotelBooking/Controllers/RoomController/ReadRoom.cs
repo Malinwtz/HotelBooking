@@ -1,7 +1,6 @@
-﻿using HotelBooking.Controllers.CRUD;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
 
-namespace HotelBooking.Controllers.Read;
+namespace HotelBooking.Controllers.RoomController;
 
 public class ReadRoom : ICrud
 {

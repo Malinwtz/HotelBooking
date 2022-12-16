@@ -12,12 +12,16 @@ namespace HotelBooking.Controllers
 {
     public class Builder
     {
+        public IConfigurationRoot config { get; set; }
         public void BuildProject()
         {
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", true, true);
-            var config = builder.Build();
+            config = builder.Build();
+        }
 
+        public ApplicationDbContext ConnectProject()
+        {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = config.GetConnectionString("DefaultConnection");
             options.UseSqlServer(connectionString);
@@ -26,6 +30,7 @@ namespace HotelBooking.Controllers
             {
                 var dataInitiaizer = new DataInitializer();
                 dataInitiaizer.MigrateAndSeed(dbContext);
+                return dbContext;
             }
         }
 

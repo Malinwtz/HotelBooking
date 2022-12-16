@@ -3,6 +3,7 @@ using HotelBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221216103229_Added Bed again")]
+    partial class AddedBedagain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +22,34 @@ namespace HotelBooking.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BookingRoom", b =>
+                {
+                    b.Property<int>("BookingsBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomsRoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingsBookingId", "RoomsRoomId");
+
+                    b.HasIndex("RoomsRoomId");
+
+                    b.ToTable("BookingRoom");
+                });
+
+            modelBuilder.Entity("HotelBooking.Data.Tables.Beds", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Bedss");
+                });
 
             modelBuilder.Entity("HotelBooking.Data.Tables.Booking", b =>
                 {
@@ -38,8 +68,6 @@ namespace HotelBooking.Migrations
                     b.HasKey("BookingId");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("Bookings");
                 });
@@ -96,31 +124,31 @@ namespace HotelBooking.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("BookingRoom", b =>
+                {
+                    b.HasOne("HotelBooking.Data.Tables.Booking", null)
+                        .WithMany()
+                        .HasForeignKey("BookingsBookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBooking.Data.Tables.Room", null)
+                        .WithMany()
+                        .HasForeignKey("RoomsRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HotelBooking.Data.Tables.Booking", b =>
                 {
-                    b.HasOne("HotelBooking.Data.Tables.Customer", "Customer")
+                    b.HasOne("HotelBooking.Data.Tables.Customer", null)
                         .WithMany("Bookings")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HotelBooking.Data.Tables.Room", "Room")
-                        .WithMany("Bookings")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("HotelBooking.Data.Tables.Customer", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("HotelBooking.Data.Tables.Room", b =>
                 {
                     b.Navigation("Bookings");
                 });

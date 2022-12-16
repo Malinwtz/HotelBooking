@@ -1,11 +1,8 @@
-﻿using HotelBooking.Controllers.Create;
-using HotelBooking.Controllers.Delete;
-using HotelBooking.Controllers.Menu;
-using HotelBooking.Controllers.Read;
-using HotelBooking.Controllers.Update;
+﻿using HotelBooking.Controllers.CustomerController;
 using HotelBooking.Data;
+using HotelBooking.MenuHandler;
 
-namespace HotelBooking.MenuHandler;
+namespace HotelBooking.Controllers.RoomController;
 
 public class RoomMenu : IMenu
 {
@@ -19,9 +16,9 @@ public class RoomMenu : IMenu
         return selectFromRooMenu;
     }
 
-    public void LoopMenu(int selectselectionFromMenuionMenu, ApplicationDbContext dbContext)
+    public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
-        switch (selectionFromMenu)
+        switch (selectedFromMenu)
         {
             case 0:
                 //avsluta

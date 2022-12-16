@@ -1,13 +1,9 @@
-﻿using HotelBooking.Controllers.Create;
-using HotelBooking.Controllers.Delete;
-using HotelBooking.Controllers.Menu;
-using HotelBooking.Controllers.Read;
-using HotelBooking.Controllers.Update;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
+using HotelBooking.MenuHandler;
 
-namespace HotelBooking.MenuHandler;
+namespace HotelBooking.Controllers.CustomerController;
 
-public class CustomerMenu : IMenu
+public class BookingMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {

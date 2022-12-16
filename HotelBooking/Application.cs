@@ -9,8 +9,11 @@ internal class Application
     {
         var builder = new Builder();
         builder.BuildProject();
+        var dbContext = builder.ConnectProject();
 
-        LoopMenu.MenuLoop();
+        var startMenu = new StartMenu();
+        var selectedFromStartMenu = startMenu.ShowAndReturnSelection();
+        startMenu.LoopMenu(selectedFromStartMenu, dbContext);
     }
 }
 

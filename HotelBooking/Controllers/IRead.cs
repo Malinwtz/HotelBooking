@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HotelBooking.Controllers.CRUD;
 
-namespace HotelBooking.Controllers.Read
+namespace HotelBooking.Controllers
 {
     public interface IRead : ICrud
     {

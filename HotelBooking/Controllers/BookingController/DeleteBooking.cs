@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HotelBooking.Controllers.CRUD;
 using HotelBooking.Data;
 using Microsoft.Extensions.Options;
 
-namespace HotelBooking.Controllers.Delete
+namespace HotelBooking.Controllers.CustomerController
 {
-    public class DeleteCustomer : ICrud
+    public class DeleteBooking : ICrud
     {
         public ApplicationDbContext DatabaseContext { get; set; }
 
-        public DeleteCustomer(ApplicationDbContext dbContext)
+        public DeleteBooking(ApplicationDbContext dbContext)
         {
             DatabaseContext = dbContext;
         }

@@ -1,8 +1,7 @@
-﻿using HotelBooking.Controllers.CRUD;
-using HotelBooking.Data;
+﻿using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 
-namespace HotelBooking.Controllers.Create;
+namespace HotelBooking.Controllers.RoomController;
 
 public class CreateRoom : ICrud
 {
