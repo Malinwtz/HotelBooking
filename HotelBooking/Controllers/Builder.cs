@@ -30,7 +30,9 @@ namespace HotelBooking.Controllers
             {
                 var dataInitiaizer = new DataInitializer();
                 dataInitiaizer.MigrateAndSeed(dbContext);
-                return dbContext;
+
+                var dbContextReturned = new ApplicationDbContext(options.Options);
+                return dbContextReturned;
             }
         }
 

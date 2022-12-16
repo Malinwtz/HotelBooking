@@ -11,12 +11,9 @@ public class ReadCustomer : ICrud
     }
     public void RunCrud()
     {
-        using (DbContext)
-        {
-            Console.WriteLine("Visa alla kunder");
-            Console.WriteLine("================");
-            View();
-        }
+        Console.WriteLine("Visa alla kunder");
+        Console.WriteLine("================"); 
+        View();
     }
 
     public void View()
