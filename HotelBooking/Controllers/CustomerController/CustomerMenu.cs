@@ -3,7 +3,7 @@ using HotelBooking.MenuHandler;
 
 namespace HotelBooking.Controllers.CustomerController;
 
-public class BookingMenu : IMenu
+public class CustomerMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {

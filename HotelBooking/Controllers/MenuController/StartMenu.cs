@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers;
-using HotelBooking.Controllers.BookingController;
+using HotelBooking.Controllers.CustomerController;
+using HotelBooking.Controllers.RoomController;
 using HotelBooking.Data;
 
 namespace HotelBooking.MenuHandler;
@@ -26,17 +27,22 @@ public class StartMenu : IMenu
             {
                 case 1:
                 {
-                    
-                  //  ManageCustomerMenu.CustomerMenu(selectedFromCustomerMenu);
+                    var customerMenu = new CustomerMenu();
+                    var selectedFromCustomerMenu = customerMenu.ShowAndReturnSelection();
+                    customerMenu.LoopMenu(selectedFromCustomerMenu, dbContext);
                     break;
                 }
                 case 2:
                 {
-                 //   var selectedFromRoomMenu = BookingMenu.ShowRoomMenu();
+                    var roomMenu = new RoomMenu();
+                    var selectedFromRooMenuMenu = roomMenu.ShowAndReturnSelection();
+                    roomMenu.LoopMenu(selectedFromRooMenuMenu, dbContext);
                     break;
                 }
                 case 3:
-                  //  BookingMenu.ShowBookingMenu();
+                    var bookingMenu = new CustomerMenu();
+                    var selectedFromBookingMenu = bookingMenu.ShowAndReturnSelection();
+                    bookingMenu.LoopMenu(selectedFromBookingMenu, dbContext);
                     break;
             }
         }
