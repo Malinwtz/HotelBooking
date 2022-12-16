@@ -6,14 +6,14 @@ public class ReadRoom : ICrud
 {
     public ReadRoom(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
     {
-        DatabaseContext = dbContext;
+        DbContext = dbContext;
     }
 
-    public ApplicationDbContext DatabaseContext { get; set; }
+    public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {
-        using (DatabaseContext)
+        using (DbContext)
         {
             Console.WriteLine("Visa alla rum");
             Console.WriteLine("=============");
@@ -23,7 +23,7 @@ public class ReadRoom : ICrud
 
     public void View()
     {
-        foreach (var room in DatabaseContext.Rooms)
+        foreach (var room in DbContext.Rooms)
             Console.WriteLine(
                 $"Id{room.RoomId}: {room.Type} {room.SizeSquareMeters}kvadratmeter. " +
                 $"Antal gäster: {room.NumberOfGuests}, möjlighet till extra sängar antal: {room.ExtraBed} ");

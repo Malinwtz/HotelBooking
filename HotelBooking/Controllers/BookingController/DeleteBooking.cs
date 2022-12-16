@@ -10,30 +10,30 @@ namespace HotelBooking.Controllers.CustomerController
 {
     public class DeleteBooking : ICrud
     {
-        public ApplicationDbContext DatabaseContext { get; set; }
+        public ApplicationDbContext DbContext { get; set; }
 
         public DeleteBooking(ApplicationDbContext dbContext)
         {
-            DatabaseContext = dbContext;
+            DbContext = dbContext;
         }
         public void RunCrud()
         {
-            using (DatabaseContext)
+            using (DbContext)
             {
                 Console.WriteLine("Ta bort en kund");
                 Console.WriteLine("===============");
 
-                foreach (var customer in DatabaseContext.Customers)
+                foreach (var customer in DbContext.Customers)
                 {
                     Console.WriteLine($"Id: {customer.CustomerId}, {customer.FirstName} {customer.LastName}");
                 }
 
                 Console.WriteLine("Välj Id på den kund som du vill ta bort");
                 var customerIdToDelete = Convert.ToInt32(Console.ReadLine());
-                var customerToDelete = DatabaseContext.Customers.First(p => p.CustomerId == customerIdToDelete);
-                DatabaseContext.Customers.Remove(customerToDelete);//ändra till soft delete
+                var customerToDelete = DbContext.Customers.First(p => p.CustomerId == customerIdToDelete);
+                DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
 
-                DatabaseContext.SaveChanges();
+                DbContext.SaveChanges();
             }
         }
     }

@@ -7,10 +7,10 @@ public class CreateCustomer : ICrud
 {
     public CreateCustomer(ApplicationDbContext dbContext)
     {
-        DatabaseContext = dbContext;
+        DbContext = dbContext;
     }
 
-    public ApplicationDbContext DatabaseContext { get; set; }
+    public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {

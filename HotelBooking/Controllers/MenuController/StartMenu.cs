@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers;
+using HotelBooking.Controllers.BookingController;
 using HotelBooking.Controllers.CustomerController;
 using HotelBooking.Controllers.RoomController;
 using HotelBooking.Data;
@@ -21,9 +22,8 @@ public class StartMenu : IMenu
     {
         while (true)
         {
-            var sel = ShowAndReturnSelection();
-            if (sel == 0) break;
-            switch (sel)
+            if (selectionFromMenu == 0) break;
+            switch (selectionFromMenu)
             {
                 case 1:
                 {
@@ -40,7 +40,7 @@ public class StartMenu : IMenu
                     break;
                 }
                 case 3:
-                    var bookingMenu = new CustomerMenu();
+                    var bookingMenu = new BookingMenu();
                     var selectedFromBookingMenu = bookingMenu.ShowAndReturnSelection();
                     bookingMenu.LoopMenu(selectedFromBookingMenu, dbContext);
                     break;

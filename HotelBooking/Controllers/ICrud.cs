@@ -10,7 +10,7 @@ namespace HotelBooking.Controllers
 
     public interface ICrud
     {
-        public ApplicationDbContext DatabaseContext { get; set; }
+        public ApplicationDbContext DbContext { get; set; }
         public void RunCrud();
     }
 }

@@ -6,23 +6,23 @@ public class UpdateCustomer : ICrud
 {
     public UpdateCustomer(ApplicationDbContext dbContext)
     {
-        DatabaseContext = dbContext;
+        DbContext = dbContext;
     }
 
-    public ApplicationDbContext DatabaseContext { get; set; }
+    public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {
-        using (DatabaseContext)
+        using (DbContext)
         {
             Console.WriteLine("Ändra kundinformation");
             Console.WriteLine("=====================");
-            foreach (var c in DatabaseContext.Customers)
+            foreach (var c in DbContext.Customers)
                 Console.WriteLine($"{c.CustomerId}. {c.FirstName} {c.LastName}");
 
             Console.Write("Välj Id på den kund du vill uppdatera: ");
             var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
-            var personToUpdate = DatabaseContext.Customers
+            var personToUpdate = DbContext.Customers
                 .First(c => c.CustomerId == customerIdToUpdate);
 
             Console.Write("Ange förnamn: ");
@@ -35,7 +35,7 @@ public class UpdateCustomer : ICrud
             personToUpdate.FirstName = updatedFirstName;
             personToUpdate.LastName = updatedLastName;
             personToUpdate.Phone = updatedPhone;
-            DatabaseContext.SaveChanges();
+            DbContext.SaveChanges();
         }
     }
 }

@@ -6,14 +6,14 @@ public class ReadBooking : ICrud
 {
     public ReadBooking(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
     {
-        DatabaseContext = dbContext;
+        DbContext = dbContext;
     }
 
-    public ApplicationDbContext DatabaseContext { get; set; }
+    public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {
-        using (DatabaseContext)
+        using (DbContext)
         {
             Console.WriteLine("Visa alla kunder");
             Console.WriteLine("================");
@@ -23,7 +23,7 @@ public class ReadBooking : ICrud
 
     public void View()
     {
-        foreach (var customer in DatabaseContext.Customers)
+        foreach (var customer in DbContext.Customers)
             Console.WriteLine(
                 $"Id{customer.CustomerId}: {customer.FirstName} {customer.LastName} Telefon: {customer.Phone} ");
     }
