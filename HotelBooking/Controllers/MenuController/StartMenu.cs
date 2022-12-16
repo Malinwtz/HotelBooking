@@ -10,7 +10,10 @@ public class StartMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 3;
+        Console.WriteLine("STARTMENY");
+        Console.WriteLine("*********");
         Console.WriteLine("1. KUND - Registrera/ändra/avregistrera");
         Console.WriteLine("2. RUM - Registrera/ändra/Ta bort");
         Console.WriteLine($"{endAlternative}. BOKNING - Registrera/ändra/Ta bort");
@@ -18,19 +21,19 @@ public class StartMenu : IMenu
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;
     }
-    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
+    public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
         var loop = true;
         while (loop == true)
         {
-            switch (selectionFromMenu)
+            switch (selectedFromMenu)
             {
                 case 1:
                 {
                     var customerMenu = new CustomerMenu();
                     var selectedFromCustomerMenu = customerMenu.ShowAndReturnSelection();
 
-                    if (selectionFromMenu == 0) break; 
+                    if (selectedFromCustomerMenu == 0) loop = false; 
                     
                     customerMenu.LoopMenu(selectedFromCustomerMenu, dbContext);
                     break;
@@ -38,18 +41,18 @@ public class StartMenu : IMenu
                 case 2:
                 {
                     var roomMenu = new RoomMenu();
-                    var selectedFromRooMenuMenu = roomMenu.ShowAndReturnSelection();
+                    var selectedFromRoomMenu = roomMenu.ShowAndReturnSelection();
 
-                    if (selectionFromMenu == 0) break;
+                    if (selectedFromRoomMenu == 0) loop = false;
 
-                    roomMenu.LoopMenu(selectedFromRooMenuMenu, dbContext);
+                    roomMenu.LoopMenu(selectedFromRoomMenu, dbContext);
                     break;
                 }
                 case 3:
                     var bookingMenu = new BookingMenu();
                     var selectedFromBookingMenu = bookingMenu.ShowAndReturnSelection();
 
-                    if (selectionFromMenu == 0) break;
+                    if (selectedFromBookingMenu == 0) loop = false;
 
                     bookingMenu.LoopMenu(selectedFromBookingMenu, dbContext);
                     break;

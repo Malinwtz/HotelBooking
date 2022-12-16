@@ -9,7 +9,10 @@ public class RoomMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 2;
+        Console.WriteLine("RUMSMENY");
+        Console.WriteLine("********");
         Console.WriteLine("1. Visa alla rum");
         Console.WriteLine("2. Registrera rum");
         Console.WriteLine("3. Ändra rum");

@@ -9,7 +9,10 @@ public class BookingMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 3;
+        Console.WriteLine("BOKNINGSMENY");
+        Console.WriteLine("************");
         Console.WriteLine("1. Visa alla bokningar");
         Console.WriteLine("2. Registrera bokning");
         Console.WriteLine("3. Ändra bokning");
@@ -20,33 +23,38 @@ public class BookingMenu : IMenu
         return selectFromBookingMenu;
     }
 
-    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
+    public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
-        switch (selectionFromMenu)
+        var loop = true;
+        while (loop)
         {
-            case 0:
-                //avsluta
-                break;
-            case 1:
-                var read = new ReadBooking(dbContext);
-                read.RunCrud();
-                break;
-            case 2:
-                {
-                    var create = new CreateBooking(dbContext);
-                    create.RunCrud();
+
+            switch (selectedFromMenu)
+            {
+                case 0:
+                    loop = false;
                     break;
-                }
-            case 3:
-                var update = new UpdateBooking(dbContext);
-                update.RunCrud();
-                break;
-            case 4:
-                {
-                    var delete = new DeleteBooking(dbContext);
-                    delete.RunCrud();
+                case 1:
+                    var read = new ReadBooking(dbContext);
+                    read.RunCrud();
                     break;
-                }
+                case 2:
+                    {
+                        var create = new CreateBooking(dbContext);
+                        create.RunCrud();
+                        break;
+                    }
+                case 3:
+                    var update = new UpdateBooking(dbContext);
+                    update.RunCrud();
+                    break;
+                case 4:
+                    {
+                        var delete = new DeleteBooking(dbContext);
+                        delete.RunCrud();
+                        break;
+                    }
+            } 
         }
     }
 }

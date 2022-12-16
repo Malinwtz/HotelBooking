@@ -8,7 +8,10 @@ public class CustomerMenu : IMenu
 {
     public int ShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 4;
+        Console.WriteLine("KUNDMENY");
+        Console.WriteLine("********");
         Console.WriteLine("1. Visa alla kunder");
         Console.WriteLine("2. Registrera kund");
         Console.WriteLine("3. Ändra kunduppgifter");
@@ -18,9 +21,9 @@ public class CustomerMenu : IMenu
         return sel;
     }
 
-    public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
+    public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
-        switch (selectionFromMenu)
+        switch (selectedFromMenu)
         {
             case 0:
                 //avsluta
