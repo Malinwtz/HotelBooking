@@ -14,11 +14,12 @@ public class ReadBooking : ICrud
 
     public void RunCrud()
     {
-        
-            Console.WriteLine("Visa alla bokningar");
-            Console.WriteLine("================");
-            View();
-        
+        Console.Clear();
+        Console.WriteLine("Visa alla bokningar");
+        Console.WriteLine("================" + Environment.NewLine);
+        View();
+        Console.WriteLine(Environment.NewLine + "Tryck på enter för att fortsätta");
+        Console.ReadKey();
     }
 
     public void View()

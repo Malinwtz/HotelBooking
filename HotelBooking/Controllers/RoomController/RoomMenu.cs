@@ -12,11 +12,11 @@ public class RoomMenu : IMenu
         Console.Clear();
         var endAlternative = 2;
         Console.WriteLine("RUMSMENY");
-        Console.WriteLine("********");
+        Console.WriteLine("********" + Environment.NewLine);
         Console.WriteLine("1. Visa alla rum");
         Console.WriteLine("2. Registrera rum");
         Console.WriteLine("3. Ändra rum");
-        Console.WriteLine($"{endAlternative}. Ta bort rum");
+        Console.WriteLine($"{endAlternative}. Ta bort rum" + Environment.NewLine);
         ReturnFromMenuClass.ExitMenu();
         var selectFromRooMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromRooMenu;
@@ -26,9 +26,6 @@ public class RoomMenu : IMenu
     {
         switch (selectedFromMenu)
         {
-            case 0:
-                //avsluta
-                break;
             case 1:
                 var read = new ReadRoom(dbContext);
                 read.RunCrud();

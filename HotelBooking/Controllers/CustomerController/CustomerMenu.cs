@@ -11,11 +11,11 @@ public class CustomerMenu : IMenu
         Console.Clear();
         var endAlternative = 4;
         Console.WriteLine("KUNDMENY");
-        Console.WriteLine("********");
+        Console.WriteLine("********" + Environment.NewLine);
         Console.WriteLine("1. Visa alla kunder");
         Console.WriteLine("2. Registrera kund");
         Console.WriteLine("3. Ändra kunduppgifter");
-        Console.WriteLine($"{endAlternative}. Avregistrera kund");
+        Console.WriteLine($"{endAlternative}. Avregistrera kund" + Environment.NewLine);
         ReturnFromMenuClass.ExitMenu();
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;
@@ -25,9 +25,6 @@ public class CustomerMenu : IMenu
     {
         switch (selectedFromMenu)
         {
-            case 0:
-                //avsluta
-                break;
             case 1:
                 var read = new ReadCustomer(dbContext);
                 read.RunCrud();

@@ -12,9 +12,12 @@ public class ReadCustomer : ICrud
     }
     public void RunCrud()
     {
+        Console.Clear();
         Console.WriteLine("Visa alla kunder");
-        Console.WriteLine("================"); 
+        Console.WriteLine("================" + Environment.NewLine); 
         View();
+        Console.WriteLine(Environment.NewLine + "Tryck på enter för att fortsätta");
+        Console.ReadKey();
     }
 
     public void View()
