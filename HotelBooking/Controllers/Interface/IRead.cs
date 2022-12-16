@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Controllers
+namespace HotelBooking.Controllers.Interface
 {
     public interface IRead : ICrud
     {

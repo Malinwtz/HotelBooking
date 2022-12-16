@@ -24,21 +24,21 @@ namespace HotelBooking.Data
                     Phone = 0707230489
                 });
             }
-            if (!dbContext.Customers.Any(c => c.FirstName == "Frida" && c.LastName == "Jönsson"))
+            if (!dbContext.Customers.Any(c => c.FirstName == "Erika" && c.LastName == "Jönsson"))
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    FirstName = "Frida",
+                    FirstName = "Erika",
                     LastName = "Jönsson",
                     Phone = 0707230482
                 });
             }
-            if (!dbContext.Customers.Any(c => c.FirstName == "Håkan" && c.LastName == "Elofsson"))
+            if (!dbContext.Customers.Any(c => c.FirstName == "Håkan" && c.LastName == "Holmström"))
             {
                 dbContext.Customers.Add(new Customer
                 {
                     FirstName = "Håkan",
-                    LastName = "Elofsson",
+                    LastName = "Holmström",
                     Phone = 0707230481
                 });
             }

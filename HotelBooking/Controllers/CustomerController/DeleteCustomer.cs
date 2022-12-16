@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Data;
 using Microsoft.Extensions.Options;
 
@@ -18,8 +19,7 @@ namespace HotelBooking.Controllers.CustomerController
         }
         public void RunCrud()
         {
-            using (DbContext)
-            {
+            
                 Console.WriteLine("Ta bort en kund");
                 Console.WriteLine("===============");
 
@@ -34,7 +34,7 @@ namespace HotelBooking.Controllers.CustomerController
                 DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
 
                 DbContext.SaveChanges();
-            }
+            
         }
     }
 }

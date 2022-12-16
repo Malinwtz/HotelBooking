@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.CustomerController;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Data;
 using HotelBooking.MenuHandler;
 
@@ -9,7 +10,9 @@ public class BookingMenu : IMenu
     public int ShowAndReturnSelection()
     {
         var endAlternative = 3;
-        Console.WriteLine("1. Visa lediga rum");
+        Console.WriteLine("1. Visa alla bokningar");
+        Console.WriteLine("2. Registrera bokning");
+        Console.WriteLine("3. Ändra bokning");
         Console.WriteLine("2. Ta bort bokning");
         Console.WriteLine($"{endAlternative}. Sök på tillgängliga datum");
         ReturnFromMenuClass.ExitMenu();

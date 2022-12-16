@@ -1,6 +1,6 @@
-﻿using HotelBooking.Controllers;
-using HotelBooking.Controllers.BookingController;
+﻿using HotelBooking.Controllers.BookingController;
 using HotelBooking.Controllers.CustomerController;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.RoomController;
 using HotelBooking.Data;
 
@@ -20,9 +20,13 @@ public class StartMenu : IMenu
     }
     public void LoopMenu(int selectionFromMenu, ApplicationDbContext dbContext)
     {
-        while (true)
+        var loop = true;
+        while (loop == true)
         {
-            if (selectionFromMenu == 0) break;
+            if (selectionFromMenu == 0)
+            {
+               // loop == false;
+            }
             switch (selectionFromMenu)
             {
                 case 1:
