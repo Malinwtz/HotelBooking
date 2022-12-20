@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers.Interface;
 using HotelBooking.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.CustomerController;
 
@@ -15,26 +16,32 @@ public class UpdateBooking : ICrud
     public void RunCrud()
     {
         Console.Clear();
-        Console.WriteLine("Ändra kundinformation");
-        Console.WriteLine("=====================");
-        foreach (var c in DbContext.Customers)
-            Console.WriteLine($"{c.CustomerId}. {c.FirstName} {c.LastName}");
+        Console.WriteLine("Ändra bokning");
+        Console.WriteLine("=============");
+        foreach (var b in DbContext.Bookings.Include(b=>b.Customer)
+                                                   .Include(b=>b.Room))
+            Console.WriteLine($"{b.BookingId} {b.Customer.FirstName} {b.Customer.LastName} " +
+                              $"{b.StartDate.ToShortDateString()}.{b.EndDate.ToShortDateString()}");
 
-        Console.Write("Välj Id på den kund du vill uppdatera: ");
-        var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
-        var personToUpdate = DbContext.Customers
-            .First(c => c.CustomerId == customerIdToUpdate);
+        Console.Write("Välj Id på den bokning du vill uppdatera: ");
+        var bookingIdToUpdate = Convert.ToInt32(Console.ReadLine());
+        var bookingToUpdate = DbContext.Bookings
+            .First(c => c.BookingId == bookingIdToUpdate);
 
-        Console.Write("Ange förnamn: ");
-        var updatedFirstName = Console.ReadLine();
-        Console.Write("Ange efternamn: ");
-        var updatedLastName = Console.ReadLine();
-        Console.Write("Ange telefonnummer: ");
-        var updatedPhone = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Ange startdatum: ");
+        var updatedStartDate = Convert.ToDateTime(Console.ReadLine());
+        Console.Write("Ange antal dagar: ");
+        var updatedNumberOfDays = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Ange rummets Id: ");
+        var updatedRoomId = Convert.ToInt32(Console.ReadLine());
 
-        personToUpdate.FirstName = updatedFirstName;
-        personToUpdate.LastName = updatedLastName;
-        personToUpdate.Phone = updatedPhone;
+        var updatedEndDate = updatedStartDate.AddDays(updatedNumberOfDays);
+        
+        bookingToUpdate.Room.RoomId = updatedRoomId;
+        bookingToUpdate.StartDate = updatedStartDate;
+        bookingToUpdate.EndDate = updatedEndDate;
+        bookingToUpdate.BookingId = bookingIdToUpdate;
+        
         DbContext.SaveChanges();
     }
 }

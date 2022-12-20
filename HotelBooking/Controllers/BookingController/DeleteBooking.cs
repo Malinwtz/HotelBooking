@@ -1,40 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.Interface;
 using HotelBooking.Data;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 
-namespace HotelBooking.Controllers.CustomerController
+namespace HotelBooking.Controllers.CustomerController;
+
+public class DeleteBooking : ICrud
 {
-    public class DeleteBooking : ICrud
+    public DeleteBooking(ApplicationDbContext dbContext)
     {
-        public ApplicationDbContext DbContext { get; set; }
+        DbContext = dbContext;
+    }
 
-        public DeleteBooking(ApplicationDbContext dbContext)
-        {
-            DbContext = dbContext;
-        }
-        public void RunCrud()
-        {
-            Console.Clear(); 
-            Console.WriteLine("Ta bort en kund");
-                Console.WriteLine("===============");
+    public ApplicationDbContext DbContext { get; set; }
 
-                foreach (var customer in DbContext.Customers)
-                {
-                    Console.WriteLine($"Id: {customer.CustomerId}, {customer.FirstName} {customer.LastName}");
-                }
+    public void RunCrud()
+    {
+        Console.Clear();
+        Console.WriteLine("Ta bort en bokning");
+        Console.WriteLine("==================");
 
-                Console.WriteLine("Välj Id på den kund som du vill ta bort");
-                var customerIdToDelete = Convert.ToInt32(Console.ReadLine());
-                var customerToDelete = DbContext.Customers.First(p => p.CustomerId == customerIdToDelete);
-                DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
+        Console.WriteLine("Rum\t\t\tKundnamn\t\t\tDatum");
+        foreach (var booking in DbContext.Bookings.Include(b=>b.Customer)
+                                                  .Include(b=>b.Room))
+            Console.WriteLine($"{booking.BookingId}\t\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
+                              $"\t\t\t{booking.StartDate.ToShortDateString()}-¨{booking.EndDate.ToShortDateString()}");
 
-                DbContext.SaveChanges();
-            
-        }
+        Console.WriteLine("Välj Id på den bokning som du vill ta bort");
+        var bookingIdToDelete = Convert.ToInt32(Console.ReadLine());
+        var bookingToDelete = DbContext.Bookings.First(p => p.BookingId == bookingIdToDelete);
+
+        DbContext.Bookings.Remove(bookingToDelete); 
+        DbContext.SaveChanges();
     }
 }
