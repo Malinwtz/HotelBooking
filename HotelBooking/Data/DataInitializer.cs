@@ -10,7 +10,7 @@ namespace HotelBooking.Data
         {
             dbContext.Database.Migrate();
             SeedRoom(dbContext);
-            SeedCustomer(dbContext);
+            SeedCustomer(dbContext); 
             dbContext.SaveChanges();
         }
         private void SeedCustomer(ApplicationDbContext dbContext)

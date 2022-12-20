@@ -28,6 +28,6 @@ public class ReadBooking : ICrud
             Console.WriteLine("Det finns inga bokningar");
         foreach (var booking in DbContext.Bookings)
             Console.WriteLine(
-                $"Id{booking.CustomerId}: {booking.Customer} {booking.Room}");
+                $"Id{booking.CustomerId}: {booking.Customer} {booking.RoomBooking}");
     }
 }
