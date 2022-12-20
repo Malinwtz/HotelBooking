@@ -16,7 +16,7 @@ public class BookingMenu : IMenu
         Console.WriteLine("1. Visa alla bokningar");
         Console.WriteLine("2. Registrera bokning");
         Console.WriteLine("3. Ändra bokning");
-        Console.WriteLine($"{endAlternative}. Ta bort bokning" + Environment.NewLine);
+        Console.WriteLine($"{endAlternative}. Ta bort bokning");
         ReturnFromMenuClass.ExitMenu();
         var selectFromBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromBookingMenu;

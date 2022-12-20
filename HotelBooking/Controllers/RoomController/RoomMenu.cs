@@ -16,7 +16,7 @@ public class RoomMenu : IMenu
         Console.WriteLine("1. Visa alla rum");
         Console.WriteLine("2. Registrera rum");
         Console.WriteLine("3. Ändra rum");
-        Console.WriteLine($"{endAlternative}. Ta bort rum" + Environment.NewLine);
+        Console.WriteLine($"{endAlternative}. Ta bort rum");
         ReturnFromMenuClass.ExitMenu();
         var selectFromRooMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromRooMenu;

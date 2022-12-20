@@ -9,6 +9,5 @@ public class Booking
     [Required] public Room Room { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    //public Room RoomBooking { get; set; }
     public int NumberOfDays { get; set; }
 }

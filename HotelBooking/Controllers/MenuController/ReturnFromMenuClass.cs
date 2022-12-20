@@ -17,6 +17,6 @@ public class ReturnFromMenuClass
     }
     public static void ExitMenu()
     {
-        Console.WriteLine("0 = Avbryt");
+        Console.WriteLine(Environment.NewLine + "0 = Avbryt");
     }
 }

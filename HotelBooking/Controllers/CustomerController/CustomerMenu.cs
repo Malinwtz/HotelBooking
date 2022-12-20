@@ -15,7 +15,7 @@ public class CustomerMenu : IMenu
         Console.WriteLine("1. Visa alla kunder");
         Console.WriteLine("2. Registrera kund");
         Console.WriteLine("3. Ändra kunduppgifter");
-        Console.WriteLine($"{endAlternative}. Avregistrera kund" + Environment.NewLine);
+        Console.WriteLine($"{endAlternative}. Avregistrera kund");
         ReturnFromMenuClass.ExitMenu();
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;
