@@ -25,7 +25,7 @@ public class CreateBooking : ICrud
         CheckIfRoomIsAlreadyBooked(listOfBookings, availableRoom);
         ShowBookingDetails(bookingToCreate);
         DisplayIfRoomIsAvailable(availableRoom);
-        AssignRoomToCustomer(bookingToCreate);
+        AssignRoomToCustomer(bookingToCreate, DbContext);
         SuccessfulBooking(bookingToCreate);
     }
 
@@ -35,8 +35,8 @@ public class CreateBooking : ICrud
         {
             bool roomIsFree = true;
             foreach (var booking in DbContext.Bookings
-                         .Include(b => b.RoomBooking)
-                         .Where(b => b.RoomBooking == room))
+                         .Include(b => b.Room)
+                         .Where(b => b.Room == room))
             {
                 for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
                 {
@@ -75,16 +75,20 @@ public class CreateBooking : ICrud
         }
     }
 
-    private void AssignRoomToCustomer(Booking bookingToCreate)
+    private void AssignRoomToCustomer(Booking bookingToCreate, ApplicationDbContext dbContext)
     {
         Console.WriteLine("\n Välj ett rum (ID) från tillgängliga rum");
-        int roomsForBooking = Convert.ToInt32(Console.ReadLine());
-        bookingToCreate.RoomBooking = DbContext.Rooms.FirstOrDefault(r => r.RoomId == roomsForBooking);
+        int roomIdForBooking = Convert.ToInt32(Console.ReadLine());
+        bookingToCreate.Room = DbContext.Rooms.FirstOrDefault(r => r.RoomId == roomIdForBooking);
             //.Where(c => c.RoomId == roomsForBooking)
             //.FirstOrDefault();
+        ReadCustomer readCustomer = new ReadCustomer(dbContext);
+        readCustomer.View();
 
-
-            //skriv in alla andra prop för booking
+        Console.WriteLine("Välj kund (ID)");
+        int customerIdForBooking = Convert.ToInt32(Console.ReadLine());
+        bookingToCreate.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
+        
         DbContext.Add(bookingToCreate);
         DbContext.SaveChanges(); 
     }
@@ -94,7 +98,7 @@ public class CreateBooking : ICrud
         Console.Clear();
         Console.WriteLine(" Your booking details");
         Console.WriteLine(" ==================================================================");
-        Console.WriteLine(" Start\t\tEnd\t\tNo. of days");
+        Console.WriteLine(" Startdatum\t\tSlutdatum\t\tAntal dagar");
         Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}" +
                           $"\t{bookingToCreate.EndDate.ToShortDateString()}" +
                           $"\t{bookingToCreate.NumberOfDays}");

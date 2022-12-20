@@ -4,7 +4,7 @@ namespace HotelBooking.Data.Tables;
 
 public class Room
 {
-    public int RoomId { get; set; }
+    [Key] public int RoomId { get; set; }
     [Required] [Range(10, 50)] public int SizeSquareMeters { get; set; }
     [Required] public int NumberOfGuests { get; set; }
     [Required] public string Type { get; set; }
