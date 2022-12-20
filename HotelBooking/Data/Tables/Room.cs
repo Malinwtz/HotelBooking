@@ -8,6 +8,6 @@ public class Room
     [Required] [Range(10, 50)] public int SizeSquareMeters { get; set; }
     [Required] public int NumberOfGuests { get; set; }
     [Required] public string Type { get; set; }
-    [Required] [Range(1, 2)] public int ExtraBed { get; set; }
+    [Required] public bool ExtraBed { get; set; }
     public List<Booking> Bookings { get; set; }
 }

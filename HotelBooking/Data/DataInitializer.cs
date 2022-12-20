@@ -15,39 +15,50 @@ namespace HotelBooking.Data
         }
         private void SeedCustomer(ApplicationDbContext dbContext)
         {
-            if (!dbContext.Customers.Any(c => c.FirstName == "Annie" && c.LastName == "Sörensen"))
+            var firstName1 = "Anna";
+            var lastName1 = "Ek";
+            if (!dbContext.Customers.Any(c => c.FirstName == firstName1 && c.LastName == lastName1))
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    FirstName = "Annie",
-                    LastName = "Sörensen",
+                    FirstName = firstName1,
+                    LastName = lastName1,
                     Phone = 0707230489
                 });
             }
-            if (!dbContext.Customers.Any(c => c.FirstName == "Erika" && c.LastName == "Jönsson"))
+
+            var firstName2 = "Carina";
+            var lastName2 = "Löv";
+            if (!dbContext.Customers.Any(c => c.FirstName == firstName2 && c.LastName == lastName2))
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    FirstName = "Erika",
-                    LastName = "Jönsson",
+                    FirstName = firstName2,
+                    LastName = lastName2,
                     Phone = 0707230482
                 });
             }
-            if (!dbContext.Customers.Any(c => c.FirstName == "Håkan" && c.LastName == "Holmström"))
+
+            var firstName3 = "Håkan";
+            var lastName3 = "Holmström";
+            if (!dbContext.Customers.Any(c => c.FirstName == firstName3 && c.LastName == lastName3))
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    FirstName = "Håkan",
-                    LastName = "Holmström",
+                    FirstName = firstName3,
+                    LastName = lastName3,
                     Phone = 0707230481
                 });
             }
-            if (!dbContext.Customers.Any(c => c.FirstName == "Erik" && c.LastName == "Holm"))
+
+            var firstName4 = "Håkan";
+            var lastName4 = "Holmström";
+            if (!dbContext.Customers.Any(c => c.FirstName == firstName4 && c.LastName == lastName4))
             {
                 dbContext.Customers.Add(new Customer
                 {
-                    FirstName = "Erik",
-                    LastName = "Holm",
+                    FirstName = firstName4,
+                    LastName = lastName4,
                     Phone = 0707230485
                 });
             }
@@ -59,9 +70,9 @@ namespace HotelBooking.Data
             {
                 dbContext.Rooms.Add(new Room()
                 {
-                    SizeSquareMeters = 20,
-                    NumberOfGuests = 2,
-                    ExtraBed = 1,
+                    SizeSquareMeters = 15,
+                    NumberOfGuests = 1,
+                    ExtraBed = false,
                     Type = "Single"
                 });
             }
@@ -69,9 +80,9 @@ namespace HotelBooking.Data
             {
                 dbContext.Rooms.Add(new Room
                 {
-                    SizeSquareMeters = 30,
-                    NumberOfGuests = 3,
-                    ExtraBed = 1,
+                    SizeSquareMeters = 20,
+                    NumberOfGuests = 2,
+                    ExtraBed = true,
                     Type = "Double"
                 });
             }
@@ -81,7 +92,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 40,
                     NumberOfGuests = 4,
-                    ExtraBed = 2,
+                    ExtraBed = true,
                     Type = "Double"
                 });
             }
@@ -91,8 +102,8 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 50,
                     NumberOfGuests = 4,
-                    ExtraBed = 2,
-                    Type = "Single"
+                    ExtraBed = true,
+                    Type = "Double"
                 });
             }
         }

@@ -19,18 +19,19 @@ public class CreateRoom : ICrud
         {
             Console.Clear();
             Console.WriteLine("Registrera rum");
-            Console.WriteLine("==============");
+            Console.WriteLine("==============" + Environment.NewLine);
             Console.Write("SizeSquareMeters: ");
             var sizeInput = Convert.ToInt32(Console.ReadLine());
             Console.Write("Max antal gäster som får plats: ");
             var numberOfGuestsInput = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Bed: ");
-            var bedInput = Console.ReadLine();
-            //Enum.TryParse(bedInput, out Enum bedInputEnum);
             Console.Write("Typ av rum: ");
             var typeInput = Console.ReadLine();
-            Console.Write("Hur många extra sängar kan ställas in: ");
-            var extraBedInput = Convert.ToInt32(Console.ReadLine());
+
+            var extraBedInput = false;
+
+            if (typeInput.ToLower() == "double" && sizeInput > 20) 
+                extraBedInput = true;
+            
 
             dbContext.Rooms.Add(new Room
             {
