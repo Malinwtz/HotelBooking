@@ -72,7 +72,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 15,
                     NumberOfGuests = 1,
-                    ExtraBed = false,
+                    ExtraBed = 0,
                     Type = "Single"
                 });
             }
@@ -82,7 +82,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 20,
                     NumberOfGuests = 2,
-                    ExtraBed = true,
+                    ExtraBed = 0,
                     Type = "Double"
                 });
             }
@@ -92,7 +92,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 40,
                     NumberOfGuests = 4,
-                    ExtraBed = true,
+                    ExtraBed = 0,
                     Type = "Double"
                 });
             }
@@ -102,7 +102,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 50,
                     NumberOfGuests = 4,
-                    ExtraBed = true,
+                    ExtraBed = 0,
                     Type = "Double"
                 });
             }

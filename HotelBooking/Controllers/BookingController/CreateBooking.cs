@@ -13,6 +13,7 @@ public class CreateBooking : ICrud
         DbContext = dbContext;
     }
     public ApplicationDbContext DbContext { get; set; }
+    public string Line = " =============================================================================================================";
     public void RunCrud()
     {
         var bookingToCreate = new Booking();
@@ -31,7 +32,7 @@ public class CreateBooking : ICrud
 
     private void CheckIfRoomIsAlreadyBooked(BookingList listOfBookings, List<Room> availableRoom)
     {
-        foreach (var room in DbContext.Rooms.ToList())
+        foreach (var room in DbContext.Rooms)
         {
             bool roomIsFree = true;
             foreach (var booking in DbContext.Bookings
@@ -96,10 +97,10 @@ public class CreateBooking : ICrud
     private void ShowBookingDetails(Booking bookingToCreate)
     {
         Console.Clear();
-        Console.WriteLine(" Your booking details");
-        Console.WriteLine(" ==================================================================");
-        Console.WriteLine(" Startdatum\t\tSlutdatum\t\tAntal dagar");
-        Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}" +
+        Console.WriteLine("                                           DINA BOKNINGSDETALJER");
+        Console.WriteLine(Line);
+        Console.WriteLine(" Startdatum\tSlutdatum\tAntal dagar");
+        Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}  - " +
                           $"\t{bookingToCreate.EndDate.ToShortDateString()}" +
                           $"\t{bookingToCreate.NumberOfDays}");
     }
@@ -108,15 +109,15 @@ public class CreateBooking : ICrud
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Clear();
-        Console.WriteLine(" Booking successful!");
+        Console.WriteLine(" Bokning genomförd!");
         Console.WriteLine(" ==============================================================================");
-        Console.WriteLine(" Start\t\tEnd\t\tNo. of days");
+        Console.WriteLine(" Startdatum\t\tSlutdatum\t\tAntal dagar");
         Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}" +
                           $"\t{bookingToCreate.EndDate.ToShortDateString()}" +
                           $"\t{bookingToCreate.NumberOfDays}");
         Console.ForegroundColor = ConsoleColor.Gray;
 
-        Console.WriteLine("\n Press any key to continue");
+        Console.WriteLine("\n Tryck på enter för att fortsätta");
         Console.ReadLine();
     }
 
@@ -140,14 +141,14 @@ public class CreateBooking : ICrud
 
     private void DisplayAvailableRooms(List<Room> availableRoom)
     {
-        Console.WriteLine("\n\n\n These rooms are available for booking");
-        Console.WriteLine("\nId\tType\t\tSize\tNumberOfGuests");
-        Console.WriteLine(" ==================================================================");
+        Console.WriteLine("\n\n\n\t\t\t\t\t     BOKNINGSBARA RUM");
+        Console.WriteLine("\n Id\t\tTyp\t\tStorlek\t\tAntal gäster\t\tMöjlighet till extrasäng");
+        Console.WriteLine(" =============================================================================================================");
 
         foreach (var room in availableRoom.OrderBy(r => r.RoomId))
         {
-            Console.WriteLine($" {room.RoomId}\t{room.Type}\t\t{room.SizeSquareMeters}\t\t{room.NumberOfGuests}");
-            Console.WriteLine(" ------------------------------------------------------------------");
+            Console.WriteLine($" {room.RoomId}\t\t{room.Type}\t\t{room.SizeSquareMeters}\t\t{room.NumberOfGuests}\t\t\t{room.ExtraBed}");
+            Console.WriteLine(" -------------------------------------------------------------------------------------------------------------");
         }
     }
 
@@ -169,9 +170,9 @@ public class CreateBooking : ICrud
     private void RoomIsNotAvailable()
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("\n\n There are no cars available for these dates. Please try another date");
+        Console.WriteLine("\n\n Det finns inga tillgängliga rum för dessa datum. Prova ett annat datum");
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine(" Press any key to continue");
+        Console.WriteLine(" Tryck på enter för att fortsätta");
         Console.ReadLine();
     }
 }

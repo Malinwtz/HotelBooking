@@ -17,29 +17,28 @@ public class CreateRoom : ICrud
     {
         using (var dbContext = new ApplicationDbContext())
         {
+            Room newRoom = new Room();
+
             Console.Clear();
             Console.WriteLine("Registrera rum");
             Console.WriteLine("==============" + Environment.NewLine);
+
             Console.Write("SizeSquareMeters: ");
             var sizeInput = Convert.ToInt32(Console.ReadLine());
+            newRoom.SizeSquareMeters = sizeInput;
+
             Console.Write("Max antal gäster som får plats: ");
             var numberOfGuestsInput = Convert.ToInt32(Console.ReadLine());
+            newRoom.NumberOfGuests = numberOfGuestsInput;
+
             Console.Write("Typ av rum: ");
             var typeInput = Console.ReadLine();
-
-            var extraBedInput = false;
+            newRoom.Type = typeInput;
 
             if (typeInput.ToLower() == "double" && sizeInput > 20) 
-                extraBedInput = true;
-            
+                newRoom.ExtraBed = 1;
 
-            dbContext.Rooms.Add(new Room
-            {
-                SizeSquareMeters = sizeInput,
-                NumberOfGuests = numberOfGuestsInput,
-                Type = typeInput,
-                ExtraBed = extraBedInput
-            });
+            dbContext.Rooms.Add(newRoom);
             dbContext.SaveChanges();
         }
     }
