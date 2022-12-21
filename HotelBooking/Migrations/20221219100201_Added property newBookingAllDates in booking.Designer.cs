@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221219100201_Added property newBookingAllDates in booking")]
+    [Migration("20221219100201_Added property NewBookingAllDates in booking")]
     partial class AddedpropertynewBookingAllDatesinbooking
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

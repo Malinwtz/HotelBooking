@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers.BookingController;
 using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -13,166 +14,36 @@ public class CreateBooking : ICrud
         DbContext = dbContext;
     }
     public ApplicationDbContext DbContext { get; set; }
-    public string Line = " =============================================================================================================";
     public void RunCrud()
     {
+        BookingPageHeader.CreateBookingHeader();
+        var bookingMethod = new BookingMethod(DbContext);
         var bookingToCreate = new Booking();
-        bookingToCreate.NumberOfDays = GetNumberOfDays();
-        GetStartDate(bookingToCreate);
-        SetEndDate(bookingToCreate);
+        bookingToCreate.NumberOfDays = bookingMethod.GetNumberOfDays();
+        bookingMethod.GetStartDate(bookingToCreate);
+        bookingMethod.SetEndDate(bookingToCreate);
         var listOfBookings = new BookingList();
-        ShowListOfRooms(bookingToCreate, listOfBookings);
+        bookingMethod.AddAllNewBookingDatesToList(bookingToCreate, listOfBookings);
         List<Room> availableRoom = new List<Room>();
-        CheckIfRoomIsAlreadyBooked(listOfBookings, availableRoom);
-        ShowBookingDetails(bookingToCreate);
-        DisplayIfRoomIsAvailable(availableRoom);
-        AssignRoomToCustomer(bookingToCreate, DbContext);
-        SuccessfulBooking(bookingToCreate);
+        bookingMethod.MakeListOfRoomsFreeForBooking(listOfBookings, availableRoom);
+        ShowSelectedBookingOptions(bookingToCreate);
+        bookingMethod.IfRoomIsAvailable(availableRoom);
+        bookingMethod.SelectRoomFromListOfAvailableRooms(bookingToCreate,  DbContext);
+        bookingMethod.AssignRoomToCustomer(bookingToCreate, DbContext);
+        bookingMethod.SaveBookingToDatabase(bookingToCreate);
+        bookingMethod.SuccessfulBooking(bookingToCreate, "genomförd");
     }
 
-    private void CheckIfRoomIsAlreadyBooked(BookingList listOfBookings, List<Room> availableRoom)
-    {
-        foreach (var room in DbContext.Rooms)
-        {
-            bool roomIsFree = true;
-            foreach (var booking in DbContext.Bookings
-                         .Include(b => b.Room)
-                         .Where(b => b.Room == room))
-            {
-                for (var dt = booking.StartDate; dt <= booking.EndDate; dt = dt.AddDays(1))
-                {
-                    if (listOfBookings.newBookingAllDates.Contains(dt))
-                    {
-                        roomIsFree = false;
-                    }
-                }
-
-                // if the car is already booked on the date of the new booking...
-                // we dont need to check any of the other bookings... the car isnt available
-                // so we break out of the loop and check the next car
-                if (!roomIsFree)
-                {
-                    break;
-                }
-            }
-
-            // finally if the car is free we can add it to our list of available cars
-            if (roomIsFree)
-            {
-                availableRoom.Add(room);
-            }
-        }
-    }
-
-    private void DisplayIfRoomIsAvailable(List<Room> availableRoom)
-    {
-        if (availableRoom.Count() < 1)
-        {
-            RoomIsNotAvailable();
-        }
-        else
-        {
-            DisplayAvailableRooms(availableRoom);
-        }
-    }
-
-    private void AssignRoomToCustomer(Booking bookingToCreate, ApplicationDbContext dbContext)
-    {
-        Console.WriteLine("\n Välj ett rum (ID) från tillgängliga rum");
-        int roomIdForBooking = Convert.ToInt32(Console.ReadLine());
-        bookingToCreate.Room = DbContext.Rooms.FirstOrDefault(r => r.RoomId == roomIdForBooking);
-            //.Where(c => c.RoomId == roomsForBooking)
-            //.FirstOrDefault();
-        ReadCustomer readCustomer = new ReadCustomer(dbContext);
-        readCustomer.View();
-
-        Console.WriteLine("Välj kund (ID)");
-        int customerIdForBooking = Convert.ToInt32(Console.ReadLine());
-        bookingToCreate.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
-        
-        DbContext.Add(bookingToCreate);
-        DbContext.SaveChanges(); 
-    }
-
-    private void ShowBookingDetails(Booking bookingToCreate)
+    public void ShowSelectedBookingOptions(Booking booking)
     {
         Console.Clear();
-        Console.WriteLine("                                           DINA BOKNINGSDETALJER");
-        Console.WriteLine(Line);
-        Console.WriteLine(" Startdatum\tSlutdatum\tAntal dagar");
-        Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}  - " +
-                          $"\t{bookingToCreate.EndDate.ToShortDateString()}" +
-                          $"\t{bookingToCreate.NumberOfDays}");
-    }
-
-    private void SuccessfulBooking(Booking bookingToCreate)
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Clear();
-        Console.WriteLine(" Bokning genomförd!");
-        Console.WriteLine(" ==============================================================================");
-        Console.WriteLine(" Startdatum\t\tSlutdatum\t\tAntal dagar");
-        Console.WriteLine($" {bookingToCreate.StartDate.ToShortDateString()}" +
-                          $"\t{bookingToCreate.EndDate.ToShortDateString()}" +
-                          $"\t{bookingToCreate.NumberOfDays}");
-        Console.ForegroundColor = ConsoleColor.Gray;
-
-        Console.WriteLine("\n Tryck på enter för att fortsätta");
-        Console.ReadLine();
-    }
-
-    private void ShowListOfRooms(Booking bookingToCreate, BookingList listOfBookings)
-    {
-        listOfBookings.newBookingAllDates = new List<DateTime>();
-     //   List<DateTime> newBookingAllDates = new List<DateTime>();
-        for (var dt = bookingToCreate.StartDate; dt <= bookingToCreate.EndDate; dt = dt.AddDays(1))
-        {
-            listOfBookings.newBookingAllDates.Add(dt);
-        }
-    }
-
-    private void SetEndDate(Booking bookingToCreate)
-    {
-        if (bookingToCreate.NumberOfDays == 1) 
-            bookingToCreate.EndDate = bookingToCreate.StartDate;
-        else if (bookingToCreate.NumberOfDays > 1) 
-            bookingToCreate.EndDate = bookingToCreate.StartDate.AddDays(bookingToCreate.NumberOfDays);
-    }
-
-    private void DisplayAvailableRooms(List<Room> availableRoom)
-    {
-        Console.WriteLine("\n\n\n\t\t\t\t\t     BOKNINGSBARA RUM");
-        Console.WriteLine("\n Id\t\tTyp\t\tStorlek\t\tAntal gäster\t\tMöjlighet till extrasäng");
-        Console.WriteLine(" =============================================================================================================");
-
-        foreach (var room in availableRoom.OrderBy(r => r.RoomId))
-        {
-            Console.WriteLine($" {room.RoomId}\t\t{room.Type}\t\t{room.SizeSquareMeters}\t\t{room.NumberOfGuests}\t\t\t{room.ExtraBed}");
-            Console.WriteLine(" -------------------------------------------------------------------------------------------------------------");
-        }
-    }
-
-    private void GetStartDate(Booking bookingToCreate)
-    {
-        bookingToCreate.StartDate = new DateTime(2001, 01, 01, 23, 59, 59);
-        while (bookingToCreate.StartDate < DateTime.Now.Date)
-        {
-            Console.Write("Skriv in startdatum för bokningen: ");
-            bookingToCreate.StartDate = Convert.ToDateTime(Console.ReadLine());
-        }
-    }
-    private int GetNumberOfDays()
-    {
-        Console.WriteLine("Skriv in hur många dagar du vill boka: ");
-        return Convert.ToInt32(Console.ReadLine());
-    }
-
-    private void RoomIsNotAvailable()
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("\n\n Det finns inga tillgängliga rum för dessa datum. Prova ett annat datum");
-        Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine(" Tryck på enter för att fortsätta");
-        Console.ReadLine();
+        BookingPageHeader.CreateBookingHeader();
+        BookingMethod method = new BookingMethod(DbContext);
+        Console.WriteLine("\n\n\t\t\t\t\t\tDina bokningsuppgifter");
+        PageHeader.LineTwo();
+        Console.WriteLine($" Startdatum    Slutdatum\tAntal dagar\n{ method.Line1}" + //antal gäster
+                          $"\n{booking.StartDate.ToString("dd MM yyyy")} " +
+                          $"- {booking.EndDate.ToString("dd MM yyyy")} " +
+                          $"\t{booking.NumberOfDays}");
     }
 }

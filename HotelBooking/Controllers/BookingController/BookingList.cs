@@ -8,6 +8,7 @@ namespace HotelBooking.Controllers.BookingController
 {
     public class BookingList
     {
-        public List<DateTime> newBookingAllDates { get; set; }
+
+        public List<DateTime> NewBookingAllDates { get; set; }
     }
 }

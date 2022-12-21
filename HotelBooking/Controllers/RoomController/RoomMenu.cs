@@ -10,7 +10,7 @@ public class RoomMenu : IMenu
     public int ShowAndReturnSelection()
     {
         Console.Clear();
-        var endAlternative = 2;
+        var endAlternative = 4;
         Console.WriteLine("RUMSMENY");
         Console.WriteLine("********" + Environment.NewLine);
         Console.WriteLine("1. Visa alla rum");

@@ -1,4 +1,4 @@
-﻿using HotelBooking.Controllers.ErrorHandling;
+﻿using HotelBooking.Controllers.ErrorController;
 
 namespace HotelBooking.MenuHandler;
 
@@ -10,9 +10,9 @@ public class ReturnFromMenuClass
         while (true)
         {
             try { sel = Convert.ToInt32(Console.ReadLine()); }
-            catch { ErrorMessage.WrongInputMessage(); }
+            catch { ErrorHandling.WrongInputMessage(); }
             if (sel >= 0 && sel <= max) return sel;
-            ErrorMessage.WrongInputMessage();
+            ErrorHandling.WrongInputMessage();
         }
     }
     public static void ExitMenu()

@@ -1,4 +1,6 @@
-﻿using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.BookingController;
+using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +16,7 @@ public class ReadBooking : ICrud
     }
     public void RunCrud()
     {
-        Console.Clear();
-        Console.WriteLine("Visa alla bokningar");
-        Console.WriteLine("===================" + Environment.NewLine);
+        BookingPageHeader.ReadBookingHeader();
         View();
         Console.WriteLine(Environment.NewLine + "Tryck på enter för att fortsätta");
         Console.ReadKey();
@@ -27,11 +27,17 @@ public class ReadBooking : ICrud
         if (DbContext.Bookings == null)
             Console.WriteLine("Det finns inga bokningar");
 
-        Console.WriteLine("Gäst\t\tRum\t\tDatum");
+        BookingMethod bookingMethod = new BookingMethod(DbContext);
+        BookingPageHeader.BookingDetailsHeader();
         foreach (var booking in DbContext.Bookings.Include(b => b.Customer)
-                     .Include(b=>b.Room))
-            Console.WriteLine($"{booking.Customer.FirstName} {booking.Customer.LastName}" +
-                              $"\t{booking.Room.RoomId}\t{booking.StartDate.ToString("MM/dd/yyyy")}" +
-                              $"-{booking.EndDate.ToString("MM/dd/yyyy")}");
+                     .Include(b => b.Room))
+        {
+            bookingMethod.BookingDetails(booking);
+        }
+
     }
 }
+
+//Console.WriteLine($"{booking.Customer.FirstName} {booking.Customer.LastName}" +
+//                  $"\t{booking.Room.RoomId}\t{booking.StartDate.ToString("MM/dd/yyyy")}" +
+//                  $"-{booking.EndDate.ToString("MM/dd/yyyy")}");

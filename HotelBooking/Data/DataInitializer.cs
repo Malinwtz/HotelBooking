@@ -27,7 +27,7 @@ namespace HotelBooking.Data
                 });
             }
 
-            var firstName2 = "Carina";
+            var firstName2 = "Ella";
             var lastName2 = "Löv";
             if (!dbContext.Customers.Any(c => c.FirstName == firstName2 && c.LastName == lastName2))
             {
@@ -40,7 +40,7 @@ namespace HotelBooking.Data
             }
 
             var firstName3 = "Håkan";
-            var lastName3 = "Holmström";
+            var lastName3 = "Alm";
             if (!dbContext.Customers.Any(c => c.FirstName == firstName3 && c.LastName == lastName3))
             {
                 dbContext.Customers.Add(new Customer
@@ -51,8 +51,8 @@ namespace HotelBooking.Data
                 });
             }
 
-            var firstName4 = "Håkan";
-            var lastName4 = "Holmström";
+            var firstName4 = "Per";
+            var lastName4 = "Björk";
             if (!dbContext.Customers.Any(c => c.FirstName == firstName4 && c.LastName == lastName4))
             {
                 dbContext.Customers.Add(new Customer
