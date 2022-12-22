@@ -1,5 +1,33 @@
-1NF	För att uppnå första graden av normalisering har tabellerna...
+									Third normal form
+===============================================================================================================================
+För att uppnå tredje graden av normalisering:
 
-2NF	För att uppnå andra graden av normalisering har ...
+>	Tabellen innehåller inga transitive functional dependencies. Varje tabell har en kolumn med en primary key. Tabellerna är 
+	separerade så att alla kolumner i en tabell beror på primary key i den tabellen. Detta gör att om värdet i en kolumn 
+	ändras påverkar det inte någon annan kolumn.
 
-3NF	För att uppnå tredje graden av normalisering ...
+_______________________________________________________________________________________________________________________________
+
+									Second normal form
+===============================================================================================================================
+För att uppnå andra graden av normalisering:
+	
+> 	Det finns inga partial dependencies. Kolumnerna i en tabell tillhör endast EN primary key. Varje kolumn i en tabell 
+	tillhör HELA primary key. Förhindrar insert, delete och update-fel.
+
+_______________________________________________________________________________________________________________________________
+
+									First normal form
+===============================================================================================================================
+För att uppnå första graden av normalisering:
+
+> 	Varje kolumn innehåller ett enda värde och varje rad i kolumnen innehåller en enda datatyp. Kolumnerna innehåller alltså 
+	INTE mixade datatyper.
+
+> 	Varje tabell har en primary key som är unik, inte ändras och inte får ha värdet null. Varje gång en rad skapas tilldelar 
+	databasen automatiskt raden en primary key med ett unikt värde. Detta förhindrar att en unik rad kan skapas flera gånger 
+	och därmed förhindras överflödig information från att visas.
+
+> 	Ordningen på raderna har ingen betydelse.
+
+________________________________________________________________________________________________________________________________
