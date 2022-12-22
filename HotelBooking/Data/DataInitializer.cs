@@ -90,9 +90,9 @@ namespace HotelBooking.Data
             {
                 dbContext.Rooms.Add(new Room
                 {
-                    SizeSquareMeters = 40,
-                    NumberOfGuests = 4,
-                    ExtraBed = 0,
+                    SizeSquareMeters = 30,
+                    NumberOfGuests = 3,
+                    ExtraBed = 1,
                     Type = "Double"
                 });
             }
@@ -100,9 +100,9 @@ namespace HotelBooking.Data
             {
                 dbContext.Rooms.Add(new Room
                 {
-                    SizeSquareMeters = 50,
+                    SizeSquareMeters = 40,
                     NumberOfGuests = 4,
-                    ExtraBed = 0,
+                    ExtraBed = 1,
                     Type = "Double"
                 });
             }
