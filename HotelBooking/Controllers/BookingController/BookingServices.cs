@@ -7,30 +7,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Controllers.ErrorController;
 using HotelBooking.Controllers.PageHeaders;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Security.Principal;
 
 namespace HotelBooking.Controllers.BookingController
 {
-    public class BookingMethod
+    public class BookingServices
     {
 
         public string Line1 = " ------------------------------------------------------" +
                               "-------------------------------------------------------"; 
-        public string Line2 = " ======================================================" +
-                             "=======================================================";
-
+        
         public ApplicationDbContext DbContext { get; set; }
-        public BookingMethod(ApplicationDbContext dbContext)
+        public BookingServices(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
         }
-        public void SaveBookingToDatabase(Booking bookingToCreate)
+        public void SaveNewBookingToDatabase(Booking bookingToCreate)
         {
             DbContext.Add(bookingToCreate);
-            DbContext.SaveChanges();
+            DbContext.SaveChanges(); 
+            Console.WriteLine("Sparat till databas");
         }
 
-        public void MakeListOfRoomsFreeForBooking(BookingList listOfBookings, List<Room> availableRoom)
+        public List<Room> MakeListOfRoomsFreeForBooking(BookingList listOfBookings, List<Room> availableRoom)
         {
             foreach (var room in DbContext.Rooms)
             {
@@ -55,9 +57,33 @@ namespace HotelBooking.Controllers.BookingController
                 if (roomIsFree)
                 {
                     availableRoom.Add(room);
-                }
+                    }
             }
+            return availableRoom;
         }
+
+        public bool IsRoomFreeForBooking(List<DateTime> listOfBookingDates, Booking bookingToUpdate)
+        {
+            var roomIsFree = true;
+            //går igenom alla bokningar på det rummet som finns i databasen
+            foreach (var b in DbContext.Bookings
+                         .Include(b => b.Room) //behövs inte??
+                         .Where(b => b.Room == bookingToUpdate.Room))
+            {
+                for (var dt = bookingToUpdate.StartDate; dt <= bookingToUpdate.EndDate; dt = dt.AddDays(1))
+                {
+                    //om det valda datumet återfinns i listan med bokningar så är rummet bokat 
+                    if (listOfBookingDates.Contains(dt))
+                    {
+                        roomIsFree = false;
+                        return roomIsFree;
+                    }
+                }
+               
+            }
+            return roomIsFree;
+        }
+
 
         public bool IfRoomIsAvailable(List<Room> availableRoom)
         {
@@ -90,9 +116,10 @@ namespace HotelBooking.Controllers.BookingController
         }
         public void BookingDetails(Booking booking)
         {
+            BookingPageHeader.BookingDetailsHeader();
             Console.WriteLine($" {booking.BookingId}\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
                               $"\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
-                              $"\t{booking.NumberOfDays}\t{booking.Room.RoomId}");
+                              $"\t{booking.NumberOfDays}\t{booking.Room.RoomId}\n");
         }
         public void SuccessfulBooking(Booking booking, string text)
         {
@@ -105,7 +132,7 @@ namespace HotelBooking.Controllers.BookingController
             Console.ReadLine();
         }
 
-        public void AddAllNewBookingDatesToList(Booking bookingToCreate, BookingList listOfBookings)
+        public List<DateTime> AddAllNewBookingDatesToList(Booking bookingToCreate, BookingList listOfBookings)
         {
             listOfBookings.NewBookingAllDates = new List<DateTime>();
             //   List<DateTime> NewBookingAllDates = new List<DateTime>();
@@ -115,6 +142,8 @@ namespace HotelBooking.Controllers.BookingController
             {//lägger den nya bokningens alla datum till en lista
                 listOfBookings.NewBookingAllDates.Add(dt);
             }
+
+            return listOfBookings.NewBookingAllDates;
         }
 
         public void SetEndDate(Booking bookingToCreate)
@@ -145,13 +174,14 @@ namespace HotelBooking.Controllers.BookingController
             while (bookingToCreate.StartDate < DateTime.Now.Date)
             {
                 Console.Write("Skriv in startdatum för bokningen: ");
-                bookingToCreate.StartDate = Convert.ToDateTime(Console.ReadLine());
+                bookingToCreate.StartDate = ErrorHandling.TryDate();
+               /// DbContext.SaveChanges();
             }
         }
         public int GetNumberOfDays()
         {
             Console.WriteLine("Skriv in hur många dagar du vill boka: ");
-            return Convert.ToInt32(Console.ReadLine());
+            return ErrorHandling.TryInt();
         }
 
         public void RoomIsNotAvailable()

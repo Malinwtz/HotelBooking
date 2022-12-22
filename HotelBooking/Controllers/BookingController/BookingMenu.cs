@@ -22,6 +22,17 @@ public class BookingMenu : IMenu
         return selectFromBookingMenu;
     }
 
+    public static int UpdateBookingMenuShowAndReturnSelection()
+    {
+        var endAlternative = 3;
+        Console.WriteLine("1. Ändra datum");
+        Console.WriteLine("2. Ändra kund");
+        Console.WriteLine($"{endAlternative}. rum");
+        ReturnFromMenuClass.ExitMenu();
+        var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        return selectFromUpdateBookingMenu;
+    }
+
     public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
         switch (selectedFromMenu)

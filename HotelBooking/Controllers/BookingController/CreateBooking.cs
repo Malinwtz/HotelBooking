@@ -17,7 +17,7 @@ public class CreateBooking : ICrud
     public void RunCrud()
     {
         BookingPageHeader.CreateBookingHeader();
-        var bookingMethod = new BookingMethod(DbContext);
+        var bookingMethod = new BookingController.BookingServices(DbContext);
         var bookingToCreate = new Booking();
         bookingToCreate.NumberOfDays = bookingMethod.GetNumberOfDays();
         bookingMethod.GetStartDate(bookingToCreate);
@@ -27,18 +27,17 @@ public class CreateBooking : ICrud
         List<Room> availableRoom = new List<Room>();
         bookingMethod.MakeListOfRoomsFreeForBooking(listOfBookings, availableRoom);
         ShowSelectedBookingOptions(bookingToCreate);
-        bookingMethod.IfRoomIsAvailable(availableRoom);
+        bookingMethod.IfRoomIsAvailable(availableRoom); //gå tillbaka till menyn bookingmenu om det inte finns något tillgängligt rum
         bookingMethod.SelectRoomFromListOfAvailableRooms(bookingToCreate,  DbContext);
         bookingMethod.AssignRoomToCustomer(bookingToCreate, DbContext);
-        bookingMethod.SaveBookingToDatabase(bookingToCreate);
+        bookingMethod.SaveNewBookingToDatabase(bookingToCreate);
         bookingMethod.SuccessfulBooking(bookingToCreate, "genomförd");
     }
 
     public void ShowSelectedBookingOptions(Booking booking)
     {
         Console.Clear();
-        BookingPageHeader.CreateBookingHeader();
-        BookingMethod method = new BookingMethod(DbContext);
+        BookingController.BookingServices method = new BookingController.BookingServices(DbContext);
         Console.WriteLine("\n\n\t\t\t\t\t\tDina bokningsuppgifter");
         PageHeader.LineTwo();
         Console.WriteLine($" Startdatum    Slutdatum\tAntal dagar\n{ method.Line1}" + //antal gäster

@@ -27,7 +27,7 @@ public class ReadBooking : ICrud
         if (DbContext.Bookings == null)
             Console.WriteLine("Det finns inga bokningar");
 
-        BookingMethod bookingMethod = new BookingMethod(DbContext);
+        BookingController.BookingServices bookingMethod = new BookingController.BookingServices(DbContext);
         BookingPageHeader.BookingDetailsHeader();
         foreach (var booking in DbContext.Bookings.Include(b => b.Customer)
                      .Include(b => b.Room))

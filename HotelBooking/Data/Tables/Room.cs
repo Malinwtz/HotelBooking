@@ -9,5 +9,7 @@ public class Room
     [Required] public int NumberOfGuests { get; set; }
     [Required] public string Type { get; set; }
     [Required] public int ExtraBed { get; set; }
+    //public int MaxGuests { get; set; }
+    //public bool SoftDelete { get; set; }
     public List<Booking> Bookings { get; set; }
 }
