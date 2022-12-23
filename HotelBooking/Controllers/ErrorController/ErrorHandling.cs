@@ -43,32 +43,32 @@ namespace HotelBooking.Controllers.ErrorController
                 }
         }
 
-        public static decimal TryPrice()
-        {
-            while (true)
-                try
-                {
-                    var price = Convert.ToDecimal(Console.ReadLine());
-                    if (price >= 1) return price;
-                    WrongInputMessage();
-                }
-                catch
-                {
-                    WrongInputMessage();
-                }
-        }
+        //public static decimal TryPrice()
+        //{
+        //    while (true)
+        //        try
+        //        {
+        //            var price = Convert.ToDecimal(Console.ReadLine());
+        //            if (price >= 1) return price;
+        //            WrongInputMessage();
+        //        }
+        //        catch
+        //        {
+        //            WrongInputMessage();
+        //        }
+        //}
 
-        public static string TryUnit()
+        public static string TrySingleOrDouble()
         {
             while (true)
             {
                 var unit = Console.ReadLine();
-                if (unit == "kilopris" || unit == "styckpris") return unit;
+                if (unit.ToLower() == "single" || unit.ToLower() == "double") return unit;
                 WrongInputMessage();
             }
         }
 
-        public static string TryName()
+        public static string TryString()
         {
             while (true)
             {
@@ -78,20 +78,20 @@ namespace HotelBooking.Controllers.ErrorController
             }
         }
 
-        public static string TryId()
-        {
-            while (true)
-                try
-                {
-                    var newId = Convert.ToInt32(Console.ReadLine());
-                    if (newId >= 1)
-                        return Convert.ToString(newId);
-                    WrongInputMessage();
-                }
-                catch
-                {
-                    WrongInputMessage();
-                }
-        }
+        //public static string TryId()
+        //{
+        //    while (true)
+        //        try
+        //        {
+        //            var newId = Convert.ToInt32(Console.ReadLine());
+        //            if (newId >= 1)
+        //                return Convert.ToString(newId);
+        //            WrongInputMessage();
+        //        }
+        //        catch
+        //        {
+        //            WrongInputMessage();
+        //        }
+        //}
     }
 }

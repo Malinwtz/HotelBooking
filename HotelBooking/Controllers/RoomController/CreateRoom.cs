@@ -1,4 +1,6 @@
-﻿using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.ErrorController;
+using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 
@@ -11,35 +13,44 @@ public class CreateRoom : ICrud
         DbContext = dbContext;
     }
 
+    public RoomService Service = new RoomService();
+
     public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {
-        using (var dbContext = new ApplicationDbContext())
-        {
-            Room newRoom = new Room();
+        var newRoom = new Room();
 
-            Console.Clear();
-            Console.WriteLine("Registrera rum");
-            Console.WriteLine("==============" + Environment.NewLine);
+        RegisterNewRoomHeader();
 
-            Console.Write("SizeSquareMeters: ");
-            var sizeInput = Convert.ToInt32(Console.ReadLine());
-            newRoom.SizeSquareMeters = sizeInput;
+        var sizeInput = Service.GetSizeSquareMetersInput(newRoom);
 
-            Console.Write("Max antal gäster som får plats: ");
-            var numberOfGuestsInput = Convert.ToInt32(Console.ReadLine());
-            newRoom.NumberOfGuests = numberOfGuestsInput;
+        Service.SetPropertyTypeToRoomBySizeInput(sizeInput, newRoom);
+        Service.SetPropertyExtraBedToRoomBySizeInput(sizeInput, newRoom);
+        Service.SetPropertyNumberOfGuestsToRoomBySizeInput(sizeInput, newRoom);
 
-            Console.Write("Typ av rum: ");
-            var typeInput = Console.ReadLine();
-            newRoom.Type = typeInput;
+        DbContext.Rooms.Add(newRoom);
+        DbContext.SaveChanges();
 
-            if (typeInput.ToLower() == "double" && sizeInput > 20) 
-                newRoom.ExtraBed = 1;
+        SuccessfullyCreatedNewRoom(newRoom);
+        Console.WriteLine("\nTryck på enter för att gå vidare...");
+        Console.ReadKey();
+    }
 
-            dbContext.Rooms.Add(newRoom);
-            dbContext.SaveChanges();
-        }
+    private void SuccessfullyCreatedNewRoom(Room newRoom)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Nytt rum registrerat!");
+        PageHeader.LineTwo();
+        Service.ShowAllRoomDetails(newRoom);
+        Console.ForegroundColor = ConsoleColor.Gray;
+    }
+
+    private static void RegisterNewRoomHeader()
+    {
+        Console.Clear();
+        Console.WriteLine("Registrera rum");
+        Console.WriteLine("==============" + Environment.NewLine);
     }
 }
