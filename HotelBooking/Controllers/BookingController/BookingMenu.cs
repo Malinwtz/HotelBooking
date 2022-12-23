@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Controllers.CustomerController;
 using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.MenuHandler;
 
@@ -11,12 +12,12 @@ public class BookingMenu : IMenu
     {
         Console.Clear();
         var endAlternative = 4;
-        Console.WriteLine("BOKNINGSMENY");
-        Console.WriteLine("************" + Environment.NewLine);
-        Console.WriteLine("1. Visa alla bokningar");
-        Console.WriteLine("2. Registrera bokning");
-        Console.WriteLine("3. Ändra bokning");
-        Console.WriteLine($"{endAlternative}. Ta bort bokning");
+        Console.WriteLine(" BOKNINGSMENY");
+        PageHeader.LineThree();
+        Console.WriteLine(" 1. Visa alla bokningar");
+        Console.WriteLine(" 2. Registrera bokning");
+        Console.WriteLine(" 3. Ändra bokning");
+        Console.WriteLine($" {endAlternative}. Ta bort bokning");
         ReturnFromMenuClass.ExitMenu();
         var selectFromBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromBookingMenu;
@@ -25,9 +26,9 @@ public class BookingMenu : IMenu
     public static int UpdateBookingMenuShowAndReturnSelection()
     {
         var endAlternative = 3;
-        Console.WriteLine("1. Ändra datum");
-        Console.WriteLine("2. Ändra kund");
-        Console.WriteLine($"{endAlternative}. rum");
+        Console.WriteLine(" 1. Ändra datum");
+        Console.WriteLine(" 2. Ändra kund");
+        Console.WriteLine($" {endAlternative}. rum");
         ReturnFromMenuClass.ExitMenu();
         var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromUpdateBookingMenu;

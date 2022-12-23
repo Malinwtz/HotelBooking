@@ -1,4 +1,5 @@
-﻿using HotelBooking.Data.Tables;
+﻿using HotelBooking.Controllers;
+using HotelBooking.Data.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Data
@@ -73,7 +74,7 @@ namespace HotelBooking.Data
                     SizeSquareMeters = 15,
                     NumberOfGuests = 1,
                     ExtraBed = 0,
-                    Type = "Single"
+                    Type = StringToWrite.Single
                 });
             }
             if (!dbContext.Rooms.Any(c => c.RoomId == 2))
@@ -83,7 +84,7 @@ namespace HotelBooking.Data
                     SizeSquareMeters = 20,
                     NumberOfGuests = 2,
                     ExtraBed = 0,
-                    Type = "Double"
+                    Type = StringToWrite.Double
                 });
             }
             if (!dbContext.Rooms.Any(c => c.RoomId == 3))
@@ -93,7 +94,7 @@ namespace HotelBooking.Data
                     SizeSquareMeters = 30,
                     NumberOfGuests = 3,
                     ExtraBed = 1,
-                    Type = "Double"
+                    Type = StringToWrite.Double
                 });
             }
             if (!dbContext.Rooms.Any(c => c.RoomId == 4))
@@ -103,7 +104,7 @@ namespace HotelBooking.Data
                     SizeSquareMeters = 40,
                     NumberOfGuests = 4,
                     ExtraBed = 1,
-                    Type = "Double"
+                    Type = StringToWrite.Double
                 });
             }
         }

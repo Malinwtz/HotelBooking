@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.MenuHandler;
 
@@ -10,12 +11,12 @@ public class CustomerMenu : IMenu
     {
         Console.Clear();
         var endAlternative = 4;
-        Console.WriteLine("KUNDMENY");
-        Console.WriteLine("********" + Environment.NewLine);
-        Console.WriteLine("1. Visa alla kunder");
-        Console.WriteLine("2. Registrera kund");
-        Console.WriteLine("3. Ändra kunduppgifter");
-        Console.WriteLine($"{endAlternative}. Avregistrera kund");
+        Console.WriteLine(" KUNDMENY");
+        PageHeader.LineThree();
+        Console.WriteLine(" 1. Visa alla kunder");
+        Console.WriteLine(" 2. Registrera kund");
+        Console.WriteLine(" 3. Ändra kunduppgifter");
+        Console.WriteLine($" {endAlternative}. Avregistrera kund");
         ReturnFromMenuClass.ExitMenu();
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;

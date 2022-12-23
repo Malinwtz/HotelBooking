@@ -1,32 +1,35 @@
 ﻿using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 
 namespace HotelBooking.Controllers.RoomController;
 
 public class ReadRoom : ICrud
 {
-    public ReadRoom(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
+    public ReadRoom(ApplicationDbContext dbContext) 
     {
         DbContext = dbContext;
     }
 
     public ApplicationDbContext DbContext { get; set; }
+    public RoomService Service = new RoomService();
 
     public void RunCrud()
     {
         Console.Clear();
-        Console.WriteLine("Visa alla rum");
-        Console.WriteLine("=============" + Environment.NewLine);
+        Console.WriteLine(" Visa alla rum");
+        PageHeader.LineOne();
         View();
-        Console.WriteLine(Environment.NewLine + "Tryck på enter för att fortsätta");
-        Console.ReadKey();
+        PageHeader.LineTwo();
+        StringToWrite.PressEnterToContinue();
     }
 
     public void View()
     {
         foreach (var room in DbContext.Rooms)
-            Console.WriteLine(
-                $"Id{room.RoomId}: {room.Type} {room.SizeSquareMeters}kvadratmeter. " +
-                $"Antal gäster: {room.NumberOfGuests}, möjlighet till extra sängar antal: {room.ExtraBed} ");
+        {
+            Service.ShowAllRoomDetails(room);
+        }
+        Console.WriteLine(Environment.NewLine);
     }
 }

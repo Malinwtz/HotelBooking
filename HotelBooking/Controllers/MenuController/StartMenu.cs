@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Controllers.BookingController;
 using HotelBooking.Controllers.CustomerController;
 using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Controllers.RoomController;
 using HotelBooking.Data;
 
@@ -12,11 +13,11 @@ public class StartMenu : IMenu
     {
         Console.Clear();
         var endAlternative = 3;
-        Console.WriteLine("STARTMENY");
-        Console.WriteLine("*********" + Environment.NewLine);
-        Console.WriteLine("1. KUND - Registrera/ändra/avregistrera");
-        Console.WriteLine("2. RUM - Registrera/ändra/Ta bort");
-        Console.WriteLine($"{endAlternative}. BOKNING - Registrera/ändra/Ta bort" + Environment.NewLine);
+        Console.WriteLine(" STARTMENY");
+        PageHeader.LineThree();
+        Console.WriteLine(" 1. KUND      (Registrera - Visa - Ändra - Ta bort)");
+        Console.WriteLine(" 2. RUM       (Registrera - Visa - Ändra - Ta bort)");
+        Console.WriteLine($" {endAlternative}. BOKNING   (Registrera - Visa - Ändra - Ta bort)");
         ReturnFromMenuClass.ExitMenu();
         var sel = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return sel;

@@ -33,24 +33,24 @@ public class CreateRoom : ICrud
         DbContext.SaveChanges();
 
         SuccessfullyCreatedNewRoom(newRoom);
-        Console.WriteLine("\nTryck på enter för att gå vidare...");
-        Console.ReadKey();
+        StringToWrite.PressEnterToContinue();
     }
 
     private void SuccessfullyCreatedNewRoom(Room newRoom)
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Nytt rum registrerat!");
+        Console.WriteLine(" Nytt rum registrerat!");
         PageHeader.LineTwo();
         Service.ShowAllRoomDetails(newRoom);
+        Console.WriteLine(Environment.NewLine);
         Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     private static void RegisterNewRoomHeader()
     {
         Console.Clear();
-        Console.WriteLine("Registrera rum");
-        Console.WriteLine("==============" + Environment.NewLine);
+        Console.WriteLine(" Registrera rum");
+        PageHeader.LineOne();
     }
 }

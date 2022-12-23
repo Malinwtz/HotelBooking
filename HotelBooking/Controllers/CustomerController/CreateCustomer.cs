@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 
@@ -18,13 +19,13 @@ public class CreateCustomer : ICrud
         using (var dbContext = new ApplicationDbContext())
         {
             Console.Clear();
-            Console.WriteLine("Registrera ny kund");
-            Console.WriteLine("==================");
-            Console.Write("Förnamn: ");
+            Console.WriteLine(" REGISTRERA NY KUND");
+            PageHeader.LineOne();
+            Console.Write(" Förnamn: ");
             var firstNameInput = Console.ReadLine();
-            Console.Write("Efternamn: ");
+            Console.Write(" Efternamn: ");
             var lastNameInput = Console.ReadLine();
-            Console.Write("Telefon: ");
+            Console.Write(" Telefon: ");
             var phoneInput = Convert.ToInt32(Console.ReadLine());
 
             dbContext.Customers.Add(new Customer

@@ -48,9 +48,9 @@ public class UpdateBooking : ICrud
                 {
                     Console.Clear();
                     //header ändra bokningens datum
-                    Console.Write("Skriv in nytt startdatum: "); //kolla så datum är i framtiden
+                    Console.Write(" Skriv in nytt startdatum: "); //kolla så datum är i framtiden
                     newStartDate = ErrorHandling.TryDate();
-                    Console.Write("Skriv in antal dagar du vill boka: ");
+                    Console.Write(" Skriv in antal dagar du vill boka: ");
                     newNumberOfDays = ErrorHandling.TryInt();
                     newEndDate = DateTime.Now;
                     if (newNumberOfDays == 1)

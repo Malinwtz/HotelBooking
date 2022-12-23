@@ -23,16 +23,13 @@ namespace HotelBooking.Controllers.RoomController
         }
         public void SetPropertyTypeToRoomBySizeInput(int sizeInput, Room roomToSetPropertyTypeTo)
         {
-            var singleRoom = "Single";
-            var doubleRoom = "Double";
-
             if (sizeInput < 20) 
             {
-                roomToSetPropertyTypeTo.Type = singleRoom;
+                roomToSetPropertyTypeTo.Type = StringToWrite.Single;
             }
             else if (sizeInput >= 20)
             {
-                roomToSetPropertyTypeTo.Type = doubleRoom;
+                roomToSetPropertyTypeTo.Type = StringToWrite.Double;
             }
         }
         public void SetPropertyNumberOfGuestsToRoomBySizeInput(int sizeInput, Room roomToSetPropertyNumberOfGuestsTo)
@@ -57,14 +54,14 @@ namespace HotelBooking.Controllers.RoomController
 
         public void ShowAllRoomDetails(Room roomToShow)
         {
-            Console.WriteLine($"Id: {roomToShow.RoomId} " +
-                              $"\nStorlek: {roomToShow.Type}, {roomToShow.SizeSquareMeters}kvm" +
-                              $"\nAntal möjliga extrasängar: {roomToShow.ExtraBed}" +
-                              $"\nAntal gäster: {roomToShow.NumberOfGuests}");
+            Console.WriteLine($" Id: {roomToShow.RoomId}    " +
+                              $"Storlek: {roomToShow.Type}, {roomToShow.SizeSquareMeters}kvm    " +
+                              $"Möjlig extrasäng: {roomToShow.ExtraBed}     " +
+                              $"Antal gäster: {roomToShow.NumberOfGuests}");
         }
         public int GetSizeSquareMetersInput(Room roomToGetASize)
         {
-            Console.Write("SizeSquareMeters: ");
+            Console.Write(" Storlek i kvadratmeter: ");
             var sizeInput = ErrorHandling.TryInt();
             roomToGetASize.SizeSquareMeters = sizeInput;
             return sizeInput;

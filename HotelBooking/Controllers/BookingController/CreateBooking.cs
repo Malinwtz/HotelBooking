@@ -38,7 +38,7 @@ public class CreateBooking : ICrud
     {
         Console.Clear();
         BookingController.BookingServices method = new BookingController.BookingServices(DbContext);
-        Console.WriteLine("\n\n\t\t\t\t\t\tDina bokningsuppgifter");
+        Console.WriteLine("\n\n Dina bokningsuppgifter");
         PageHeader.LineTwo();
         Console.WriteLine($" Startdatum    Slutdatum\tAntal dagar\n{ method.Line1}" + //antal gäster
                           $"\n{booking.StartDate.ToString("dd MM yyyy")} " +
