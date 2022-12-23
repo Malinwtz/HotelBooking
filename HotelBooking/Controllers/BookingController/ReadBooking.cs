@@ -22,10 +22,10 @@ public class ReadBooking : ICrud
         Console.ReadKey();
     }
 
-    public void View()
+    public void View() //visar bara en bokning, inte alla bokningar. Alla bokningar visas när bokningen ska ändras - update booking
     {
         if (DbContext.Bookings == null)
-            Console.WriteLine("Det finns inga bokningar");
+            Console.WriteLine(" Det finns inga bokningar");
 
         BookingController.BookingServices bookingMethod = new BookingController.BookingServices(DbContext);
         BookingPageHeader.BookingDetailsHeader();

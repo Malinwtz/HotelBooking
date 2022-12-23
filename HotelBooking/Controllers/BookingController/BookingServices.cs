@@ -102,15 +102,16 @@ namespace HotelBooking.Controllers.BookingController
         public void SelectRoomFromListOfAvailableRooms(Booking bookingToCreate, ApplicationDbContext dbContext)
         {
             Console.Write("\n\n Välj ett rum (ID) från tillgängliga rum: ");
-            int roomIdForBooking = Convert.ToInt32(Console.ReadLine());
+            int roomIdForBooking = ErrorHandling.TryInt();
             bookingToCreate.Room = DbContext.Rooms.FirstOrDefault(r => r.RoomId == roomIdForBooking);
-            ReadCustomer readCustomer = new ReadCustomer(dbContext);
-            readCustomer.View();
         }
 
         public void AssignRoomToCustomer(Booking bookingToCreate, ApplicationDbContext dbContext)
         {
-            Console.Write("Välj kund (ID): ");
+            Console.Clear();
+            ReadCustomer readCustomer = new ReadCustomer(dbContext);
+            readCustomer.View();
+            Console.Write(" Välj kund (ID): ");
             int customerIdForBooking = Convert.ToInt32(Console.ReadLine());
             bookingToCreate.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
         }
@@ -173,7 +174,7 @@ namespace HotelBooking.Controllers.BookingController
             bookingToCreate.StartDate = new DateTime(2001, 01, 01, 23, 59, 59);
             while (bookingToCreate.StartDate < DateTime.Now.Date)
             {
-                Console.Write("Skriv in startdatum för bokningen: ");
+                Console.Write(" Skriv in startdatum för bokningen (yyyy-MM-dd): ");
                 bookingToCreate.StartDate = ErrorHandling.TryDate();
                /// DbContext.SaveChanges();
             }

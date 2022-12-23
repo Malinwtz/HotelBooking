@@ -25,7 +25,12 @@ public class UpdateCustomer : ICrud
             var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
             var personToUpdate = DbContext.Customers
                 .First(c => c.CustomerId == customerIdToUpdate);
-
+        
+            CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
+            //skriv en meny 
+            //ändra förnamn
+            //ändra efternamn
+            //ändra telefonnummer
             Console.Write(" Ange förnamn: ");
             var updatedFirstName = Console.ReadLine();
             Console.Write(" Ange efternamn: ");
