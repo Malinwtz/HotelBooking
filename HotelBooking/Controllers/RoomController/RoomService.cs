@@ -1,70 +1,50 @@
 ﻿using HotelBooking.Controllers.ErrorController;
 using HotelBooking.Data.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HotelBooking.Controllers.RoomController
+namespace HotelBooking.Controllers.RoomController;
+
+public class RoomService
 {
-    public class RoomService
+    public void SetPropertyExtraBedToRoomBySizeInput(int sizeInput, Room roomToSetPropertyExtraBedTo)
     {
-        public void SetPropertyExtraBedToRoomBySizeInput(int sizeInput, Room roomToSetPropertyExtraBedTo)
-        {
-            if (sizeInput < 25) 
-            {
-                roomToSetPropertyExtraBedTo.ExtraBed = 0;
-            }
-            else if (sizeInput >= 25)
-            {
-                roomToSetPropertyExtraBedTo.ExtraBed = 1;
-            }
-        }
-        public void SetPropertyTypeToRoomBySizeInput(int sizeInput, Room roomToSetPropertyTypeTo)
-        {
-            if (sizeInput < 20) 
-            {
-                roomToSetPropertyTypeTo.Type = StringToWrite.Single;
-            }
-            else if (sizeInput >= 20)
-            {
-                roomToSetPropertyTypeTo.Type = StringToWrite.Double;
-            }
-        }
-        public void SetPropertyNumberOfGuestsToRoomBySizeInput(int sizeInput, Room roomToSetPropertyNumberOfGuestsTo)
-        {
-            if (sizeInput < 20) 
-            {
-                roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 1;
-            }
-            else if (sizeInput >= 20 && sizeInput < 30)
-            {
-                roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 2;
-            }
-            else if (sizeInput >= 30 && sizeInput < 40)
-            {
-                roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 3;
-            }
-            else if (sizeInput >= 40)
-            {
-                roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 4;
-            }
-        }
+        if (sizeInput < 25)
+            roomToSetPropertyExtraBedTo.ExtraBed = 0;
+        else if (sizeInput >= 25 && sizeInput < 40)
+            roomToSetPropertyExtraBedTo.ExtraBed = 1;
+        else if (sizeInput >= 40) roomToSetPropertyExtraBedTo.ExtraBed = 2;
+    }
 
-        public void ShowAllRoomDetails(Room roomToShow)
-        {
-            Console.WriteLine($" Id: {roomToShow.RoomId}    " +
-                              $"Storlek: {roomToShow.Type}, {roomToShow.SizeSquareMeters}kvm    " +
-                              $"Möjlig extrasäng: {roomToShow.ExtraBed}     " +
-                              $"Antal gäster: {roomToShow.NumberOfGuests}");
-        }
-        public int GetSizeSquareMetersInput(Room roomToGetASize)
-        {
-            Console.Write(" Storlek i kvadratmeter: ");
-            var sizeInput = ErrorHandling.TryInt();
-            roomToGetASize.SizeSquareMeters = sizeInput;
-            return sizeInput;
-        }
+    public void SetPropertyTypeToRoomBySizeInput(int sizeInput, Room roomToSetPropertyTypeTo)
+    {
+        if (sizeInput < 20)
+            roomToSetPropertyTypeTo.Type = StringToWrite.Single;
+        else if (sizeInput >= 20) roomToSetPropertyTypeTo.Type = StringToWrite.Double;
+    }
+
+    public void SetPropertyNumberOfGuestsToRoomBySizeInput(int sizeInput, Room roomToSetPropertyNumberOfGuestsTo)
+    {
+        if (sizeInput < 20)
+            roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 1;
+        else if (sizeInput >= 20 && sizeInput < 30)
+            roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 2;
+        else if (sizeInput >= 30 && sizeInput < 40)
+            roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 3;
+        else if (sizeInput >= 40) roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 4;
+    }
+
+    public void ShowAllRoomDetails(Room roomToShow)
+    {
+        Console.WriteLine($" Id: {roomToShow.RoomId}     " +
+                          $"Storlek: {roomToShow.Type}, {roomToShow.SizeSquareMeters}kvm     " +
+                          $"Möjlig extrasäng: {roomToShow.ExtraBed}     " +
+                          $"Antal gäster: {roomToShow.NumberOfGuests}");
+    }
+
+    public int GetSizeSquareMetersInput(Room roomToGetASize)
+    {
+        Console.Write(" Storlek i kvadratmeter: ");
+        var sizeInput = ErrorHandling.TryInt();
+        roomToGetASize.SizeSquareMeters = sizeInput;
+        return sizeInput;
     }
 }

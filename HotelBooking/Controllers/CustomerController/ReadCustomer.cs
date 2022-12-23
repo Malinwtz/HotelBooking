@@ -7,7 +7,7 @@ namespace HotelBooking.Controllers.CustomerController;
 public class ReadCustomer : ICrud
 {
     public ApplicationDbContext DbContext { get; set; }
-    public ReadCustomer(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
+    public ReadCustomer(ApplicationDbContext dbContext) 
     {
         DbContext = dbContext;
     }
@@ -24,6 +24,6 @@ public class ReadCustomer : ICrud
     {
         foreach (var customer in DbContext.Customers)
             Console.WriteLine(
-                $" Id{customer.CustomerId}: {customer.FirstName} {customer.LastName} Telefon: {customer.Phone} ");
+                $" Id: {customer.CustomerId}     Namn: {customer.FirstName} {customer.LastName}     Telefon: {customer.Phone} ");
     }
 }

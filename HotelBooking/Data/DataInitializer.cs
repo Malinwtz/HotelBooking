@@ -103,7 +103,7 @@ namespace HotelBooking.Data
                 {
                     SizeSquareMeters = 40,
                     NumberOfGuests = 4,
-                    ExtraBed = 1,
+                    ExtraBed = 2,
                     Type = StringToWrite.Double
                 });
             }
