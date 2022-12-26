@@ -32,7 +32,8 @@ public class CreateCustomer : ICrud
             {
                 FirstName = firstNameInput,
                 LastName = lastNameInput,
-                Phone = phoneInput
+                Phone = phoneInput,
+                Active = true
             });
             dbContext.SaveChanges();
         }

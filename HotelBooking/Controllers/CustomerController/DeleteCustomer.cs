@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBooking.Controllers.ErrorController;
 using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
@@ -22,7 +23,7 @@ namespace HotelBooking.Controllers.CustomerController
         {
 
             Console.Clear();
-            Console.WriteLine("TA BORT KUND");
+            Console.WriteLine(" TA BORT KUND");
             PageHeader.LineOne();
 
                 foreach (var customer in DbContext.Customers)
@@ -31,19 +32,21 @@ namespace HotelBooking.Controllers.CustomerController
                 }
 
                 Console.WriteLine("\n Välj Id på den kund som du vill ta bort");
-                var customerIdToDelete = Convert.ToInt32(Console.ReadLine());
-                var customerToDelete = DbContext.Customers.First(p => p.CustomerId == customerIdToDelete);
+                var customerIdToDelete = ErrorHandling.TryInt();
+                var customerToDelete = DbContext.Customers
+                    .FirstOrDefault(c => c.CustomerId == customerIdToDelete);
 
             //om kunden har en bokning ska det inte gå att ta bort kunden
-            if (customerToDelete.Bookings.Count != 0)
+            if (customerToDelete.Bookings != null ) //object not set to an instance
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
+                Console.WriteLine(" Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            else //if (customerToDelete.Bookings.Count = 0)
+            else if (customerToDelete.Bookings == null)
             {
-                DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
+                customerToDelete.Active = false;
+               /// DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
                 DbContext.SaveChanges();
             }
         }
