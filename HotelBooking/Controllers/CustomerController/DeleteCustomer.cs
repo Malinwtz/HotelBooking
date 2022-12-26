@@ -33,10 +33,19 @@ namespace HotelBooking.Controllers.CustomerController
                 Console.WriteLine("\n Välj Id på den kund som du vill ta bort");
                 var customerIdToDelete = Convert.ToInt32(Console.ReadLine());
                 var customerToDelete = DbContext.Customers.First(p => p.CustomerId == customerIdToDelete);
-                DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
 
+            //om kunden har en bokning ska det inte gå att ta bort kunden
+            if (customerToDelete.Bookings.Count != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else //if (customerToDelete.Bookings.Count = 0)
+            {
+                DbContext.Customers.Remove(customerToDelete);//ändra till soft delete
                 DbContext.SaveChanges();
-            
+            }
         }
     }
 }
