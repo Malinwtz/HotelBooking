@@ -10,7 +10,7 @@ namespace HotelBooking.Controllers.CustomerController;
 public class ReadBooking : ICrud
 {
     public ApplicationDbContext DbContext { get; set; }
-    public ReadBooking(ApplicationDbContext dbContext) //skicka in dbcontext i ctor eller in run metod?
+    public ReadBooking(ApplicationDbContext dbContext)
     {
         DbContext = dbContext;
     }
@@ -22,19 +22,20 @@ public class ReadBooking : ICrud
         Console.ReadKey();
     }
 
-    public void View() //visar bara en bokning, inte alla bokningar. Alla bokningar visas när bokningen ska ändras - update booking
+    public void View() 
     {
-        if (DbContext.Bookings == null)
-            Console.WriteLine(" Det finns inga bokningar");
-
-        BookingController.BookingServices bookingMethod = new BookingController.BookingServices(DbContext);
-        BookingPageHeader.BookingDetailsHeader();
-        foreach (var booking in DbContext.Bookings.Include(b => b.Customer)
-                     .Include(b => b.Room))
+        if (!DbContext.Bookings.Any()) 
         {
-            bookingMethod.BookingDetails(booking);
+            Console.WriteLine(" Det finns inga bokningar");
         }
-
+        else if (DbContext.Bookings.Any())
+        {
+            BookingPageHeader.BookingDetailsHeader();
+          foreach (var b in DbContext.Bookings.Include(b => b.Customer).Include(b => b.Room))
+                Console.WriteLine($" {b.BookingId}\t\t{b.Customer.FirstName} {b.Customer.LastName} " +
+                                  $"\t\t{b.StartDate.ToString("dd/MM/yyyy")} - {b.EndDate.ToString("dd/MM/yyyy")} " +
+                                  $"\t{b.Room.RoomId}");
+        }
     }
 }
 

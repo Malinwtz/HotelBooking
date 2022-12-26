@@ -22,8 +22,10 @@ public class ReadCustomer : ICrud
 
     public void View()
     {
-        foreach (var customer in DbContext.Customers)
+        foreach (var customer in DbContext.Customers.Where(c => c.Active == true))
+        {
             Console.WriteLine(
                 $" Id: {customer.CustomerId}     Namn: {customer.FirstName} {customer.LastName}     Telefon: {customer.Phone} ");
+        }
     }
 }

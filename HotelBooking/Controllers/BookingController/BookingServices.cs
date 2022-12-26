@@ -117,7 +117,6 @@ namespace HotelBooking.Controllers.BookingController
         }
         public void BookingDetails(Booking booking)
         {
-            BookingPageHeader.BookingDetailsHeader();
             Console.WriteLine($" {booking.BookingId}\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
                               $"\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
                               $"\t{booking.NumberOfDays}\t{booking.Room.RoomId}\n");
