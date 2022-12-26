@@ -22,7 +22,15 @@ public class RoomMenu : IMenu
         var selectFromRooMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromRooMenu;
     }
-
+    public static int UpdateRoomMenuShowAndReturnSelection()
+    {
+        var endAlternative = 2;
+        Console.WriteLine(" 1. Ändra storlek (kvadratmeter) ");
+        Console.WriteLine($" {endAlternative}. Ändra antal gäster som får plats");
+        ReturnFromMenuClass.ExitMenu();
+        var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        return selectFromUpdateBookingMenu;
+    }
     public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
         switch (selectedFromMenu)

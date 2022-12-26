@@ -29,20 +29,59 @@ public class UpdateRoom : ICrud
         var roomToUpdate = DbContext.Rooms.First(c => c.RoomId == roomIdToUpdate);
         
         Console.Clear();
-        Console.Write(" Uppdatera rummets storlek: ");
-        roomToUpdate.SizeSquareMeters = ErrorHandling.TryInt();
-        
-        Service.SetPropertyTypeToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
-        Service.SetPropertyExtraBedToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
-        Service.SetPropertyNumberOfGuestsToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
-
-        DbContext.SaveChanges();
-
+        var selectionFromUpdateRoomMenu = RoomMenu.UpdateRoomMenuShowAndReturnSelection();
         Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(" Rummet ändrat!");
-        Service.ShowAllRoomDetails(roomToUpdate);
-        Console.ForegroundColor = ConsoleColor.Gray;
-        StringToWrite.PressEnterToContinue();
+        switch (selectionFromUpdateRoomMenu)
+        {
+            case 1:
+            {
+                Console.Write(" Uppdatera rummets storlek: ");
+                roomToUpdate.SizeSquareMeters = ErrorHandling.TryInt();
+                Service.SetPropertyTypeToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
+                Service.SetPropertyExtraBedToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
+                Service.SetPropertyNumberOfGuestsToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
+
+                DbContext.SaveChanges();
+
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(" Rummets storlek ändrat!");
+                Service.ShowAllRoomDetails(roomToUpdate);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                StringToWrite.PressEnterToContinue();
+                break;
+            }
+            case 2:
+            {
+                var highestNumberOfGuests = 0;
+                    if (roomToUpdate.SizeSquareMeters < 20)
+                    highestNumberOfGuests = 1;
+                else if (roomToUpdate.SizeSquareMeters >= 20 && roomToUpdate.SizeSquareMeters < 30)
+                    highestNumberOfGuests = 2;
+                else if (roomToUpdate.SizeSquareMeters >= 30 && roomToUpdate.SizeSquareMeters < 40)
+                    highestNumberOfGuests = 3;
+                else if (roomToUpdate.SizeSquareMeters >= 40) highestNumberOfGuests = 4;
+                
+                    while (true)
+                    {
+                        Console.Write(" Uppdatera antal gäster som får plats: ");
+                        var updatedNumberOfGuests = ErrorHandling.TryInt();
+                        if (updatedNumberOfGuests > highestNumberOfGuests)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($" Max antal gäster som får plats i rummet är: {highestNumberOfGuests}");
+                        }
+                        else if (updatedNumberOfGuests <= highestNumberOfGuests)
+                        {
+                            //ändra antal extrasängar efter hur många gäster som får plats?
+
+                            roomToUpdate.NumberOfGuests = updatedNumberOfGuests;
+                            DbContext.SaveChanges();
+                            break;
+                        }
+                    }
+                    break;
+            }
+        }
     }
 }
