@@ -26,22 +26,35 @@ public class UpdateCustomer : ICrud
             var personToUpdate = DbContext.Customers
                 .First(c => c.CustomerId == customerIdToUpdate);
         
-            CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
-            //skriv en meny 
-            //ändra förnamn
-            //ändra efternamn
-            //ändra telefonnummer
-            Console.Write(" Ange förnamn: ");
-            var updatedFirstName = Console.ReadLine();
-            Console.Write(" Ange efternamn: ");
-            var updatedLastName = Console.ReadLine();
-            Console.Write(" Ange telefonnummer: ");
-            var updatedPhone = Convert.ToInt32(Console.ReadLine());
+            Console.Clear();
+            var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
+            switch (selectionFromUpdateCustomerMenu)
+            {
+                case 1:
+                {
+                    Console.Write(" Ange förnamn: ");
+                    var updatedFirstName = Console.ReadLine();
+                    personToUpdate.FirstName = updatedFirstName;
+                    DbContext.SaveChanges();
+                    break;
+                }
+                case 2:
+                {
 
-            personToUpdate.FirstName = updatedFirstName;
-            personToUpdate.LastName = updatedLastName;
-            personToUpdate.Phone = updatedPhone;
-            DbContext.SaveChanges();
-        
+                    Console.Write(" Ange efternamn: ");
+                    var updatedLastName = Console.ReadLine();
+                    personToUpdate.LastName = updatedLastName;
+                    DbContext.SaveChanges();
+                    break;
+                }
+                case 3:
+                {
+                    Console.Write(" Ange telefonnummer: ");
+                    var updatedPhone = Convert.ToInt32(Console.ReadLine());
+                    personToUpdate.Phone = updatedPhone;
+                    DbContext.SaveChanges();
+                    break;
+                }
+            }
     }
 }

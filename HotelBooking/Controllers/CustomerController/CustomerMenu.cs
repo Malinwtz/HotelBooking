@@ -24,9 +24,9 @@ public class CustomerMenu : IMenu
     public static int UpdateCustomerMenuShowAndReturnSelection()
     {
         var endAlternative = 3;
-        Console.WriteLine(" 1. Ändra datum");
-        Console.WriteLine(" 2. Ändra kund");
-        Console.WriteLine($" {endAlternative}. rum");
+        Console.WriteLine(" 1. Ändra förnamn");
+        Console.WriteLine(" 2. Ändra efternamn");
+        Console.WriteLine($" {endAlternative}. Ändra telefonnummer");
         ReturnFromMenuClass.ExitMenu();
         var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromUpdateBookingMenu;
