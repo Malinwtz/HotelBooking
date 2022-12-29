@@ -1,4 +1,5 @@
-﻿using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.ErrorController;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
@@ -16,9 +17,7 @@ public class CreateCustomer : ICrud
 
     public void RunCrud()
     {
-        using (var dbContext = new ApplicationDbContext())
-        {
-            Console.Clear();
+        Console.Clear();
             Console.WriteLine(" REGISTRERA NY KUND");
             PageHeader.LineOne();
             Console.Write(" Förnamn: ");
@@ -26,16 +25,21 @@ public class CreateCustomer : ICrud
             Console.Write(" Efternamn: ");
             var lastNameInput = Console.ReadLine();
             Console.Write(" Telefon (xxxxxxxxxx): ");
-            var phoneInput = Convert.ToInt32(Console.ReadLine());
+            var phoneInput = ErrorHandling.TryInt();
 
-            dbContext.Customers.Add(new Customer
+            DbContext.Customers.Add(new Customer
             {
                 FirstName = firstNameInput,
                 LastName = lastNameInput,
                 Phone = phoneInput,
                 Active = true
             });
-            dbContext.SaveChanges();
-        }
+        DbContext.SaveChanges();
+
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($" Ny kund {firstNameInput} {lastNameInput} med telefonnummer {phoneInput} sparad!");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        StringToWrite.PressEnterToContinue();
     }
 }

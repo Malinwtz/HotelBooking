@@ -32,7 +32,8 @@ public class UpdateCustomer : ICrud
             {
                 case 1:
                 {
-                    Console.Write(" Ange förnamn: ");
+                    Console.Clear();
+                    Console.Write(" Ange nytt förnamn: ");
                     var updatedFirstName = Console.ReadLine();
                     personToUpdate.FirstName = updatedFirstName;
                     DbContext.SaveChanges();
@@ -40,8 +41,8 @@ public class UpdateCustomer : ICrud
                 }
                 case 2:
                 {
-
-                    Console.Write(" Ange efternamn: ");
+                    Console.Clear();
+                    Console.Write(" Ange nytt efternamn: ");
                     var updatedLastName = Console.ReadLine();
                     personToUpdate.LastName = updatedLastName;
                     DbContext.SaveChanges();
@@ -49,7 +50,8 @@ public class UpdateCustomer : ICrud
                 }
                 case 3:
                 {
-                    Console.Write(" Ange telefonnummer: ");
+                    Console.Clear();
+                    Console.Write(" Ange nytt telefonnummer: ");
                     var updatedPhone = Convert.ToInt32(Console.ReadLine());
                     personToUpdate.Phone = updatedPhone;
                     DbContext.SaveChanges();
