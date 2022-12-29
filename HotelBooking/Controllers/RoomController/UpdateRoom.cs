@@ -73,10 +73,38 @@ public class UpdateRoom : ICrud
                         }
                         else if (updatedNumberOfGuests <= highestNumberOfGuests)
                         {
-                            //ändra antal extrasängar efter hur många gäster som får plats?
+                            if (updatedNumberOfGuests == 1)
+                            {
+                                roomToUpdate.Type = StringToWrite.Single;
+                                roomToUpdate.ExtraBed = 0;
+                            }
+                            else if (updatedNumberOfGuests == 2)
+                            {
+                                roomToUpdate.Type = StringToWrite.Double;
+                                roomToUpdate.ExtraBed = 0;
+                            }
+                            else if (updatedNumberOfGuests > 2 && updatedNumberOfGuests <= 3)
+                            {
+                                roomToUpdate.Type = StringToWrite.Double;
+                                roomToUpdate.ExtraBed = 1;
+                            }
+                            else if (updatedNumberOfGuests > 3)
+                            {
+                                roomToUpdate.Type = StringToWrite.Double;
+                                roomToUpdate.ExtraBed = 2;
+                            }
 
                             roomToUpdate.NumberOfGuests = updatedNumberOfGuests;
                             DbContext.SaveChanges();
+
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($" Rummet är ändrat! \n" +
+                                              $"\n Storlek: {roomToUpdate.SizeSquareMeters}kvm" +
+                                              $"\n Antal gäster: {roomToUpdate.NumberOfGuests}" +
+                                              $"\n Antal extrasängar: {roomToUpdate.ExtraBed}");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            StringToWrite.PressEnterToContinue();
                             break;
                         }
                     }
