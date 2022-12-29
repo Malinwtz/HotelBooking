@@ -24,7 +24,7 @@ public class CreateCustomer : ICrud
             var firstNameInput = Console.ReadLine();
             Console.Write(" Efternamn: ");
             var lastNameInput = Console.ReadLine();
-            Console.Write(" Telefon (xxxxxxxxxx): ");
+            Console.Write(" Telefon: ");
             var phoneInput = Console.ReadLine();
 
             DbContext.Customers.Add(new Customer
