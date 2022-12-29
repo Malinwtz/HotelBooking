@@ -9,6 +9,7 @@ public class Booking
     [Required] public Room Room { get; set; }
     [Required] public DateTime StartDate { get; set; }
     [Required] public DateTime EndDate { get; set; }
-    public int NumberOfDays { get; set; } //behövs den?
+    public int NumberOfDays { get; set; } 
+    public int GuestCount { get; set; }
     //prop invoice
 }

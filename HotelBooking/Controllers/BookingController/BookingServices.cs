@@ -16,10 +16,6 @@ namespace HotelBooking.Controllers.BookingController
 {
     public class BookingServices
     {
-
-        public string Line1 = " ------------------------------------------------------" +
-                              "-------------------------------------------------------"; 
-        
         public ApplicationDbContext DbContext { get; set; }
         public BookingServices(ApplicationDbContext dbContext)
         {
@@ -34,7 +30,8 @@ namespace HotelBooking.Controllers.BookingController
 
         public List<Room> MakeListOfRoomsFreeForBooking(BookingList listOfBookings, List<Room> availableRoom)
         {
-            foreach (var room in DbContext.Rooms)
+            var availableRoomDateAndNumberOfGuests = new List<Room>();
+            foreach (var room in availableRoom)
             {
                 bool roomIsFree = true;
                 //går igenom alla bokningar som finns i databasen
@@ -49,17 +46,17 @@ namespace HotelBooking.Controllers.BookingController
                             roomIsFree = false;
                         }
                     }//loopen börjar om från början med nästa rum
-                    if (!roomIsFree)
+                    if (!roomIsFree) //borde kunna ha break i if-satsen innan?
                     {
                         break;
                     }
                 }//om rummet är ledigt läggs det till i den nya listan med lediga rum
                 if (roomIsFree)
                 {
-                    availableRoom.Add(room);
-                    }
+                    availableRoomDateAndNumberOfGuests.Add(room);
+                }
             }
-            return availableRoom;
+            return availableRoomDateAndNumberOfGuests;
         }
 
         public bool IsRoomFreeForBooking(List<DateTime> listOfBookingDates, Booking bookingToUpdate)
@@ -119,13 +116,14 @@ namespace HotelBooking.Controllers.BookingController
         {
             Console.WriteLine($" {booking.BookingId}\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
                               $"\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
-                              $"\t{booking.NumberOfDays}\t{booking.Room.RoomId}\n");
+                              $"\t{booking.NumberOfDays}\t{booking.GuestCount}\t{booking.Room.RoomId}\n");
         }
         public void SuccessfulBooking(Booking booking, string text)
         {
             Console.Clear(); 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($" Bokning {text}!");
+            Console.WriteLine(" Bokningens Id   Kundnamn    Startdatum  -  Slutdatum    Antal dagar     Antal gäster    Rummets Id");
             BookingDetails(booking);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("\n Tryck på enter för att fortsätta");
