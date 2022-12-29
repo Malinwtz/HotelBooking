@@ -84,12 +84,11 @@ public class CreateBooking : ICrud
     {
         Console.Clear();
         BookingController.BookingServices method = new BookingController.BookingServices(DbContext);
-        Console.WriteLine("\n\n Dina bokningsuppgifter");
+        Console.WriteLine("\n\n Dina bokningsuppgifter:");
         PageHeader.LineTwo();
-        Console.WriteLine($" Startdatum    Slutdatum\tAntal dagar\n");
-        PageHeader.LineTwo();
-        Console.WriteLine($"\n{booking.StartDate.ToString("dd MM yyyy")} " +
-                                                $"- {booking.EndDate.ToString("dd MM yyyy")} " +
-                                                $"\t{booking.NumberOfDays}");
+        Console.WriteLine($" Startdatum    Slutdatum\tAntal dagar\tAntal gäster");
+        Console.WriteLine($" {booking.StartDate.ToString("dd MM yyyy")} " +
+                          $"- {booking.EndDate.ToString("dd MM yyyy")} " +
+                          $"\t{booking.NumberOfDays}\t\t{booking.GuestCount}");
     }
 }

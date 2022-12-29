@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Controllers.Interface;
+using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,8 +17,7 @@ public class DeleteBooking : ICrud
     public void RunCrud()
     {
         Console.Clear();
-        Console.WriteLine("Ta bort en bokning");
-        Console.WriteLine("==================");
+        BookingPageHeader.DeleteBookingHeader();
 
         Console.WriteLine("Rum\t\t\tKundnamn\t\t\tDatum");
         foreach (var booking in DbContext.Bookings.Include(b=>b.Customer)

@@ -46,8 +46,8 @@ namespace HotelBooking.Controllers.PageHeaders
         public static void AvailableRoomHeader()
         {
             Console.WriteLine("\n\n\n\t\t\t\t\t     BOKNINGSBARA RUM");
-            Console.WriteLine("\n Id\t\tTyp\t\tStorlek\t\tAntal gäster\t\tMöjlighet till extrasäng");
-            Console.WriteLine(" =============================================================================================================");
+            Console.WriteLine("\n Id\t\tTyp\t\tStorlek\t\tMax antal gäster\t\tMöjlighet till extrasäng");
+            PageHeader.LineOne();
         }
     }
 }
