@@ -103,14 +103,14 @@ namespace HotelBooking.Controllers.BookingController
             bookingToCreate.Room = DbContext.Rooms.FirstOrDefault(r => r.RoomId == roomIdForBooking);
         }
 
-        public void AssignRoomToCustomer(Booking bookingToCreate, ApplicationDbContext dbContext)
+        public void AssignRoomToCustomer(Booking bookingToAssignCustomerTo, ApplicationDbContext dbContext)
         {
             Console.Clear();
             ReadCustomer readCustomer = new ReadCustomer(dbContext);
             readCustomer.View();
             Console.Write(" Välj kund (ID): ");
-            int customerIdForBooking = Convert.ToInt32(Console.ReadLine());
-            bookingToCreate.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
+            int customerIdForBooking = ErrorHandling.TryInt();
+            bookingToAssignCustomerTo.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
         }
         public void BookingDetails(Booking booking)
         {
@@ -123,7 +123,8 @@ namespace HotelBooking.Controllers.BookingController
             Console.Clear(); 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($" Bokning {text}!");
-            Console.WriteLine(" Bokningens Id   Kundnamn    Startdatum  -  Slutdatum    Antal dagar     Antal gäster    Rummets Id");
+            Console.WriteLine(" Bokningens Id   Kundnamn     Startdatum  -  Slutdatum      " +
+                              " Antal dagar        Antal gäster       Rummets Id");
             BookingDetails(booking);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("\n Tryck på enter för att fortsätta");
@@ -155,7 +156,7 @@ namespace HotelBooking.Controllers.BookingController
         public void RoomDetails(Room room)
         {
             Console.WriteLine($" {room.RoomId}\t\t{room.Type}\t\t{room.SizeSquareMeters}" +
-                              $"\t\t{room.NumberOfGuests}\t\t\t{room.ExtraBed}");
+                              $"\t\t{room.NumberOfGuests}\t\t\t\t{room.ExtraBed}");
         }
         public void DisplayAvailableRooms(List<Room> availableRoom)
         {

@@ -4,6 +4,7 @@ using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.CustomerController;
@@ -74,83 +75,20 @@ public class UpdateBooking : ICrud
             }
             case 2:
             {
-                    //ÄNDRA kund
-                    //var newStartDate = DateTime.Now;
-                    //var newEndDate = DateTime.Now;
-                    //var newNumberOfDays = 0;
-                    //var roomIsFree = false;
-                    //while (!roomIsFree)
-                    //{
-                    //    Console.Clear();
-                    //    //header ändra bokningens datum
-                    //    Console.Write("Skriv in nytt startdatum: "); //kolla så datum är i framtiden
-                    //    newStartDate = ErrorHandling.TryDate();
-                    //    Console.Write("Skriv in antal dagar du vill boka: ");
-                    //    newNumberOfDays = ErrorHandling.TryInt();
-                    //    newEndDate = DateTime.Now;
-                    //    if (newNumberOfDays == 1)
-                    //        newEndDate = newStartDate;
-                    //    else if (newNumberOfDays > 1)
-                    //        newEndDate = newStartDate.AddDays(newNumberOfDays - 1);
-
-                    //    //LOOPAR IGENOM DE UPPDATERADE DATUMEN OCH LÄGGER IN DEM I EN DATUMLISTA
-                    //    var listOfBookingDates = new List<DateTime>();
-                    //    for (var dt = newStartDate; dt <= newEndDate; dt = dt.AddDays(1))
-                    //        listOfBookingDates.Add(dt);
-
-                    //    //HITTAR OCH GÅR IGENOM ALLA bokningar SOM FINNS PÅ RUMMET
-                    //    roomIsFree = IfRoomIsFree(listOfBookingDates);
-                    //}
-
-                    //BookingToUpdate.StartDate = newStartDate;
-                    //BookingToUpdate.EndDate = newEndDate;
-                    //BookingToUpdate.NumberOfDays = newNumberOfDays;
-
-                    //bookingMethod.AssignRoomToCustomer(BookingToUpdate, DbContext);
-                    break;
+                bookingMethod.AssignRoomToCustomer(BookingToUpdate, DbContext); 
+                break;
             }
             case 3:
             {
                     //ändra rum
-                    //var newStartDate = DateTime.Now;
-                    //var newEndDate = DateTime.Now;
-                    //var newNumberOfDays = 0;
-                    //var roomIsFree = false;
-                    //while (!roomIsFree)
-                    //{
-                    //    Console.Clear();
-                    //    //header ändra bokningens datum
-                    //    Console.Write("Skriv in nytt startdatum: "); //kolla så datum är i framtiden
-                    //    newStartDate = ErrorHandling.TryDate();
-                    //    Console.Write("Skriv in antal dagar du vill boka: ");
-                    //    newNumberOfDays = ErrorHandling.TryInt();
-                    //    newEndDate = DateTime.Now;
-                    //    if (newNumberOfDays == 1)
-                    //        newEndDate = newStartDate;
-                    //    else if (newNumberOfDays > 1)
-                    //        newEndDate = newStartDate.AddDays(newNumberOfDays - 1);
-
-                    //    //LOOPAR IGENOM DE UPPDATERADE DATUMEN OCH LÄGGER IN DEM I EN DATUMLISTA
-                    //    var listOfBookingDates = new List<DateTime>();
-                    //    for (var dt = newStartDate; dt <= newEndDate; dt = dt.AddDays(1))
-                    //        listOfBookingDates.Add(dt);
-
-                    //    //HITTAR OCH GÅR IGENOM ALLA bokningar SOM FINNS PÅ RUMMET
-                    //    roomIsFree = IfRoomIsFree(listOfBookingDates);
-                    //}
-
-                    //BookingToUpdate.StartDate = newStartDate;
-                    //BookingToUpdate.EndDate = newEndDate;
-                    //BookingToUpdate.NumberOfDays = newNumberOfDays;
+                    // visa lista på lediga rum
+                    //välj rum 
+                    //assigna till bokningen
                     break;
             }
         }
         DbContext.SaveChanges();
         bookingMethod.SuccessfulBooking(BookingToUpdate, "uppdaterad");
-        
-        //bookingMethod.SaveBookingToDatabase(BookingToUpdate); //SqlException: Cannot insert explicit
-        //value for identity column in table 'Bookings'
-        //when IDENTITY_INSERT is set to OFF.
     }
 
     private bool IfRoomIsFree(List<DateTime> listOfBookingDates)
