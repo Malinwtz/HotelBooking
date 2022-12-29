@@ -120,7 +120,9 @@ namespace HotelBooking.Controllers.BookingController
             readCustomer.View();
             Console.Write(" Välj kund (ID): ");
             int customerIdForBooking = ErrorHandling.TryInt();
-            bookingToAssignCustomerTo.Customer = DbContext.Customers.FirstOrDefault(c => c.CustomerId == customerIdForBooking);
+            bookingToAssignCustomerTo.Customer = DbContext.Customers
+                .Where(c => c.Active == true)
+                .FirstOrDefault(c => c.CustomerId == customerIdForBooking);
         }
         public void BookingDetails(Booking booking)
         {

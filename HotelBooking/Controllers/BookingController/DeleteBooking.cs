@@ -23,7 +23,7 @@ public class DeleteBooking : ICrud
         foreach (var booking in DbContext.Bookings.Include(b=>b.Customer)
                                                   .Include(b=>b.Room))
             Console.WriteLine($"{booking.BookingId}\t\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
-                              $"\t\t\t{booking.StartDate.ToShortDateString()}-¨{booking.EndDate.ToShortDateString()}");
+                              $"\t\t\t{booking.StartDate.ToShortDateString()} - {booking.EndDate.ToShortDateString()}");
 
         Console.WriteLine("Välj Id på den bokning som du vill ta bort");
         var bookingIdToDelete = Convert.ToInt32(Console.ReadLine());
@@ -31,5 +31,11 @@ public class DeleteBooking : ICrud
 
         DbContext.Bookings.Remove(bookingToDelete); 
         DbContext.SaveChanges();
+
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Bokning borttagen!");
+        Console.ForegroundColor = ConsoleColor.Gray;
+        StringToWrite.PressEnterToContinue();
     }
 }

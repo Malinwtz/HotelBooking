@@ -1,4 +1,5 @@
-﻿using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.ErrorController;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 
@@ -18,12 +19,13 @@ public class UpdateCustomer : ICrud
         Console.Clear();
         Console.WriteLine(" ÄNDRA KUND");
         PageHeader.LineOne();
-            foreach (var c in DbContext.Customers)
+            foreach (var c in DbContext.Customers.Where(c => c.Active == true))
                 Console.WriteLine($" {c.CustomerId}. {c.FirstName} {c.LastName}");
 
             Console.Write(" Välj Id på den kund du vill uppdatera: ");
-            var customerIdToUpdate = Convert.ToInt32(Console.ReadLine());
+            var customerIdToUpdate = ErrorHandling.TryInt();
             var personToUpdate = DbContext.Customers
+                .Where(c=>c.Active == true)
                 .First(c => c.CustomerId == customerIdToUpdate);
         
             Console.Clear();
