@@ -54,7 +54,7 @@ public class UpdateCustomer : ICrud
                 {
                     Console.Clear();
                     Console.Write(" Ange nytt telefonnummer: ");
-                    var updatedPhone = Convert.ToInt32(Console.ReadLine());
+                    var updatedPhone = Console.ReadLine();
                     personToUpdate.Phone = updatedPhone;
                     DbContext.SaveChanges();
                     break;

@@ -15,7 +15,6 @@ public class DeleteCustomer : ICrud
 
     public Customer CustomerToDelete { get; set; }
     public ApplicationDbContext DbContext { get; set; }
-
     public void RunCrud()
     {
         Console.Clear();
@@ -53,6 +52,12 @@ public class DeleteCustomer : ICrud
         {
             CustomerToDelete.Active = false;
             DbContext.SaveChanges();
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Kund avregistrerad!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            StringToWrite.PressEnterToContinue();
         }
         else
         {

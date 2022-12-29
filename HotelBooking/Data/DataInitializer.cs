@@ -11,7 +11,7 @@ namespace HotelBooking.Data
         {
             dbContext.Database.Migrate();
             SeedRoom(dbContext);
-            SeedCustomer(dbContext); 
+            SeedCustomer(dbContext);
             dbContext.SaveChanges();
         }
         private void SeedCustomer(ApplicationDbContext dbContext)
@@ -24,7 +24,7 @@ namespace HotelBooking.Data
                 {
                     FirstName = firstName1,
                     LastName = lastName1,
-                    Phone = 0707230489,
+                    Phone = "0707230489",
                     Active = true
                 });
             }
@@ -37,7 +37,7 @@ namespace HotelBooking.Data
                 {
                     FirstName = firstName2,
                     LastName = lastName2,
-                    Phone = 0707230482,
+                    Phone = "0707230482",
                     Active = true
                 });
             }
@@ -50,7 +50,7 @@ namespace HotelBooking.Data
                 {
                     FirstName = firstName3,
                     LastName = lastName3,
-                    Phone = 0707230481,
+                    Phone = "0707230481",
                     Active = true
                 });
             }
@@ -63,7 +63,7 @@ namespace HotelBooking.Data
                 {
                     FirstName = firstName4,
                     LastName = lastName4,
-                    Phone = 0707230485,
+                    Phone = "0707230485",
                     Active = true
                 });
             }
