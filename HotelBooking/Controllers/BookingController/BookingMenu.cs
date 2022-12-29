@@ -28,7 +28,7 @@ public class BookingMenu : IMenu
         var endAlternative = 3;
         Console.WriteLine(" 1. Ändra datum");
         Console.WriteLine(" 2. Ändra kund");
-        Console.WriteLine($" {endAlternative}. rum");
+        Console.WriteLine($" {endAlternative}. Ändra rum");
         ReturnFromMenuClass.ExitMenu();
         var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
         return selectFromUpdateBookingMenu;

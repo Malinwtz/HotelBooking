@@ -4,7 +4,6 @@ using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.CustomerController;
@@ -31,11 +30,11 @@ public class UpdateBooking : ICrud
             Console.WriteLine($" {b.BookingId}\t\t{b.Customer.FirstName} {b.Customer.LastName} " +
                               $"\t\t{b.StartDate.ToString("dd/MM/yyyy")} - {b.EndDate.ToString("dd/MM/yyyy")} " +
                               $"\t{b.Room.RoomId}");
-        
+
         SelectBookingToUpdate();
         BookingPageHeader.BookingDetailsHeader();
         bookingMethod.BookingDetails(BookingToUpdate);
-        
+
         var selectionUpdateBookingMenu = BookingMenu.UpdateBookingMenuShowAndReturnSelection();
         switch (selectionUpdateBookingMenu)
         {
@@ -67,7 +66,7 @@ public class UpdateBooking : ICrud
                     //HITTAR OCH GÅR IGENOM ALLA bokningar SOM FINNS PÅ RUMMET
                     roomIsFree = IfRoomIsFree(listOfBookingDates);
                 }
-                
+
                 BookingToUpdate.StartDate = newStartDate;
                 BookingToUpdate.EndDate = newEndDate;
                 BookingToUpdate.NumberOfDays = newNumberOfDays;
@@ -75,18 +74,43 @@ public class UpdateBooking : ICrud
             }
             case 2:
             {
-                bookingMethod.AssignRoomToCustomer(BookingToUpdate, DbContext); 
+                bookingMethod.AssignRoomToCustomer(BookingToUpdate, DbContext);
                 break;
             }
-            case 3:
+            case 3: //ÄNDRA RUM
             {
-                    //ändra rum
-                    // visa lista på lediga rum
-                    //välj rum 
-                    //assigna till bokningen
+                var roomsBigEnough = new List<Room>();
+
+                foreach (var room in DbContext.Rooms)
+                    if (BookingToUpdate.GuestCount <= room.NumberOfGuests)
+                        roomsBigEnough.Add(room);
+
+                if (!roomsBigEnough.Any())
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(" Det finns inga tillräckligt stora rum lediga. \n");
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     break;
+                }
+
+                if (roomsBigEnough.Any())
+                {
+                    var listOfBookings = new BookingList();
+                    bookingMethod.AddAllNewBookingDatesToList(BookingToUpdate, listOfBookings);
+
+                    var availableRoomBothDateAndNumberOfGuests =
+                        bookingMethod.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
+                    bookingMethod.ShowSelectedBookingOptions(BookingToUpdate);
+                    bookingMethod.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
+
+                    bookingMethod.SelectRoomFromListOfAvailableRooms(BookingToUpdate, DbContext);
+                }
+
+                break;
             }
         }
+
         DbContext.SaveChanges();
         bookingMethod.SuccessfulBooking(BookingToUpdate, "uppdaterad");
     }
