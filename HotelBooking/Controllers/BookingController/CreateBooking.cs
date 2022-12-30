@@ -4,7 +4,6 @@ using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.CustomerController;
 
@@ -14,15 +13,17 @@ public class CreateBooking : ICrud
     {
         DbContext = dbContext;
     }
+
     public ApplicationDbContext DbContext { get; set; }
+
     public void RunCrud()
     {
         BookingPageHeader.CreateBookingHeader();
-        var bookingMethod = new BookingController.BookingServices(DbContext);
+        var bookingService = new BookingService(DbContext);
         var bookingToCreate = new Booking();
-        bookingToCreate.NumberOfDays = bookingMethod.GetNumberOfDays();
-        bookingMethod.GetStartDate(bookingToCreate);
-        bookingMethod.SetEndDate(bookingToCreate);
+        bookingToCreate.NumberOfDays = bookingService.GetNumberOfDays();
+        bookingService.GetStartDate(bookingToCreate);
+        bookingService.SetEndDate(bookingToCreate);
 
         var roomsBigEnough = new List<Room>();
         while (true)
@@ -46,15 +47,7 @@ public class CreateBooking : ICrud
                 }
             }
 
-            //var availableRoomNumberOfGuests = DbContext.Rooms
-            //    .Where(r => r.NumberOfGuests > bookingToCreate.GuestCount)
-            //    .ToList();
-            //return availableRoomNumberOfGuests;
-            foreach (var room in DbContext.Rooms)
-            {
-                if (bookingToCreate.GuestCount <= room.NumberOfGuests)
-                    roomsBigEnough.Add(room);
-            }
+            roomsBigEnough = DbContext.Rooms.Where(r => r.NumberOfGuests > bookingToCreate.GuestCount).ToList();
 
             if (!roomsBigEnough.Any())
             {
@@ -64,21 +57,21 @@ public class CreateBooking : ICrud
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             else
+            {
                 break;
+            }
         }
 
         var listOfBookings = new BookingList();
-        bookingMethod.AddAllNewBookingDatesToList(bookingToCreate, listOfBookings);
-        
-        var availableRoomBothDateAndNumberOfGuests = bookingMethod.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
-        bookingMethod.ShowSelectedBookingOptions(bookingToCreate);
-        bookingMethod.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
+        bookingService.AddAllNewBookingDatesToList(bookingToCreate, listOfBookings);
 
-        bookingMethod.SelectRoomFromListOfAvailableRooms(bookingToCreate,  DbContext);
-        bookingMethod.AssignRoomToCustomer(bookingToCreate, DbContext);
-        bookingMethod.SaveNewBookingToDatabase(bookingToCreate);
-        bookingMethod.SuccessfulBooking(bookingToCreate, "genomförd");
+        var availableRoomBothDateAndNumberOfGuests = bookingService.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
+        bookingService.ShowSelectedBookingOptions(bookingToCreate);
+        bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
+
+        bookingService.SelectRoomFromListOfAvailableRooms(bookingToCreate, DbContext);
+        bookingService.AssignRoomToCustomer(bookingToCreate, DbContext);
+        bookingService.SaveNewBookingToDatabase(bookingToCreate);
+        bookingService.SuccessfulBooking(bookingToCreate, "genomförd");
     }
-    
-  
 }
