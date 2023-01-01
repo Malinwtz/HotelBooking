@@ -23,7 +23,7 @@ namespace HotelBooking.Controllers.PageHeaders
         public static void UpdateCustomerHeader()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t\t\t\tÄNDRA BOKNING");
+            Console.WriteLine(" \t\t\t\t\t\tÄNDRA KUND");
             PageHeader.LineThree();
         }
         public static void DeleteCustomerHeader()

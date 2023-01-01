@@ -20,7 +20,6 @@ public class BookingService
     {
         DbContext.Add(bookingToCreate);
         DbContext.SaveChanges();
-        Console.WriteLine("Sparat till databas");
     }
 
     public List<Room> MakeListOfRoomsFreeForBooking(BookingList listOfBookings, List<Room> availableRoom)
@@ -45,28 +44,6 @@ public class BookingService
 
         return availableRoomDateAndNumberOfGuests;
     }
-
-    //public bool IsRoomFreeForBooking(List<DateTime> listOfBookingDates, Booking bookingToUpdate)
-    //{
-    //    var roomIsFree = true;
-    //    //går igenom alla bokningar på det rummet som finns i databasen
-    //    foreach (var b in DbContext.Bookings
-    //                 .Include(b => b.Room)
-    //                 .Where(b => b.Room == bookingToUpdate.Room))
-    //    {
-    //        for (var dt = bookingToUpdate.StartDate; dt <= bookingToUpdate.EndDate; dt = dt.AddDays(1))
-    //        {
-    //            if (listOfBookingDates.Contains(dt))
-    //            {
-    //                roomIsFree = false;
-    //                return roomIsFree;
-    //            }
-    //        }
-
-    //    }
-    //    return roomIsFree;
-    //}
-
 
     public bool IfRoomIsAvailable(List<Room> availableRoom)
     {
@@ -113,23 +90,11 @@ public class BookingService
 
     public void BookingDetails(Booking booking)
     {
-        Console.WriteLine($" {booking.BookingId}\t\t{booking.Customer.FirstName} {booking.Customer.LastName}" +
-                          $"\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
-                          $"\t{booking.NumberOfDays}\t{booking.GuestCount}\t{booking.Room.RoomId}\n");
+        Console.WriteLine($" {booking.BookingId}\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
+                          $"\t{booking.NumberOfDays}\t{booking.GuestCount}\t{booking.Room.RoomId}\t\t\t{booking.Customer.FirstName} {booking.Customer.LastName}\n");
     }
 
-    public void SuccessfulBooking(Booking booking, string text)
-    {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($" Bokning {text}!");
-        Console.WriteLine(" Bokningens Id   Kundnamn     Startdatum  -  Slutdatum      " +
-                          " Antal dagar        Antal gäster       Rummets Id");
-        BookingDetails(booking);
-        Console.ForegroundColor = ConsoleColor.Gray;
-        Console.Write("\n Tryck på enter för att fortsätta");
-        Console.ReadLine();
-    }
+   
 
     public List<DateTime> AddAllNewBookingDatesToList(Booking bookingToCreate, BookingList listOfBookings)
     {

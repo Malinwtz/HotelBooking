@@ -38,9 +38,6 @@ namespace HotelBooking.Controllers.PageHeaders
             Console.Clear();
             Console.WriteLine("\t\t\t\t\t\tBOKNINGSDETALJER");
             PageHeader.LineThree();
-            Console.WriteLine($" Bokningens Id\tKundnamn\t\tStartdatum   " +
-                              $"Slutdatum\tAntal dagar\tRummets Id");
-            PageHeader.LineOne();
         }
 
         public static void AvailableRoomHeader()

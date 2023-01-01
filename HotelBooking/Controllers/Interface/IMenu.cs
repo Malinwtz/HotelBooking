@@ -9,7 +9,7 @@ namespace HotelBooking.Controllers.Interface
 {
     public interface IMenu
     {
-        int ShowAndReturnSelection();
+        int ReturnSelectionFromMenu();
         void LoopMenu(int selectionMenu, ApplicationDbContext dbContext);
     }
 }

@@ -9,7 +9,7 @@ namespace HotelBooking.MenuHandler;
 
 public class StartMenu : IMenu
 {
-    public int ShowAndReturnSelection()
+    public int ReturnSelectionFromMenu()
     {
         Console.Clear();
         var endAlternative = 3;
@@ -32,7 +32,7 @@ public class StartMenu : IMenu
                 case 1:
                 {
                     var customerMenu = new CustomerMenu();
-                    var selectedFromCustomerMenu = customerMenu.ShowAndReturnSelection();
+                    var selectedFromCustomerMenu = customerMenu.ReturnSelectionFromMenu();
                     if (selectedFromCustomerMenu == 0) loop = false;
                     customerMenu.LoopMenu(selectedFromCustomerMenu, dbContext);
                     break;
@@ -40,14 +40,14 @@ public class StartMenu : IMenu
                 case 2:
                 {
                     var roomMenu = new RoomMenu();
-                    var selectedFromRoomMenu = roomMenu.ShowAndReturnSelection();
+                    var selectedFromRoomMenu = roomMenu.ReturnSelectionFromMenu();
                     if (selectedFromRoomMenu == 0) loop = false;
                     roomMenu.LoopMenu(selectedFromRoomMenu, dbContext);
                     break;
                 }
                 case 3:
                     var bookingMenu = new BookingMenu();
-                    var selectedFromBookingMenu = bookingMenu.ShowAndReturnSelection();
+                    var selectedFromBookingMenu = bookingMenu.ReturnSelectionFromMenu();
                     if (selectedFromBookingMenu == 0) loop = false;
                     bookingMenu.LoopMenu(selectedFromBookingMenu, dbContext);
                     break;

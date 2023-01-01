@@ -2,6 +2,7 @@
 using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
+using HotelBooking.Data.Tables;
 
 namespace HotelBooking.Controllers.CustomerController;
 
@@ -16,49 +17,66 @@ public class UpdateCustomer : ICrud
 
     public void RunCrud()
     {
-        Console.Clear();
-        Console.WriteLine(" ÄNDRA KUND");
-        PageHeader.LineOne();
-            foreach (var c in DbContext.Customers.Where(c => c.Active == true))
-                Console.WriteLine($" {c.CustomerId}. {c.FirstName} {c.LastName}");
-
-            Console.Write(" Välj Id på den kund du vill uppdatera: ");
-            var customerIdToUpdate = ErrorHandling.TryInt();
-            var personToUpdate = DbContext.Customers
-                .Where(c=>c.Active == true)
-                .First(c => c.CustomerId == customerIdToUpdate);
+        CustomerPageHeader.UpdateCustomerHeader();
+        var read = new ReadCustomer(DbContext);
+        read.View();
+        var personToUpdate = FindCustomerToUpdate();
         
-            Console.Clear();
-            var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
+        var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection(); 
+        Console.Clear();
             switch (selectionFromUpdateCustomerMenu)
             {
                 case 1:
                 {
-                    Console.Clear();
-                    Console.Write(" Ange nytt förnamn: ");
-                    var updatedFirstName = Console.ReadLine();
-                    personToUpdate.FirstName = updatedFirstName;
+                    SetNewFirstName(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
                 case 2:
                 {
-                    Console.Clear();
-                    Console.Write(" Ange nytt efternamn: ");
-                    var updatedLastName = Console.ReadLine();
-                    personToUpdate.LastName = updatedLastName;
+                    SetNewLastName(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
                 case 3:
                 {
-                    Console.Clear();
-                    Console.Write(" Ange nytt telefonnummer: ");
-                    var updatedPhone = Console.ReadLine();
-                    personToUpdate.Phone = updatedPhone;
+                    SetNewPhoneNumber(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
             }
+        StringToWrite.SuccessfulAction(" Kund ändrad!");
+        StringToWrite.PressEnterToContinue();
+    }
+
+    private static void SetNewPhoneNumber(Customer personToUpdate)
+    {
+        Console.Write(" Ange nytt telefonnummer: ");
+        var updatedPhone = Console.ReadLine();
+        personToUpdate.Phone = updatedPhone;
+    }
+
+    private static void SetNewLastName(Customer personToUpdate)
+    {
+        Console.Write(" Ange nytt efternamn: ");
+        var updatedLastName = Console.ReadLine();
+        personToUpdate.LastName = updatedLastName;
+    }
+
+    private static void SetNewFirstName(Customer personToUpdate)
+    {
+        Console.Write(" Ange nytt förnamn: ");
+        var updatedFirstName = Console.ReadLine();
+        personToUpdate.FirstName = updatedFirstName;
+    }
+
+    private Customer FindCustomerToUpdate()
+    {
+        Console.Write(" Välj Id på den kund du vill uppdatera: ");
+        var customerIdToUpdate = ErrorHandling.TryInt();
+        var personToUpdate = DbContext.Customers
+            .Where(c => c.Active == true)
+            .First(c => c.CustomerId == customerIdToUpdate);
+        return personToUpdate;
     }
 }

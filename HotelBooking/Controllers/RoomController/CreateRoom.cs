@@ -32,20 +32,10 @@ public class CreateRoom : ICrud
         DbContext.Rooms.Add(newRoom);
         DbContext.SaveChanges();
 
-        SuccessfullyCreatedNewRoom(newRoom);
-        StringToWrite.PressEnterToContinue();
+        StringToWrite.SuccessfulAction(" Nytt rum registrerat!");
     }
 
-    private void SuccessfullyCreatedNewRoom(Room newRoom)
-    {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(" Nytt rum registrerat!");
-        PageHeader.LineTwo();
-        Service.ShowAllRoomDetails(newRoom);
-        Console.WriteLine(Environment.NewLine);
-        Console.ForegroundColor = ConsoleColor.Gray;
-    }
+   
 
     private static void RegisterNewRoomHeader()
     {

@@ -32,13 +32,6 @@ public class RoomService
         else if (sizeInput >= 40) roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 4;
     }
 
-    public void ShowAllRoomDetails(Room roomToShow)
-    {
-        Console.WriteLine($" Id: {roomToShow.RoomId}     " +
-                          $"Storlek: {roomToShow.Type}, {roomToShow.SizeSquareMeters}kvm     " +
-                          $"Möjlig extrasäng: {roomToShow.ExtraBed}     " +
-                          $"Antal gäster: {roomToShow.NumberOfGuests}");
-    }
 
     public int GetSizeSquareMetersInput(Room roomToGetASize)
     {

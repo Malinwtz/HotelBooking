@@ -7,7 +7,7 @@ namespace HotelBooking.Controllers.CustomerController;
 
 public class CustomerMenu : IMenu
 {
-    public int ShowAndReturnSelection()
+    public int ReturnSelectionFromMenu()
     {
         Console.Clear();
         var endAlternative = 4;
@@ -23,6 +23,7 @@ public class CustomerMenu : IMenu
     }
     public static int UpdateCustomerMenuShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 3;
         Console.WriteLine(" 1. Ändra förnamn");
         Console.WriteLine(" 2. Ändra efternamn");

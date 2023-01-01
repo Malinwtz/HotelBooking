@@ -26,9 +26,11 @@ public class ReadRoom : ICrud
 
     public void View()
     {
+        Console.WriteLine(String.Format("{0,-10}{1,-20}{2,-20}{3,-10}", " Id", "Typ/Storlek", "Möjlig extrasäng", "Antal gäster"));
         foreach (var room in DbContext.Rooms)
         {
-            Service.ShowAllRoomDetails(room);
+            Console.WriteLine(String.Format("{0,-10}{1,-20}{2,-20}{3,-10}",
+                $"{room.RoomId}", $"{room.Type}, {room.SizeSquareMeters}kvm", $"{room.ExtraBed}", $"{room.NumberOfGuests}"));
         }
         Console.WriteLine(Environment.NewLine);
     }

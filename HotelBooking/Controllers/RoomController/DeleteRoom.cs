@@ -24,10 +24,8 @@ namespace HotelBooking.Controllers.RoomController
                 Console.WriteLine(" Ta bort ett rum");
                 PageHeader.LineOne();
 
-                foreach (var room in DbContext.Rooms)
-                {
-                    Console.WriteLine($" Id{room.RoomId}: {room.Type}, {room.SizeSquareMeters}kvadratmeter, antal gäster: {room.NumberOfGuests}, antal möjliga extra sängar: {room.ExtraBed}");
-                }
+                var read = new ReadRoom(DbContext);
+                read.View();
 
                 Console.Write(" Välj Id på det rum som du vill ta bort");
                 var roomIdToDelete = Convert.ToInt32(Console.ReadLine());
@@ -35,8 +33,9 @@ namespace HotelBooking.Controllers.RoomController
                 DbContext.Rooms.Remove(roomToDelete);
 
                 DbContext.SaveChanges();
-                Console.WriteLine(" Rum borttaget!");
-                StringToWrite.PressEnterToContinue();
+
+                StringToWrite.SuccessfulAction(" Rum borttaget!");
+            
         }
     }
 }

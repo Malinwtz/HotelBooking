@@ -14,7 +14,7 @@ public class Application
         while (ContinueLoop)
         {
             var startMenu = new StartMenu();
-            var selectedFromStartMenu = startMenu.ShowAndReturnSelection();
+            var selectedFromStartMenu = startMenu.ReturnSelectionFromMenu();
             if (selectedFromStartMenu == 0) break;
                 startMenu.LoopMenu(selectedFromStartMenu, dbContext);
         }

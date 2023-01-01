@@ -22,10 +22,11 @@ public class ReadCustomer : ICrud
 
     public void View()
     {
+        Console.WriteLine(String.Format("{0,-10}  {1,-30}  {2,5}", "Id", "Namn", "Telefon"));
         foreach (var customer in DbContext.Customers.Where(c => c.Active == true))
         {
-            Console.WriteLine(
-                $" Id: {customer.CustomerId}     Namn: {customer.FirstName} {customer.LastName}     Telefon: {customer.Phone} ");
+            Console.WriteLine(String.Format("{0,-10}  {1,-30}  {2,5}", 
+                $"{customer.CustomerId}", $"{customer.FirstName} {customer.LastName}", $"{customer.Phone}"));
         }
     }
 }

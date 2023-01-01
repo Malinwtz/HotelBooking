@@ -20,8 +20,9 @@ public class UpdateRoom : ICrud
         Console.Clear();
         Console.WriteLine(" ÄNDRA RUM");
         PageHeader.LineOne();
-            foreach (var room in DbContext.Rooms)
-                Service.ShowAllRoomDetails(room);
+        var read = new ReadRoom(DbContext);
+        read.View();
+
         PageHeader.LineTwo();
         
         Console.Write(" Välj Id på det rum du vill uppdatera: "); 
@@ -43,12 +44,7 @@ public class UpdateRoom : ICrud
 
                 DbContext.SaveChanges();
 
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(" Rummets storlek ändrat!");
-                Service.ShowAllRoomDetails(roomToUpdate);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                StringToWrite.PressEnterToContinue();
+                RoomSuccessfullyUpdated(roomToUpdate);
                 break;
             }
             case 2:
@@ -97,14 +93,10 @@ public class UpdateRoom : ICrud
                             roomToUpdate.NumberOfGuests = updatedNumberOfGuests;
                             DbContext.SaveChanges();
 
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($" Rummet är ändrat! \n" +
-                                              $"\n Storlek: {roomToUpdate.SizeSquareMeters}kvm" +
-                                              $"\n Antal gäster: {roomToUpdate.NumberOfGuests}" +
-                                              $"\n Antal extrasängar: {roomToUpdate.ExtraBed}");
-                            Console.ForegroundColor = ConsoleColor.Gray;
-                            StringToWrite.PressEnterToContinue();
+                            StringToWrite.SuccessfulAction($" Rummet är ändrat! \n" +
+                                                           $"\n Storlek: {roomToUpdate.SizeSquareMeters}kvm" +
+                                                           $"\n Antal gäster: {roomToUpdate.NumberOfGuests}" +
+                                                           $"\n Antal extrasängar: {roomToUpdate.ExtraBed}");
                             break;
                         }
                     }

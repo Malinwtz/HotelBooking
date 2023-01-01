@@ -8,7 +8,7 @@ namespace HotelBooking.Controllers.BookingController;
 
 public class BookingMenu : IMenu
 {
-    public int ShowAndReturnSelection()
+    public int ReturnSelectionFromMenu()
     {
         Console.Clear();
         var endAlternative = 4;
