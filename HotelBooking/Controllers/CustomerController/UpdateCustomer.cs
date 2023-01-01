@@ -46,7 +46,6 @@ public class UpdateCustomer : ICrud
                 }
             }
         StringToWrite.SuccessfulAction(" Kund ändrad!");
-        StringToWrite.PressEnterToContinue();
     }
 
     private static void SetNewPhoneNumber(Customer personToUpdate)

@@ -35,8 +35,18 @@ public class RoomService
 
     public int GetSizeSquareMetersInput(Room roomToGetASize)
     {
-        Console.Write(" Storlek i kvadratmeter: ");
-        var sizeInput = ErrorHandling.TryInt();
+        var sizeInput = 0; // det går att registerera fel size
+        while (true)
+        {
+            Console.Write(" Storlek i kvadratmeter: ");
+            sizeInput = ErrorHandling.TryInt();
+            if (sizeInput > 10 || sizeInput < 50)
+            {
+                break;
+            }
+            Console.WriteLine("Rummet kan bara vara mellan 10 och 50 kvadratmeter");
+        }
+        
         roomToGetASize.SizeSquareMeters = sizeInput;
         return sizeInput;
     }

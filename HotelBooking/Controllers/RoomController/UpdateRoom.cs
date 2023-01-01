@@ -43,8 +43,6 @@ public class UpdateRoom : ICrud
                 Service.SetPropertyNumberOfGuestsToRoomBySizeInput(roomToUpdate.SizeSquareMeters, roomToUpdate);
 
                 DbContext.SaveChanges();
-
-                RoomSuccessfullyUpdated(roomToUpdate);
                 break;
             }
             case 2:
@@ -93,15 +91,16 @@ public class UpdateRoom : ICrud
                             roomToUpdate.NumberOfGuests = updatedNumberOfGuests;
                             DbContext.SaveChanges();
 
-                            StringToWrite.SuccessfulAction($" Rummet är ändrat! \n" +
-                                                           $"\n Storlek: {roomToUpdate.SizeSquareMeters}kvm" +
-                                                           $"\n Antal gäster: {roomToUpdate.NumberOfGuests}" +
-                                                           $"\n Antal extrasängar: {roomToUpdate.ExtraBed}");
                             break;
                         }
                     }
                     break;
             }
         }
+
+        StringToWrite.SuccessfulAction($" Rummet är ändrat! \n" +
+                                       $"\n Storlek: {roomToUpdate.SizeSquareMeters}kvm" +
+                                       $"\n Antal gäster: {roomToUpdate.NumberOfGuests}" +
+                                       $"\n Antal extrasängar: {roomToUpdate.ExtraBed}");
     }
 }
