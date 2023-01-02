@@ -47,8 +47,7 @@ public class DeleteCustomer : ICrud
             .Where(b => b.Customer == CustomerToDelete)
             .ToList();
 
-        if (!listOfBookings.Any()) //om bookings inte är null
-            //any() funkar inte, .count funkar inte, == null funkar inte
+        if (!listOfBookings.Any())
         {
             CustomerToDelete.Active = false;
             DbContext.SaveChanges();

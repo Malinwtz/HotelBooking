@@ -40,13 +40,13 @@ public class RoomService
         {
             Console.Write(" Storlek i kvadratmeter: ");
             sizeInput = ErrorHandling.TryInt();
-            if (sizeInput > 10 || sizeInput < 50)
+            if (sizeInput >= 10 && sizeInput <= 50)
             {
                 break;
             }
             Console.WriteLine("Rummet kan bara vara mellan 10 och 50 kvadratmeter");
         }
-        
+
         roomToGetASize.SizeSquareMeters = sizeInput;
         return sizeInput;
     }
