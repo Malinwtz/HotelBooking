@@ -12,7 +12,7 @@ public class CustomerMenu : IMenu
         Console.Clear();
         var endAlternative = 4;
         Console.WriteLine(" KUNDMENY");
-        PageHeader.LineThree();
+        Lines.LineThreeStar();
         Console.WriteLine(" 1. Visa alla kunder");
         Console.WriteLine(" 2. Registrera kund");
         Console.WriteLine(" 3. Ändra kunduppgifter");

@@ -13,11 +13,17 @@ public class ReadCustomer : ICrud
     }
     public void RunCrud()
     {
-        Console.Clear();
-        Console.WriteLine(" VISA ALLA KUNDER");
-        PageHeader.LineOne();
-        View();
-        StringToWrite.PressEnterToContinue();
+        CustomerPageHeader.ReadCustomerHeader();
+        if (!DbContext.Customers.Any())
+        {
+            Console.WriteLine(" Det finns inga kunder");
+            StringToWrite.PressEnterToContinue();
+        }
+        else if (DbContext.Customers.Any())
+        {
+            View();
+            StringToWrite.PressEnterToContinue();
+        }
     }
 
     public void View()
@@ -28,5 +34,6 @@ public class ReadCustomer : ICrud
             Console.WriteLine(String.Format("{0,-10}  {1,-30}  {2,5}", 
                 $"{customer.CustomerId}", $"{customer.FirstName} {customer.LastName}", $"{customer.Phone}"));
         }
+        Lines.LineTwoHyphen();
     }
 }

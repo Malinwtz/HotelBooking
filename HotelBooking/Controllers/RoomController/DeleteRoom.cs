@@ -15,6 +15,7 @@ namespace HotelBooking.Controllers.RoomController
     public class DeleteRoom : ICrud
     {
         public ApplicationDbContext DbContext { get; set; }
+        public RoomService Service { get; set; }
 
         public DeleteRoom(ApplicationDbContext dbContext)
         {
@@ -22,16 +23,11 @@ namespace HotelBooking.Controllers.RoomController
         }
         public void RunCrud()
         {
-            Console.Clear();
-                Console.WriteLine(" Ta bort ett rum");
-                PageHeader.LineOne();
-
+            RoomPageHeader.DeleteRoomHeader();
                 var read = new ReadRoom(DbContext);
                 read.View();
 
-                Console.Write(" Välj Id på det rum som du vill ta bort");
-                var roomIdToDelete = Convert.ToInt32(Console.ReadLine());
-                var roomToDelete = DbContext.Rooms.FirstOrDefault(p => p.RoomId == roomIdToDelete);
+               var roomToDelete = Service.GetRoomFromId();
 
                 var listOfBookings = DbContext.Bookings
                     .Where(b => b.Room == roomToDelete)
@@ -39,15 +35,10 @@ namespace HotelBooking.Controllers.RoomController
 
                 if (listOfBookings.Any()) 
                 {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(" Det finns en aktiv bokning på rummet. Om du tar bort rummet kommer bokningen att raderas.");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-
-                        Console.WriteLine("\n 1. Ta bort rum");
-                        Console.WriteLine(" 2. Fortsätt utan att ta bort rum");
-                        var selectedFromDeleteRoomOptions = ErrorHandling.TryInt();
-                        Console.Clear();
+                    StringToWrite.NotSuccessfulAction(" Det finns en aktiv bokning på rummet. Om du tar bort rummet kommer bokningen att raderas.");
+                       
+                        var selectedFromDeleteRoomOptions = RoomMenu.MenuDeleteRoomWithBooking();
+                    
                         switch (selectedFromDeleteRoomOptions)
                         {
                             case 1:
@@ -67,6 +58,8 @@ namespace HotelBooking.Controllers.RoomController
                     DeleteRoomFromDatabase(roomToDelete);
                 }
         }
+
+      
 
         private void DeleteRoomFromDatabase(Room? roomToDelete)
         {

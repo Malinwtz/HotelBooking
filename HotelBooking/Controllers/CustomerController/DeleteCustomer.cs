@@ -17,9 +17,7 @@ public class DeleteCustomer : ICrud
     public ApplicationDbContext DbContext { get; set; }
     public void RunCrud()
     {
-        Console.Clear();
-        Console.WriteLine(" TA BORT KUND");
-        PageHeader.LineOne();
+        CustomerPageHeader.DeleteCustomerHeader();
         var read = new ReadCustomer(DbContext);
         read.View();
 
@@ -32,10 +30,7 @@ public class DeleteCustomer : ICrud
 
             if (CustomerToDelete == null)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(" Kunden finns inte. Prova ett annat Id. ");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                StringToWrite.NotSuccessfulAction(" Kunden finns inte. Prova ett annat Id. ");
             }
             else
             {
@@ -51,20 +46,11 @@ public class DeleteCustomer : ICrud
         {
             CustomerToDelete.Active = false;
             DbContext.SaveChanges();
-
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(" Kund avregistrerad!");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            StringToWrite.PressEnterToContinue();
+            StringToWrite.SuccessfulAction(" Kund avregistrerad!");
         }
         else
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(" Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            StringToWrite.PressEnterToContinue();
+            StringToWrite.NotSuccessfulAction(" Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
         }
     }
 }

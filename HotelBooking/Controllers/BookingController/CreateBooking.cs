@@ -34,11 +34,7 @@ public class CreateBooking : ICrud
                 var numberOfGuestsToBook = ErrorHandling.TryInt();
                 if (numberOfGuestsToBook >= 5)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(
-                        " Det går bara att boka fyra personer i ett rum. Gör en till bokning om antal gäster överstiger fyra. \n");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    StringToWrite.NotSuccessfulAction(" Det går bara att boka fyra personer i ett rum. Gör en till bokning om antal gäster överstiger fyra.");
                 }
                 else
                 {
@@ -51,10 +47,7 @@ public class CreateBooking : ICrud
 
             if (!roomsBigEnough.Any())
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(" Det finns inga tillräckligt stora rum lediga. \n");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                StringToWrite.NotSuccessfulAction(" Det finns inga tillräckligt stora rum lediga.");
             }
             else
             {

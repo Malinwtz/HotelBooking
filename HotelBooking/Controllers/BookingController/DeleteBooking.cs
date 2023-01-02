@@ -27,12 +27,7 @@ public class DeleteBooking : ICrud
         DbContext.Bookings.Remove(bookingToDelete); 
         DbContext.SaveChanges();
 
-        ////metod stringtowrite successfulAction?
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Bokning borttagen!");
-        Console.ForegroundColor = ConsoleColor.Gray;
-        StringToWrite.PressEnterToContinue();
+        StringToWrite.SuccessfulAction("Bokning borttagen!");
     }
 
     private Booking FindBookingToDelete()

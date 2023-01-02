@@ -17,9 +17,7 @@ public class CreateCustomer : ICrud
 
     public void RunCrud()
     {
-        Console.Clear();
-            Console.WriteLine(" REGISTRERA NY KUND");
-            PageHeader.LineOne();
+       CustomerPageHeader.CreateCustomerHeader();
             Console.Write(" Förnamn: ");
             var firstNameInput = Console.ReadLine();
             Console.Write(" Efternamn: ");
@@ -35,11 +33,6 @@ public class CreateCustomer : ICrud
                 Active = true
             });
         DbContext.SaveChanges();
-
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($" Ny kund {firstNameInput} {lastNameInput} med telefonnummer {phoneInput} sparad!");
-        Console.ForegroundColor = ConsoleColor.Gray;
-        StringToWrite.PressEnterToContinue();
+        StringToWrite.SuccessfulAction($" Ny kund {firstNameInput} {lastNameInput} med telefonnummer {phoneInput} sparad!");
     }
 }

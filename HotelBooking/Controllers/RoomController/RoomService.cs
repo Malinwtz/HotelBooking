@@ -1,10 +1,22 @@
 ﻿using HotelBooking.Controllers.ErrorController;
+using HotelBooking.Data;
 using HotelBooking.Data.Tables;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.RoomController;
 
 public class RoomService
 {
+    public ApplicationDbContext DbContext { get; set; }
+
+    public RoomService()
+    {
+        
+    }
+    public RoomService(ApplicationDbContext dbContext)
+    {
+        DbContext = dbContext;
+    }
     public void SetPropertyExtraBedToRoomBySizeInput(int sizeInput, Room roomToSetPropertyExtraBedTo)
     {
         if (sizeInput < 25)
@@ -32,10 +44,16 @@ public class RoomService
         else if (sizeInput >= 40) roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 4;
     }
 
-
-    public int GetSizeSquareMetersInput(Room roomToGetASize)
+    public Room GetRoomFromId()
     {
-        var sizeInput = 0; // det går att registerera fel size
+        Console.Write(" Välj rum genom att skriva in Id: ");
+        var roomId = ErrorHandling.TryInt();
+        var room = DbContext.Rooms.FirstOrDefault(c => c.RoomId == roomId);
+        return room;
+    }
+    public int SetRoomSize(Room roomToGetASize)
+    {
+        var sizeInput = 0; 
         while (true)
         {
             Console.Write(" Storlek i kvadratmeter: ");
@@ -44,7 +62,7 @@ public class RoomService
             {
                 break;
             }
-            Console.WriteLine("Rummet kan bara vara mellan 10 och 50 kvadratmeter");
+            StringToWrite.NotSuccessfulAction("Rummet kan bara vara mellan 10 och 50 kvadratmeter");
         }
 
         roomToGetASize.SizeSquareMeters = sizeInput;

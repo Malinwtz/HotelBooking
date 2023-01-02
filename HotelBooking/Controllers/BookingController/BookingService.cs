@@ -62,7 +62,7 @@ public class BookingService
         Console.Clear();
         var method = new BookingService(DbContext);
         Console.WriteLine("\n\n Dina bokningsuppgifter:");
-        PageHeader.LineTwo();
+        Lines.LineTwoHyphen();
         Console.WriteLine(" Startdatum    Slutdatum\tAntal dagar\tAntal gäster");
         Console.WriteLine($" {booking.StartDate.ToString("dd MM yyyy")} " +
                           $"- {booking.EndDate.ToString("dd MM yyyy")} " +

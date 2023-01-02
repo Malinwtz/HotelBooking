@@ -16,12 +16,18 @@ public class ReadRoom : ICrud
 
     public void RunCrud()
     {
-        Console.Clear();
-        Console.WriteLine(" Visa alla rum");
-        PageHeader.LineOne();
-        View();
-        PageHeader.LineTwo();
-        StringToWrite.PressEnterToContinue();
+        RoomPageHeader.ReadRoomHeader();
+        if (!DbContext.Rooms.Any())
+        {
+            Console.WriteLine(" Det finns inga rum");
+            StringToWrite.PressEnterToContinue();
+        }
+        else if (DbContext.Rooms.Any())
+        {
+            View();
+            StringToWrite.PressEnterToContinue();
+        }
+            
     }
 
     public void View()
@@ -32,6 +38,6 @@ public class ReadRoom : ICrud
             Console.WriteLine(String.Format("{0,-10}{1,-20}{2,-20}{3,-10}",
                 $"{room.RoomId}", $"{room.Type}, {room.SizeSquareMeters}kvm", $"{room.ExtraBed}", $"{room.NumberOfGuests}"));
         }
-        Console.WriteLine(Environment.NewLine);
+        Lines.LineTwoHyphen();
     }
 }

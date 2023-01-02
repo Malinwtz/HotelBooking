@@ -13,7 +13,7 @@ public class BookingMenu : IMenu
         Console.Clear();
         var endAlternative = 4;
         Console.WriteLine(" BOKNINGSMENY");
-        PageHeader.LineThree();
+        Lines.LineThreeStar();
         Console.WriteLine(" 1. Visa alla bokningar");
         Console.WriteLine(" 2. Registrera bokning");
         Console.WriteLine(" 3. Ändra bokning");

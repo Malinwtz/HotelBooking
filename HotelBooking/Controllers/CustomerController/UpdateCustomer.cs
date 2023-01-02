@@ -18,12 +18,18 @@ public class UpdateCustomer : ICrud
     public void RunCrud()
     {
         CustomerPageHeader.UpdateCustomerHeader();
-        var read = new ReadCustomer(DbContext);
-        read.View();
-        var personToUpdate = FindCustomerToUpdate();
-        
-        var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection(); 
-        Console.Clear();
+        if (!DbContext.Customers.Any())
+        {
+            Console.WriteLine(" Det finns inga kunder");
+        }
+        else if (DbContext.Customers.Any())
+        {
+            var read = new ReadCustomer(DbContext);
+            read.View();
+            var personToUpdate = FindCustomerToUpdate();
+
+            var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
+            Console.Clear();
             switch (selectionFromUpdateCustomerMenu)
             {
                 case 1:
@@ -45,7 +51,8 @@ public class UpdateCustomer : ICrud
                     break;
                 }
             }
-        StringToWrite.SuccessfulAction(" Kund ändrad!");
+            StringToWrite.SuccessfulAction(" Kund ändrad!");
+        }
     }
 
     private static void SetNewPhoneNumber(Customer personToUpdate)

@@ -14,7 +14,7 @@ public class StartMenu : IMenu
         Console.Clear();
         var endAlternative = 3;
         Console.WriteLine(" STARTMENY");
-        PageHeader.LineThree();
+        Lines.LineThreeStar();
         Console.WriteLine(" 1. KUND      (Registrera - Visa - Ändra - Ta bort)");
         Console.WriteLine(" 2. RUM       (Registrera - Visa - Ändra - Ta bort)");
         Console.WriteLine($" {endAlternative}. BOKNING   (Registrera - Visa - Ändra - Ta bort)");
