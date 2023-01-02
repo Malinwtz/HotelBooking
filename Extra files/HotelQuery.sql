@@ -1,5 +1,29 @@
 USE Hotel;
 
+--Show all rooms bigger than 20 square meters ordered by number of guests------
+SELECT 
+	*
+FROM 
+	Rooms
+WHERE 
+	SizeSquareMeters > 20
+ORDER BY 
+	NumberOfGuests DESC;
+
+--Show all rooms and average room size-----------------------------------------
+SELECT
+	RoomId,
+	[Type],
+	SizeSquareMeters, 
+		(
+		SELECT 
+			AVG(SizeSquareMeters) 
+		FROM 
+			Rooms
+		) AS AverageRoomSize
+FROM 
+	Rooms;
+
 --Show bookings ordered by booking id------------------------------------------
 SELECT 
 	b.BookingId, 
@@ -24,30 +48,6 @@ FROM
 	Bookings
 GROUP BY
 	RoomId;
-
---Show all rooms bigger than 20 square meters ordered by number of guests------
-SELECT 
-	*
-FROM 
-	Rooms
-WHERE 
-	SizeSquareMeters > 20
-ORDER BY 
-	NumberOfGuests DESC;
-
---Show all rooms and average room size-----------------------------------------
-SELECT
-	RoomId,
-	[Type],
-	SizeSquareMeters, 
-		(
-		SELECT 
-			AVG(SizeSquareMeters) 
-		FROM 
-			Rooms
-		) AS AverageRoomSize
-FROM 
-	Rooms;
 
 --Show all bookings where days booked are more than average--------------------
 SELECT
