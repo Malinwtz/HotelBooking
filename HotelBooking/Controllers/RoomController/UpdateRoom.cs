@@ -23,11 +23,12 @@ public class UpdateRoom : ICrud
     {
         RoomPageHeader.UpdateRoomHeader();
 
-        if (!DbContext.Customers.Any())
+        if (!DbContext.Rooms.Any())
         {
-            Console.WriteLine(" Det finns inga kunder");
+            Console.WriteLine(" Det finns inga rum");
+            StringToWrite.PressEnterToContinue();
         }
-        else if (DbContext.Customers.Any())
+        else if (DbContext.Rooms.Any())
         {
             var read = new ReadRoom(DbContext);
             read.View();
