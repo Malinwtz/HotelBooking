@@ -94,8 +94,6 @@ public class BookingService
                           $"\t{booking.NumberOfDays}\t{booking.GuestCount}\t{booking.Room.RoomId}\t\t\t{booking.Customer.FirstName} {booking.Customer.LastName}\n");
     }
 
-   
-
     public List<DateTime> AddAllNewBookingDatesToList(Booking bookingToCreate, BookingList listOfBookings)
     {
         listOfBookings.NewBookingAllDates = new List<DateTime>();
@@ -125,19 +123,19 @@ public class BookingService
         foreach (var room in availableRoom.OrderBy(r => r.RoomId)) RoomDetails(room);
     }
 
-    public void GetStartDate(Booking bookingToCreate)
+    public void GetStartDate(Booking booking)
     {
-        bookingToCreate.StartDate = new DateTime(2001, 01, 01, 23, 59, 59);
-        while (bookingToCreate.StartDate < DateTime.Now.Date)
+        booking.StartDate = new DateTime(2001, 01, 01, 23, 59, 59);
+        while (booking.StartDate < DateTime.Now.Date)
         {
             Console.Write(" Skriv in startdatum för bokningen (yyyy-MM-dd): ");
-            bookingToCreate.StartDate = ErrorHandling.TryDate();
+            booking.StartDate = ErrorHandling.TryDate();
         }
     }
 
     public int GetNumberOfDays()
     {
-        Console.WriteLine("Skriv in hur många dagar du vill boka: ");
+        Console.WriteLine("Skriv in antal dagar du vill boka: ");
         return ErrorHandling.TryInt();
     }
 
@@ -146,7 +144,6 @@ public class BookingService
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("\n\n Det finns inga tillgängliga rum för dessa datum. Prova ett annat datum");
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine(" Tryck på enter för att fortsätta");
-        Console.ReadLine();
+        StringToWrite.PressEnterToContinue();
     }
 }

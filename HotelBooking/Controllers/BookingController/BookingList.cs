@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace HotelBooking.Controllers.BookingController;
 
-namespace HotelBooking.Controllers.BookingController
+public class BookingList
 {
-    public class BookingList
-    {
-
-        public List<DateTime> NewBookingAllDates { get; set; }
-    }
+    public List<DateTime> NewBookingAllDates { get; set; }
 }

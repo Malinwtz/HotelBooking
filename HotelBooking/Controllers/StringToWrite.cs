@@ -32,7 +32,6 @@ namespace HotelBooking.Controllers
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.Gray;
-            PressEnterToContinue();
         }
     }
 }

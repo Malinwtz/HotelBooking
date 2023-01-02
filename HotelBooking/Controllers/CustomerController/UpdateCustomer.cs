@@ -14,7 +14,6 @@ public class UpdateCustomer : ICrud
     }
 
     public ApplicationDbContext DbContext { get; set; }
-
     public void RunCrud()
     {
         CustomerPageHeader.UpdateCustomerHeader();
@@ -26,7 +25,8 @@ public class UpdateCustomer : ICrud
         {
             var read = new ReadCustomer(DbContext);
             read.View();
-            var personToUpdate = FindCustomerToUpdate();
+            CustomerService service = new CustomerService(DbContext);
+            var personToUpdate = service.FindCustomerById();
 
             var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
             Console.Clear();
@@ -34,55 +34,24 @@ public class UpdateCustomer : ICrud
             {
                 case 1:
                 {
-                    SetNewFirstName(personToUpdate);
+                    service.SetCustomerFirstName(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
                 case 2:
                 {
-                    SetNewLastName(personToUpdate);
+                    service.SetCustomerLastName(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
                 case 3:
                 {
-                    SetNewPhoneNumber(personToUpdate);
+                    service.SetCustomerPhoneNumber(personToUpdate);
                     DbContext.SaveChanges();
                     break;
                 }
             }
             StringToWrite.SuccessfulAction(" Kund ändrad!");
         }
-    }
-
-    private static void SetNewPhoneNumber(Customer personToUpdate)
-    {
-        Console.Write(" Ange nytt telefonnummer: ");
-        var updatedPhone = Console.ReadLine();
-        personToUpdate.Phone = updatedPhone;
-    }
-
-    private static void SetNewLastName(Customer personToUpdate)
-    {
-        Console.Write(" Ange nytt efternamn: ");
-        var updatedLastName = Console.ReadLine();
-        personToUpdate.LastName = updatedLastName;
-    }
-
-    private static void SetNewFirstName(Customer personToUpdate)
-    {
-        Console.Write(" Ange nytt förnamn: ");
-        var updatedFirstName = Console.ReadLine();
-        personToUpdate.FirstName = updatedFirstName;
-    }
-
-    private Customer FindCustomerToUpdate()
-    {
-        Console.Write(" Välj Id på den kund du vill uppdatera: ");
-        var customerIdToUpdate = ErrorHandling.TryInt();
-        var personToUpdate = DbContext.Customers
-            .Where(c => c.Active == true)
-            .First(c => c.CustomerId == customerIdToUpdate);
-        return personToUpdate;
     }
 }

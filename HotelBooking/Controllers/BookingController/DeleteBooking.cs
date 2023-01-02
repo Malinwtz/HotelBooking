@@ -18,15 +18,11 @@ public class DeleteBooking : ICrud
     public void RunCrud()
     {
         BookingPageHeader.DeleteBookingHeader();
-
         var read = new ReadBooking(DbContext);
         read.View();
-        
         var bookingToDelete = FindBookingToDelete();
-
         DbContext.Bookings.Remove(bookingToDelete); 
         DbContext.SaveChanges();
-
         StringToWrite.SuccessfulAction("Bokning borttagen!");
     }
 

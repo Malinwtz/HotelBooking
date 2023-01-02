@@ -24,25 +24,10 @@ public class CreateBooking : ICrud
         bookingToCreate.NumberOfDays = bookingService.GetNumberOfDays();
         bookingService.GetStartDate(bookingToCreate);
         bookingService.SetEndDate(bookingToCreate);
-
         var roomsBigEnough = new List<Room>();
         while (true)
         {
-            while (true)
-            {
-                Console.Write(" Hur många gäster vill du boka: ");
-                var numberOfGuestsToBook = ErrorHandling.TryInt();
-                if (numberOfGuestsToBook >= 5)
-                {
-                    StringToWrite.NotSuccessfulAction(" Det går bara att boka fyra personer i ett rum. Gör en till bokning om antal gäster överstiger fyra.");
-                }
-                else
-                {
-                    bookingToCreate.GuestCount = numberOfGuestsToBook;
-                    break;
-                }
-            }
-
+            SetNumberOfGuestsToBook(bookingToCreate);
             roomsBigEnough = DbContext.Rooms.Where(r => r.NumberOfGuests > bookingToCreate.GuestCount).ToList();
 
             if (!roomsBigEnough.Any())
@@ -57,15 +42,31 @@ public class CreateBooking : ICrud
 
         var listOfBookings = new BookingList();
         bookingService.AddAllNewBookingDatesToList(bookingToCreate, listOfBookings);
-
         var availableRoomBothDateAndNumberOfGuests = bookingService.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
         bookingService.ShowSelectedBookingOptions(bookingToCreate);
         bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
-
         bookingService.SelectRoomFromListOfAvailableRooms(bookingToCreate, DbContext);
         bookingService.AssignRoomToCustomer(bookingToCreate, DbContext);
         bookingService.SaveNewBookingToDatabase(bookingToCreate);
         StringToWrite.SuccessfulAction("Bokning genomförd");
-        
+    }
+
+    private void SetNumberOfGuestsToBook(Booking bookingToCreate)
+    {
+        while (true)
+        {
+            Console.Write(" Hur många gäster vill du boka: ");
+            var numberOfGuestsToBook = ErrorHandling.TryInt();
+            if (numberOfGuestsToBook >= 5)
+            {
+                StringToWrite.NotSuccessfulAction(
+                    " Det går bara att boka fyra personer i ett rum. Gör en till bokning om antal gäster överstiger fyra.");
+            }
+            else
+            {
+                bookingToCreate.GuestCount = numberOfGuestsToBook;
+                return;
+            }
+        }
     }
 }

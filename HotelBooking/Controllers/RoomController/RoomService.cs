@@ -53,10 +53,10 @@ public class RoomService
     }
     public int SetRoomSize(Room roomToGetASize)
     {
-        var sizeInput = 0; 
+        int sizeInput;
         while (true)
         {
-            Console.Write(" Storlek i kvadratmeter: ");
+            Console.WriteLine(" Storlek i kvadratmeter: ");
             sizeInput = ErrorHandling.TryInt();
             if (sizeInput >= 10 && sizeInput <= 50)
             {
