@@ -1,4 +1,5 @@
-﻿using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.ErrorController;
+using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
@@ -11,9 +12,8 @@ public class DeleteRoom : ICrud
     {
         DbContext = dbContext;
     }
-
-    public RoomService Service { get; set; }
     public ApplicationDbContext DbContext { get; set; }
+    public Room RoomToDelete { get; set; }
 
     public void RunCrud()
     {
@@ -21,9 +21,9 @@ public class DeleteRoom : ICrud
         var read = new ReadRoom(DbContext);
         read.View();
 
-        var roomToDelete = Service.GetRoomFromId();
+        RoomToDelete = GetRoomById();
         var listOfBookings = DbContext.Bookings
-            .Where(b => b.Room == roomToDelete)
+            .Where(b => b.Room == RoomToDelete)
             .ToList();
 
         if (listOfBookings.Any())
@@ -37,7 +37,7 @@ public class DeleteRoom : ICrud
             {
                 case 1:
                 {
-                    DeleteRoomFromDatabase(roomToDelete);
+                    DeleteRoomFromDatabase(RoomToDelete);
                     break;
                 }
                 case 2:
@@ -48,7 +48,18 @@ public class DeleteRoom : ICrud
         }
         else if (!listOfBookings.Any())
         {
-            DeleteRoomFromDatabase(roomToDelete);
+            DeleteRoomFromDatabase(RoomToDelete);
+        }
+    }
+
+    private Room GetRoomById()
+    {
+        while (true)
+        {
+            Console.Write(" Välj rum genom att skriva in Id: ");
+            var roomId = ErrorHandling.TryInt();
+            var room = DbContext.Rooms.First(c => c.RoomId == roomId); //System.NullReferenceException
+            if (room != null) return room;
         }
     }
 

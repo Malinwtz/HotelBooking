@@ -18,7 +18,7 @@ namespace HotelBooking.Data
         {
             var firstName1 = "Anna";
             var lastName1 = "Ek";
-            if (!dbContext.Customers.Any(c => c.FirstName == firstName1 && c.LastName == lastName1))
+            if (!dbContext.Customers.Any(c=>c.Active == true))
             {
                 dbContext.Customers.Add(new Customer
                 {
@@ -27,12 +27,11 @@ namespace HotelBooking.Data
                     Phone = "0707230489",
                     Active = true
                 });
-            }
+            
 
-            var firstName2 = "Ella";
-            var lastName2 = "Löv";
-            if (!dbContext.Customers.Any(c => c.FirstName == firstName2 && c.LastName == lastName2))
-            {
+                var firstName2 = "Ella";
+                var lastName2 = "Löv";
+            
                 dbContext.Customers.Add(new Customer
                 {
                     FirstName = firstName2,
@@ -40,12 +39,11 @@ namespace HotelBooking.Data
                     Phone = "0707230482",
                     Active = true
                 });
-            }
+            
 
-            var firstName3 = "Håkan";
-            var lastName3 = "Alm";
-            if (!dbContext.Customers.Any(c => c.FirstName == firstName3 && c.LastName == lastName3))
-            {
+                var firstName3 = "Håkan";
+                var lastName3 = "Alm";
+            
                 dbContext.Customers.Add(new Customer
                 {
                     FirstName = firstName3,
@@ -53,12 +51,10 @@ namespace HotelBooking.Data
                     Phone = "0707230481",
                     Active = true
                 });
-            }
 
-            var firstName4 = "Per";
-            var lastName4 = "Björk";
-            if (!dbContext.Customers.Any(c => c.FirstName == firstName4 && c.LastName == lastName4))
-            {
+                var firstName4 = "Per";
+                var lastName4 = "Björk";
+            
                 dbContext.Customers.Add(new Customer
                 {
                     FirstName = firstName4,
@@ -71,7 +67,7 @@ namespace HotelBooking.Data
 
         private void SeedRoom(ApplicationDbContext dbContext)
         {
-            if (!dbContext.Rooms.Any(c => c.RoomId == 1))
+            if (!dbContext.Rooms.Any())
             {
                 dbContext.Rooms.Add(new Room()
                 {
@@ -80,9 +76,7 @@ namespace HotelBooking.Data
                     ExtraBed = 0,
                     Type = StringToWrite.Single
                 });
-            }
-            if (!dbContext.Rooms.Any(c => c.RoomId == 2))
-            {
+           
                 dbContext.Rooms.Add(new Room
                 {
                     SizeSquareMeters = 20,
@@ -90,9 +84,7 @@ namespace HotelBooking.Data
                     ExtraBed = 0,
                     Type = StringToWrite.Double
                 });
-            }
-            if (!dbContext.Rooms.Any(c => c.RoomId == 3))
-            {
+            
                 dbContext.Rooms.Add(new Room
                 {
                     SizeSquareMeters = 30,
@@ -100,9 +92,7 @@ namespace HotelBooking.Data
                     ExtraBed = 1,
                     Type = StringToWrite.Double
                 });
-            }
-            if (!dbContext.Rooms.Any(c => c.RoomId == 4))
-            {
+           
                 dbContext.Rooms.Add(new Room
                 {
                     SizeSquareMeters = 40,

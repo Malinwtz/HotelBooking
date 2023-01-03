@@ -1,4 +1,5 @@
-﻿using HotelBooking.Controllers.ErrorController;
+﻿using System.Net.NetworkInformation;
+using HotelBooking.Controllers.ErrorController;
 using HotelBooking.Data;
 using HotelBooking.Data.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -46,10 +47,13 @@ public class RoomService
 
     public Room GetRoomFromId()
     {
-        Console.Write(" Välj rum genom att skriva in Id: ");
-        var roomId = ErrorHandling.TryInt();
-        var room = DbContext.Rooms.FirstOrDefault(c => c.RoomId == roomId);
-        return room;
+        while (true)
+        {
+            Console.Write(" Välj rum genom att skriva in Id: ");
+            var roomId = ErrorHandling.TryInt();
+            var room = DbContext.Rooms.First(c => c.RoomId == roomId);//System.NullReferenceException
+            if (room != null) return room;
+        }
     }
     public int SetRoomSize(Room roomToGetASize)
     {

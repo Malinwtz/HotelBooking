@@ -33,7 +33,7 @@ public class UpdateRoom : ICrud
             var read = new ReadRoom(DbContext);
             read.View();
 
-            var roomToUpdate = Service.GetRoomFromId();
+            var roomToUpdate = GetRoomById();
             var selectionFromUpdateRoomMenu = RoomMenu.UpdateRoomMenuShowAndReturnSelection();
             
             switch (selectionFromUpdateRoomMenu)
@@ -77,6 +77,16 @@ public class UpdateRoom : ICrud
         }
     }
 
+    private Room GetRoomById()
+    {
+        while (true)
+        {
+            Console.Write(" Välj rum genom att skriva in Id: ");
+            var roomId = ErrorHandling.TryInt();
+            var room = DbContext.Rooms.First(c => c.RoomId == roomId);
+            if (room != null) return room;
+        }
+    }
     private static int UpdatedNumberOfGuests()
     {
         Console.Write(" Uppdatera antal gäster som får plats: ");

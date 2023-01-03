@@ -12,7 +12,6 @@ public class ReadRoom : ICrud
     }
 
     public ApplicationDbContext DbContext { get; set; }
-    public RoomService Service = new RoomService();
 
     public void RunCrud()
     {
