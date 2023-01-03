@@ -46,11 +46,12 @@ public class DeleteCustomer : ICrud
         {
             CustomerToDelete.Active = false;
             DbContext.SaveChanges();
-            StringToWrite.SuccessfulAction(" Kund avregistrerad!");
+            StringToWrite.SuccessfulAction(" Kund avregistrerad (soft delete)!");
         }
         else
         {
             StringToWrite.NotSuccessfulAction(" Det går inte att ta bort kunden eftersom kunden har en aktiv bokning");
+            StringToWrite.PressEnterToContinue();
         }
     }
 }
