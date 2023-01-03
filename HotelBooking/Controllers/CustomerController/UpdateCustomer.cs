@@ -1,8 +1,6 @@
-﻿using HotelBooking.Controllers.ErrorController;
-using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
-using HotelBooking.Data.Tables;
 
 namespace HotelBooking.Controllers.CustomerController;
 
@@ -14,6 +12,7 @@ public class UpdateCustomer : ICrud
     }
 
     public ApplicationDbContext DbContext { get; set; }
+
     public void RunCrud()
     {
         CustomerPageHeader.UpdateCustomerHeader();
@@ -25,7 +24,7 @@ public class UpdateCustomer : ICrud
         {
             var read = new ReadCustomer(DbContext);
             read.View();
-            CustomerService service = new CustomerService(DbContext);
+            var service = new CustomerService(DbContext);
             var personToUpdate = service.FindCustomerById();
 
             var selectionFromUpdateCustomerMenu = CustomerMenu.UpdateCustomerMenuShowAndReturnSelection();
@@ -51,6 +50,7 @@ public class UpdateCustomer : ICrud
                     break;
                 }
             }
+
             StringToWrite.SuccessfulAction(" Kund ändrad!");
         }
     }

@@ -51,7 +51,7 @@ public class CreateBooking : ICrud
             bookingService.SelectRoomFromListOfAvailableRooms(bookingToCreate, DbContext);
             bookingService.AssignRoomToCustomer(bookingToCreate, DbContext);
             bookingService.SaveNewBookingToDatabase(bookingToCreate);
-            StringToWrite.SuccessfulAction("Bokning genomförd");
+            StringToWrite.SuccessfulAction(" Bokning genomförd");
         }
         else RunCrud();
     }

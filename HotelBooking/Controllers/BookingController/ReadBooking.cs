@@ -31,8 +31,8 @@ public class ReadBooking : ICrud
 
     public void View()
     {
-        Console.WriteLine("{0,-15} {1,-30} {2,-30} {3,-15} {4,-10}", "Bokningens Id", "Kundnamn",
-            "Startdatum - Slutdatum", "Antal dagar", "Rummets Id");
+        Console.WriteLine("{0,-15} {1,-30} {2,-30} {3,-15} {4,-10}", "BokningsId", "Kundnamn",
+            "Startdatum   Slutdatum", "Antal dagar", "RumsId");
 
         foreach (var b in DbContext.Bookings.Include(b => b.Customer).Include(b => b.Room))
             Console.WriteLine("{0,-15} {1,-30} {2,-30} {3,-15} {4,-10}", $" {b.BookingId}", $"{b.Customer.FirstName} {b.Customer.LastName}",

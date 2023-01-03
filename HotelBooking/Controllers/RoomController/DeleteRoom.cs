@@ -12,15 +12,15 @@ public class DeleteRoom : ICrud
     {
         DbContext = dbContext;
     }
-    public ApplicationDbContext DbContext { get; set; }
+
     public Room RoomToDelete { get; set; }
+    public ApplicationDbContext DbContext { get; set; }
 
     public void RunCrud()
     {
         RoomPageHeader.DeleteRoomHeader();
         var read = new ReadRoom(DbContext);
         read.View();
-
         RoomToDelete = GetRoomById();
         var listOfBookings = DbContext.Bookings
             .Where(b => b.Room == RoomToDelete)
@@ -32,7 +32,6 @@ public class DeleteRoom : ICrud
                 " Det finns en aktiv bokning på rummet. Om du tar bort rummet kommer bokningen att raderas.");
 
             var selectedFromDeleteRoomOptions = RoomMenu.MenuDeleteRoomWithBooking();
-
             switch (selectedFromDeleteRoomOptions)
             {
                 case 1:
@@ -58,7 +57,7 @@ public class DeleteRoom : ICrud
         {
             Console.Write(" Välj rum genom att skriva in Id: ");
             var roomId = ErrorHandling.TryInt();
-            var room = DbContext.Rooms.First(c => c.RoomId == roomId); //System.NullReferenceException
+            var room = DbContext.Rooms.FirstOrDefault(c => c.RoomId == roomId);
             if (room != null) return room;
         }
     }

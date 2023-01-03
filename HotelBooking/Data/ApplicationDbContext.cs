@@ -11,8 +11,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Room> Rooms { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Booking> Bookings { get; set; }
-   
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)

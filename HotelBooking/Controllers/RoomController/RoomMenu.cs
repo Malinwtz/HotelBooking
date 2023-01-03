@@ -1,6 +1,4 @@
-﻿using HotelBooking.Controllers.CustomerController;
-using HotelBooking.Controllers.ErrorController;
-using HotelBooking.Controllers.Interface;
+﻿using HotelBooking.Controllers.Interface;
 using HotelBooking.Controllers.PageHeaders;
 using HotelBooking.Data;
 using HotelBooking.MenuHandler;
@@ -24,27 +22,7 @@ public class RoomMenu : IMenu
         Console.Clear();
         return selectFromRooMenu;
     }
-    public static int UpdateRoomMenuShowAndReturnSelection()
-    {
-        Console.Clear();
-        var endAlternative = 2;
-        Console.WriteLine(" 1. Ändra storlek (kvadratmeter) ");
-        Console.WriteLine($" {endAlternative}. Ändra antal gäster som får plats");
-        ReturnFromMenuClass.ExitMenu();
-        var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        Console.Clear();
-        return selectFromUpdateBookingMenu;
-    }
 
-    public static int MenuDeleteRoomWithBooking()
-    {
-        var endAlternative = 2;
-        Console.WriteLine("\n 1. Ta bort rum");
-        Console.WriteLine($" {endAlternative}. Fortsätt utan att ta bort rum");
-        var selectedFromDeleteRoomOptions = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
-        Console.Clear();
-        return selectedFromDeleteRoomOptions;
-    }
     public void LoopMenu(int selectedFromMenu, ApplicationDbContext dbContext)
     {
         switch (selectedFromMenu)
@@ -70,5 +48,27 @@ public class RoomMenu : IMenu
                 break;
             }
         }
+    }
+
+    public static int UpdateRoomMenuShowAndReturnSelection()
+    {
+        Console.Clear();
+        var endAlternative = 2;
+        Console.WriteLine(" 1. Ändra storlek (kvadratmeter) ");
+        Console.WriteLine($" {endAlternative}. Ändra antal gäster som får plats");
+        ReturnFromMenuClass.ExitMenu();
+        var selectFromUpdateBookingMenu = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        Console.Clear();
+        return selectFromUpdateBookingMenu;
+    }
+
+    public static int MenuDeleteRoomWithBooking()
+    {
+        var endAlternative = 2;
+        Console.WriteLine("\n 1. Ta bort rum");
+        Console.WriteLine($" {endAlternative}. Fortsätt utan att ta bort rum");
+        var selectedFromDeleteRoomOptions = ReturnFromMenuClass.ReturnFromMenu(endAlternative);
+        Console.Clear();
+        return selectedFromDeleteRoomOptions;
     }
 }

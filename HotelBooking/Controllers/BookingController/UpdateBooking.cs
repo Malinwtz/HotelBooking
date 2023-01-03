@@ -96,7 +96,6 @@ public class UpdateBooking : ICrud
                         }
                 }
             }
-            
         }
     }
 
@@ -152,7 +151,7 @@ public class UpdateBooking : ICrud
             for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
                 if (listOfBookingDates.Contains(dt))
                 {
-                    StringToWrite.NotSuccessfulAction("Rummet är redan bokat! Prova ett annat datum");
+                    StringToWrite.NotSuccessfulAction(" Rummet är redan bokat! Prova ett annat datum");
                     StringToWrite.PressEnterToContinue();
                     roomIsFree = false;
                     return roomIsFree;
@@ -162,7 +161,7 @@ public class UpdateBooking : ICrud
 
     private void SelectBookingToUpdate()
     {
-        Console.Write("\n\nVälj Id på den bokning du vill uppdatera: ");
+        Console.Write("\n\n Välj Id på den bokning du vill uppdatera: ");
         var selectId = ErrorHandling.TryInt();
         BookingToUpdate = DbContext.Bookings
             .First(c => c.BookingId == selectId);

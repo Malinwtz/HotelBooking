@@ -8,16 +8,14 @@ namespace HotelBooking.Controllers.RoomController;
 
 public class UpdateRoom : ICrud
 {
-   
+    public RoomService Service = new();
+
     public UpdateRoom(ApplicationDbContext dbContext)
     {
         DbContext = dbContext;
     }
 
     public ApplicationDbContext DbContext { get; set; }
-
-    public RoomService Service = new();
-
 
     public void RunCrud()
     {
@@ -32,10 +30,9 @@ public class UpdateRoom : ICrud
         {
             var read = new ReadRoom(DbContext);
             read.View();
-
             var roomToUpdate = GetRoomById();
             var selectionFromUpdateRoomMenu = RoomMenu.UpdateRoomMenuShowAndReturnSelection();
-            
+
             switch (selectionFromUpdateRoomMenu)
             {
                 case 1:
@@ -87,6 +84,7 @@ public class UpdateRoom : ICrud
             if (room != null) return room;
         }
     }
+
     private static int UpdatedNumberOfGuests()
     {
         Console.Write(" Uppdatera antal gäster som får plats: ");

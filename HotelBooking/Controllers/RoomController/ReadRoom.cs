@@ -6,7 +6,7 @@ namespace HotelBooking.Controllers.RoomController;
 
 public class ReadRoom : ICrud
 {
-    public ReadRoom(ApplicationDbContext dbContext) 
+    public ReadRoom(ApplicationDbContext dbContext)
     {
         DbContext = dbContext;
     }
@@ -26,17 +26,14 @@ public class ReadRoom : ICrud
             View();
             StringToWrite.PressEnterToContinue();
         }
-            
     }
 
     public void View()
     {
-        Console.WriteLine(String.Format("{0,-10}{1,-20}{2,-20}{3,-10}", " Id", "Typ/Storlek", "Möjlig extrasäng", "Antal gäster"));
+        Console.WriteLine("{0,-10}{1,-20}{2,-20}{3,-10}", " Id", "Typ/Storlek", "Möjlig extrasäng", "Antal gäster");
         foreach (var room in DbContext.Rooms)
-        {
-            Console.WriteLine(String.Format("{0,-10}{1,-20}{2,-20}{3,-10}",
-                $"{room.RoomId}", $"{room.Type}, {room.SizeSquareMeters}kvm", $"{room.ExtraBed}", $"{room.NumberOfGuests}"));
-        }
+            Console.WriteLine("{0,-10}{1,-20}{2,-20}{3,-10}", $"{room.RoomId}",
+                $"{room.Type}, {room.SizeSquareMeters}kvm", $"{room.ExtraBed}", $"{room.NumberOfGuests}");
         Lines.LineTwoHyphen();
     }
 }
