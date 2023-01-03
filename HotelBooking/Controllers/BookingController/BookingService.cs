@@ -47,14 +47,14 @@ public class BookingService
 
     public bool IfRoomIsAvailable(List<Room> availableRoom)
     {
-        if (availableRoom.Count() < 1)
+        if (!availableRoom.Any())
         {
             RoomIsNotAvailable();
-            return true;
+            return false;
         }
 
         DisplayAvailableRooms(availableRoom);
-        return false;
+        return true;
     }
 
     public void ShowSelectedBookingOptions(Booking booking)
@@ -143,8 +143,9 @@ public class BookingService
     public void RoomIsNotAvailable()
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("\n\n Det finns inga tillgängliga rum för dessa datum. Prova ett annat datum");
+        Console.WriteLine("\n\n Det finns inga tillgängliga rum för dessa datum.");
         Console.ForegroundColor = ConsoleColor.Gray;
         StringToWrite.PressEnterToContinue();
+        Console.Clear();
     }
 }

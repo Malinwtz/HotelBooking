@@ -33,6 +33,7 @@ public class CreateBooking : ICrud
             if (!roomsBigEnough.Any())
             {
                 StringToWrite.NotSuccessfulAction(" Det finns inga tillräckligt stora rum lediga.");
+                StringToWrite.PressEnterToContinue();
             }
             else
             {
@@ -44,11 +45,15 @@ public class CreateBooking : ICrud
         bookingService.AddAllNewBookingDatesToList(bookingToCreate, listOfBookings);
         var availableRoomBothDateAndNumberOfGuests = bookingService.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
         bookingService.ShowSelectedBookingOptions(bookingToCreate);
-        bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
-        bookingService.SelectRoomFromListOfAvailableRooms(bookingToCreate, DbContext);
-        bookingService.AssignRoomToCustomer(bookingToCreate, DbContext);
-        bookingService.SaveNewBookingToDatabase(bookingToCreate);
-        StringToWrite.SuccessfulAction("Bokning genomförd");
+        var availableRoomBool = bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
+        if (availableRoomBool == true)
+        {
+            bookingService.SelectRoomFromListOfAvailableRooms(bookingToCreate, DbContext);
+            bookingService.AssignRoomToCustomer(bookingToCreate, DbContext);
+            bookingService.SaveNewBookingToDatabase(bookingToCreate);
+            StringToWrite.SuccessfulAction("Bokning genomförd");
+        }
+        else RunCrud();
     }
 
     private void SetNumberOfGuestsToBook(Booking bookingToCreate)

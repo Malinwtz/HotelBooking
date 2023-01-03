@@ -29,62 +29,73 @@ public class UpdateBooking : ICrud
         }
         else if (DbContext.Bookings.Any())
         {
-            //BookingPageHeader.BookingDetailsHeader();
             var read = new ReadBooking(DbContext);
             read.View();
             SelectBookingToUpdate();
-            BookingPageHeader.BookingDetailsHeader();
-            bookingService.BookingDetails(BookingToUpdate);
-            var selectionUpdateBookingMenu = BookingMenu.UpdateBookingMenuShowAndReturnSelection();
-            switch (selectionUpdateBookingMenu)
+            
+            while (true)
             {
-                case 1:
-                {
-                    var newStartDate = DateTime.Now;
-                    var newEndDate = DateTime.Now;
-                    var newNumberOfDays = 0;
-                    var roomIsFree = false;
-                    while (!roomIsFree)
-                    {
-                        newStartDate = GetUpdatedStartDate();
-                        newNumberOfDays = bookingService.GetNumberOfDays();
-                        newEndDate = SetUpdatedEndDate(newNumberOfDays, newEndDate, newStartDate);
-                        var listOfBookingDates = MakeListOfBookingDates(newStartDate, newEndDate);
-                        roomIsFree = IfRoomIsFree(listOfBookingDates);
-                    }
-
-                    SetPropertiesToBooking(newStartDate, newEndDate, newNumberOfDays);
+                BookingPageHeader.BookingDetailsHeader();
+                bookingService.BookingDetails(BookingToUpdate);
+                var selectionUpdateBookingMenu = BookingMenu.UpdateBookingMenuShowAndReturnSelection();
+                if (selectionUpdateBookingMenu == 0)
                     break;
-                }
-                case 2:
+                switch (selectionUpdateBookingMenu)
                 {
-                    bookingService.AssignRoomToCustomer(BookingToUpdate, DbContext);
-                    break;
-                }
-                case 3:
-                {
-                    var roomsBigEnough = GetListOfRoomsBigEnough();
-                    if (!roomsBigEnough.Any())
-                    {
-                        StringToWrite.NotSuccessfulAction(" Det finns inga tillräckligt stora rum lediga.");
-                    }
-                    else if (roomsBigEnough.Any())
-                    {
-                        var listOfBookings = new BookingList();
-                        bookingService.AddAllNewBookingDatesToList(BookingToUpdate, listOfBookings);
-                        var availableRoomBothDateAndNumberOfGuests =
-                            bookingService.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
-                        bookingService.ShowSelectedBookingOptions(BookingToUpdate);
-                        bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
-                        bookingService.SelectRoomFromListOfAvailableRooms(BookingToUpdate, DbContext);
-                    }
-
-                    break;
+                    case 1:
+                        {
+                            var newStartDate = DateTime.Now;
+                            var newEndDate = DateTime.Now;
+                            var newNumberOfDays = 0;
+                            var roomIsFree = false;
+                            while (!roomIsFree)
+                            {
+                                newStartDate = GetUpdatedStartDate();
+                                newNumberOfDays = bookingService.GetNumberOfDays();
+                                newEndDate = SetUpdatedEndDate(newNumberOfDays, newEndDate, newStartDate);
+                                var listOfBookingDates = MakeListOfBookingDates(newStartDate, newEndDate);
+                                roomIsFree = IfRoomIsFree(listOfBookingDates);
+                                if (roomIsFree == true) break;
+                            }
+                            SetPropertiesToBooking(newStartDate, newEndDate, newNumberOfDays);
+                            DbContext.SaveChanges();
+                            StringToWrite.SuccessfulAction(" Bokningen är uppdaterad!");
+                            break;
+                        }
+                    case 2:
+                        {
+                            bookingService.AssignRoomToCustomer(BookingToUpdate, DbContext);
+                            DbContext.SaveChanges();
+                            StringToWrite.SuccessfulAction(" Bokningen är uppdaterad!");
+                            break;
+                        }
+                    case 3:
+                        {
+                            var roomsBigEnough = GetListOfRoomsBigEnough();
+                            if (!roomsBigEnough.Any())
+                            {
+                                StringToWrite.NotSuccessfulAction(" Det finns inga tillräckligt stora rum lediga.");
+                            }
+                            else if (roomsBigEnough.Any())
+                            {
+                                var listOfBookings = new BookingList();
+                                bookingService.AddAllNewBookingDatesToList(BookingToUpdate, listOfBookings);
+                                var availableRoomBothDateAndNumberOfGuests =
+                                    bookingService.MakeListOfRoomsFreeForBooking(listOfBookings, roomsBigEnough);
+                                bookingService.ShowSelectedBookingOptions(BookingToUpdate);
+                                var availableRoomBool = bookingService.IfRoomIsAvailable(availableRoomBothDateAndNumberOfGuests);
+                                if (availableRoomBool == true)
+                                {
+                                    bookingService.SelectRoomFromListOfAvailableRooms(BookingToUpdate, DbContext);
+                                    DbContext.SaveChanges();
+                                    StringToWrite.SuccessfulAction(" Bokningen är uppdaterad!");
+                                }
+                            }
+                            break;
+                        }
                 }
             }
-
-            DbContext.SaveChanges();
-            StringToWrite.SuccessfulAction(" Bokningen är uppdaterad!");
+            
         }
     }
 
@@ -141,10 +152,10 @@ public class UpdateBooking : ICrud
                 if (listOfBookingDates.Contains(dt))
                 {
                     StringToWrite.NotSuccessfulAction("Rummet är redan bokat! Prova ett annat datum");
+                    StringToWrite.PressEnterToContinue();
                     roomIsFree = false;
                     return roomIsFree;
                 }
-
         return roomIsFree;
     }
 
