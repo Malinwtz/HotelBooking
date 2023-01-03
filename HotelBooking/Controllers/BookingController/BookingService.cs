@@ -126,17 +126,13 @@ public class BookingService
 
     public void GetStartDate(Booking booking)
     {
-        booking.StartDate = new DateTime(2001, 01, 01, 23, 59, 59);
-        while (booking.StartDate < DateTime.Now.Date)
-        {
-            Console.Write(" Skriv in startdatum för bokningen (yyyy-MM-dd): ");
+        Console.Write(" Skriv in startdatum för bokningen (yyyy-MM-dd): ");
             booking.StartDate = ErrorHandling.TryDate();
-        }
     }
 
     public int GetNumberOfDays()
     {
-        Console.WriteLine("Skriv in antal dagar du vill boka: ");
+        Console.WriteLine(" Skriv in antal dagar du vill boka: ");
         return ErrorHandling.TryInt();
     }
 

@@ -6,7 +6,7 @@ public class ErrorHandling
 {
     public static void WrongInputMessage()
     {
-        Console.WriteLine("Felaktig input");
+        Console.WriteLine(" Felaktig input");
     }
 
     public static DateTime TryDate()
@@ -16,6 +16,7 @@ public class ErrorHandling
             {
                 var date = DateTime.ParseExact(Console.ReadLine(), "yyyy-MM-dd", CultureInfo.CurrentCulture);
                 if (date > DateTime.Now) return date;
+                else Console.Write(" Felaktigt datum. Försök igen: ");
             }
             catch
             {

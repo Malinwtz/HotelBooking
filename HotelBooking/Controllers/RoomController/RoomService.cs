@@ -1,23 +1,10 @@
-﻿using System.Net.NetworkInformation;
-using HotelBooking.Controllers.ErrorController;
-using HotelBooking.Data;
+﻿using HotelBooking.Controllers.ErrorController;
 using HotelBooking.Data.Tables;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Controllers.RoomController;
 
 public class RoomService
 {
-    public ApplicationDbContext DbContext { get; set; }
-
-    public RoomService()
-    {
-        
-    }
-    public RoomService(ApplicationDbContext dbContext)
-    {
-        DbContext = dbContext;
-    }
     public void SetPropertyExtraBedToRoomBySizeInput(int sizeInput, Room roomToSetPropertyExtraBedTo)
     {
         if (sizeInput < 25)
@@ -45,28 +32,15 @@ public class RoomService
         else if (sizeInput >= 40) roomToSetPropertyNumberOfGuestsTo.NumberOfGuests = 4;
     }
 
-    public Room GetRoomFromId()
-    {
-        while (true)
-        {
-            Console.Write(" Välj rum genom att skriva in Id: ");
-            var roomId = ErrorHandling.TryInt();
-            var room = DbContext.Rooms.First(c => c.RoomId == roomId);//System.NullReferenceException
-            if (room != null) return room;
-        }
-    }
     public int SetRoomSize(Room roomToGetASize)
     {
         int sizeInput;
         while (true)
         {
-            Console.WriteLine(" Storlek i kvadratmeter: ");
+            Console.Write(" Storlek i kvadratmeter: ");
             sizeInput = ErrorHandling.TryInt();
-            if (sizeInput >= 10 && sizeInput <= 50)
-            {
-                break;
-            }
-            StringToWrite.NotSuccessfulAction("Rummet kan bara vara mellan 10 och 50 kvadratmeter");
+            if (sizeInput >= 10 && sizeInput <= 50) break;
+            StringToWrite.NotSuccessfulAction(" Rummet kan bara vara mellan 10 och 50 kvadratmeter");
         }
 
         roomToGetASize.SizeSquareMeters = sizeInput;

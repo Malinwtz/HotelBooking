@@ -75,6 +75,7 @@ public class UpdateBooking : ICrud
                             if (!roomsBigEnough.Any())
                             {
                                 StringToWrite.NotSuccessfulAction(" Det finns inga tillräckligt stora rum lediga.");
+                                StringToWrite.PressEnterToContinue();
                             }
                             else if (roomsBigEnough.Any())
                             {
