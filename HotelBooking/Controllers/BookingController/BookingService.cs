@@ -90,8 +90,9 @@ public class BookingService
 
     public void BookingDetails(Booking booking)
     {
-        Console.WriteLine($" {booking.BookingId}\t\t\t{booking.StartDate.ToString("dd MM yyyy")} - {booking.EndDate.ToString("dd MM yyyy")} " +
-                          $"\t{booking.NumberOfDays}\t{booking.GuestCount}\t{booking.Room.RoomId}\t\t\t{booking.Customer.FirstName} {booking.Customer.LastName}\n");
+        Console.WriteLine(String.Format("{0,-15} {1,-30} {2,-30} {3,-10} {4,-10} {5,-5}",
+            $" {booking.BookingId}", $"{booking.Customer.FirstName} {booking.Customer.LastName}", $"{booking.StartDate.ToString("dd MM yyyy")} " +
+            $"- {booking.EndDate.ToString("dd MM yyyy")}", $"{booking.NumberOfDays}", $"{booking.GuestCount}", $"{booking.Room.RoomId}"));
     }
 
     public List<DateTime> AddAllNewBookingDatesToList(Booking bookingToCreate, BookingList listOfBookings)

@@ -12,7 +12,7 @@ public class Lines
     public static void LineTwoHyphen()
     {
         Console.WriteLine("------------------------------------------------------" +
-                          "-----------------------------------------------------------------" + Environment.NewLine);
+                          "-----------------------------------------------------------------");
     }
 
     public static void LineThreeStar()

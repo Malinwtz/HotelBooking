@@ -1,4 +1,6 @@
-﻿namespace HotelBooking.Controllers.PageHeaders;
+﻿using HotelBooking.Data.Tables;
+
+namespace HotelBooking.Controllers.PageHeaders;
 
 public class BookingPageHeader
 {
@@ -35,6 +37,8 @@ public class BookingPageHeader
         Console.Clear();
         Console.WriteLine("\t\t\t\t\t\tBOKNINGSDETALJER");
         Lines.LineThreeStar();
+        Console.WriteLine(String.Format("{0,-15} {1,-30} {2,-30} {3,-10} {4,-10} {5,-5}", 
+            $"BokningsId", "Kund", "Startdatum - Slutdatum", "Dagar", "Gäster", "Rummets Id"));
     }
 
     public static void AvailableRoomHeader()

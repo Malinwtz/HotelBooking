@@ -28,7 +28,7 @@ public class CreateBooking : ICrud
         while (true)
         {
             SetNumberOfGuestsToBook(bookingToCreate);
-            roomsBigEnough = DbContext.Rooms.Where(r => r.NumberOfGuests > bookingToCreate.GuestCount).ToList();
+            roomsBigEnough = DbContext.Rooms.Where(r => r.NumberOfGuests >= bookingToCreate.GuestCount).ToList();
 
             if (!roomsBigEnough.Any())
             {

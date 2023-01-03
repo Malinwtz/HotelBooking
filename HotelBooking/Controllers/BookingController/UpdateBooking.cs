@@ -29,7 +29,7 @@ public class UpdateBooking : ICrud
         }
         else if (DbContext.Bookings.Any())
         {
-            BookingPageHeader.BookingDetailsHeader();
+            //BookingPageHeader.BookingDetailsHeader();
             var read = new ReadBooking(DbContext);
             read.View();
             SelectBookingToUpdate();

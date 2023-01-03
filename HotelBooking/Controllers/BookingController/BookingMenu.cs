@@ -25,6 +25,7 @@ public class BookingMenu : IMenu
 
     public static int UpdateBookingMenuShowAndReturnSelection()
     {
+        Console.Clear();
         var endAlternative = 3;
         Console.WriteLine(" 1. Ändra datum");
         Console.WriteLine(" 2. Ändra kund");
