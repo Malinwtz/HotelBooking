@@ -1,3 +1,5 @@
+--CREATE HOTEL DATABASE-----------------------------------------------
+
 CREATE DATABASE Hotel;
 
 CREATE TABLE Bookings(
@@ -26,4 +28,4 @@ CREATE TABLE Rooms(
 [ExtraBed] int NOT NULL,
 );
 
------------------------------------------
+------------------------------------------------------------------------
